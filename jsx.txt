@@ -1,0 +1,16 @@
+<svg ...>
+  {imageLayer && (
+    <image
+      href={imageLayer}
+      x="0"
+      y="0"
+      width="320"
+      height="200"
+      opacity={0.5}
+    />
+  )}
+  {shapes
+    .filter(shape => shape.visible)
+    .sort((a, b) => a.layerOrder - b.layerOrder)
+    .map(renderShape)}
+</svg>
