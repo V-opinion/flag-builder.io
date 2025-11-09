@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flag Builder – ccTLD .se Color Demo</title>
+  <title>Flag Builder – Compare and Edit</title>
   <style>
     body {
       background: #f9f9f9;
@@ -16,41 +16,49 @@
     }
     main { padding: 2em; display: flex; gap: 2em; }
     .sidebar {
-      min-width: 200px; background: #f1f4f6; padding: 1em;
-      border-radius: 0.7em; box-shadow: 0 0 8px #eee;
+      min-width: 220px; background: #f1f4f6; padding: 1em;
+      border-radius: 0.8em; box-shadow: 0 0 8px #eee;
     }
-    <div class="canvas-area" style="display:flex; gap:40px; align-items:flex-start;">
-  <div>
-    <div style="text-align:center; color:#444; font-weight:bold;">Original</div>
-    <svg id="originalFlagCanvas" width="320" height="200" style="border:1px solid #bbb; background:#fff; margin-bottom:0.5em;">
-      <!-- Original flag -->
-    </svg>
-  </div>
-  <div>
-    <div style="text-align:center; color:#0366d6; font-weight:bold;">Editable</div>
-    <svg id="flagCanvas" width="320" height="200" style="border:1px solid #333; background:#fff; touch-action:none;">
-      <!-- Editable shapes are drawn here via JS -->
-    </svg>
-    <div style="margin-top:1em;font-size:0.95em;color:#888;">
-      <em>Tip: Tap/click and drag letters to move them. Tap to edit, change color, or delete.</em>
-    </div>
-  </div>
-</div>
-
+    .canvas-area {
+      flex-grow: 1;
+      background: #fff;
+      padding: 2em 2em 0.5em 2em;
+      border-radius: 1em;
+      box-shadow: 0 0 12px #ddd;
+      min-width: 760px;
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+    .canvas-block {
+      text-align: center;
+    }
+    h1 { margin: 0 0 0.2em 0; font-size: 2em; }
+    h2, h3 { margin-top: 1em; }
+    button { margin: 2px 0.5em 2px 0; }
+    input[type="color"] { width: 36px; height: 1.5em; padding: 0; border: none; }
+    .selectedTextMsg { color: #00aaff; font-weight: bold; }
+    .canvas-label {
+      color: #444;
+      font-weight: bold;
+      margin-bottom:0.4em;
+      font-size:1em;
+    }
+    .canvas-label.editable { color: #0366d6; }
   </style>
 </head>
 <body>
   <header>
     <h1>Flag Builder</h1>
-    <p>Create a ccTLD .se flag by composing draggable colored letters. Export as SVG or PNG!</p>
+    <p>Compare the original template (left) with your editable flag (right). Add .se with colors, drag, edit, and export!</p>
   </header>
   <main>
     <div class="sidebar">
       <h2>Templates</h2>
-      <button onclick="loadFlag('se')">Sweden (reset)</button>
-      <button onclick="loadFlag('no')">Norway</button>
-      <button onclick="loadFlag('dk')">Denmark</button>
-      <button onclick="loadFlag('fi')">Finland</button>
+      <button onclick="loadFlag('se')">Sweden (reset)</button><br>
+      <button onclick="loadFlag('no')">Norway</button><br>
+      <button onclick="loadFlag('dk')">Denmark</button><br>
+      <button onclick="loadFlag('fi')">Finland</button><br>
 
       <h3>.se with Colors</h3>
       <button onclick="addColoredSE()">Add .se with Colors</button>
@@ -58,7 +66,7 @@
       <h3>Add Letter/Text</h3>
       <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" style="width:80px;" />
       <button onclick="addLetter()">Add</button>
-      <div id="textControls" style="margin-top:1.5em;">
+      <div id="textControls" style="margin-top:1.5em">
         <div id="selectedTextPanel" style="margin-top:10px;"></div>
       </div>
 
@@ -67,18 +75,29 @@
       <button onclick="exportPNG()">Export PNG</button>
     </div>
     <div class="canvas-area">
-      <svg id="flagCanvas" width="320" height="200" style="border:1px solid #333; background:#fff; touch-action:none;">
-        <!-- Shapes will be drawn here via JS -->
-      </svg>
-      <div style="margin-top:1em;font-size:0.95em;color:#888;">
-        <em>Tip: Tap/click and drag letters to move them. Tap to edit, change color, or delete.</em>
+      <div class="canvas-block">
+        <div class="canvas-label">Original</div>
+        <svg id="originalFlagCanvas" width="320" height="200" style="border:1px solid #bbb; background:#fff; margin-bottom:0.5em;">
+          <!-- Original flag template -->
+        </svg>
+      </div>
+      <div class="canvas-block">
+        <div class="canvas-label editable">Editable</div>
+        <svg id="flagCanvas" width="320" height="200" style="border:1px solid #333; background:#fff; touch-action:none;">
+          <!-- Editable flag -->
+        </svg>
+        <div style="margin-top:1em;font-size:0.95em;color:#888;">
+          <em>Tip: Tap/click and drag letters to move them. Tap to edit, change color, or delete.</em>
+        </div>
       </div>
     </div>
   </main>
   <script>
     const flagTemplates = {
       se: [
-        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" }
+        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#006aa7" },
+        { type: "rect", x: 90, y: 0, width: 40, height: 200, fill: "#fecc00" },
+        { type: "rect", x: 0, y: 80, width: 320, height: 40, fill: "#fecc00" }
       ],
       no: [
         { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#ba0c2f" },
@@ -100,10 +119,10 @@
     };
 
     let userFlag = [];
+    let currentTemplateKey = 'se';
     let selectedTextId = null;
     let dragOffset = null;
 
-    // The new function for your special .se with colored letters
     function addColoredSE() {
       userFlag = [
         { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" }
@@ -126,6 +145,8 @@
       });
       selectedTextId = null;
       drawFlag(userFlag);
+      drawOriginalFlag(flagTemplates.se); // Always show Sweden original
+      currentTemplateKey = 'se';
     }
 
     function addLetter() {
@@ -142,6 +163,33 @@
       drawFlag(userFlag);
       document.getElementById('addLetterInput').value = "";
       selectText(userFlag[userFlag.length - 1].id);
+    }
+
+    function drawOriginalFlag(shapes) {
+      const svg = document.getElementById('originalFlagCanvas');
+      svg.innerHTML = '';
+      shapes.forEach((shape, idx) => {
+        let el;
+        if (shape.type === 'rect') {
+          el = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          el.setAttribute('x', shape.x);
+          el.setAttribute('y', shape.y);
+          el.setAttribute('width', shape.width);
+          el.setAttribute('height', shape.height);
+          el.setAttribute('fill', shape.fill);
+        }
+        if (shape.type === 'text') {
+          el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          el.setAttribute('x', shape.x);
+          el.setAttribute('y', shape.y);
+          el.setAttribute('fill', shape.fill);
+          el.setAttribute('font-size', shape.fontSize);
+          el.setAttribute('font-weight', shape.fontWeight || "normal");
+          el.setAttribute('font-family', "Arial, sans-serif");
+          el.textContent = shape.text;
+        }
+        svg.appendChild(el);
+      });
     }
 
     function drawFlag(shapes) {
@@ -171,14 +219,14 @@
             el.setAttribute('stroke', '#00aaff');
             el.setAttribute('stroke-width', "2");
           }
-          // Mouse drag events
+          // Mouse drag
           el.addEventListener('mousedown', function(evt) {
             selectText(shape.id);
             dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y };
             svg.addEventListener('mousemove', dragMoveText);
             svg.addEventListener('mouseup', dragEndText);
           });
-          // Touch events
+          // Touch drag
           el.addEventListener('touchstart', function(evt) {
             selectText(shape.id);
             const touch = evt.touches[0];
@@ -267,11 +315,12 @@
       drawFlag(userFlag);
     }
     function loadFlag(key) {
+      currentTemplateKey = key;
       userFlag = [...flagTemplates[key]];
       selectedTextId = null;
       drawFlag(userFlag);
+      drawOriginalFlag(flagTemplates[key]);
     }
-    // Export SVG function
     function exportSVG() {
       const svg = document.getElementById('flagCanvas');
       const serializer = new XMLSerializer();
@@ -286,7 +335,6 @@
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
     }
-    // Export PNG with canvas workaround
     function exportPNG() {
       const svg = document.getElementById('flagCanvas');
       const svgData = new XMLSerializer().serializeToString(svg);
@@ -304,8 +352,9 @@
       };
       img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
     }
-    // Initial flag: set to white background
-    window.onload = () => loadFlag('se');
+    window.onload = () => {
+      loadFlag('se');
+    };
   </script>
 </body>
 </html>
