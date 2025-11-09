@@ -169,6 +169,33 @@
   <label>Opacity: <input type="range" min="0" max="1" step="0.05"></label>
   <button>Delete Shape</button>
 </div>
+// The current flag state will include not just rectangles, but any letters (as SVG <text>)
+let userFlag = [];
+
+// Add a selectable letter (or short string) to flag
+function addLetter() {
+  const txt = document.getElementById('addLetterInput').value.trim();
+  if (!txt) return;
+  // Add to the current flag as a new object; you can set default position/size
+  userFlag.push({
+    type: "text",
+    text: txt,
+    x: 120,
+    y: 110,
+    fontSize: 56,
+    fill: "#fff",
+    fontWeight: "bold",
+    id: "l" + (Math.random() * 10000).toFixed(0)
+  });
+  drawFlag(userFlag.length > 0 ? userFlag : flagTemplates.se);
+  document.getElementById('addLetterInput').value = "";
+}
+
+// When loading a template, clear userFlag and load just the template
+function loadFlag(key) {
+  userFlag = [...flagTemplates[key]];
+  drawFlag(userFlag);
+}
 
 </body>
 </html>
