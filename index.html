@@ -58,6 +58,17 @@
         <li><button onclick="loadFlag('dk')">Denmark (.dk)</button></li>
         <li><button onclick="loadFlag('fi')">Finland (.fi)</button></li>
       </ul>
+      <div class="sidebar">
+  <h2>Templates</h2>
+  <!-- ...existing template buttons... -->
+
+  <h2>Add Letter</h2>
+  <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="5" style="width:70px;" />
+  <button onclick="addLetter()">Add</button>
+  <br><br>
+  <!-- ...rest of your sidebar... -->
+</div>
+
       <br>
       <button onclick="exportSVG()">Export SVG</button>
       <button onclick="exportPNG()">Export PNG</button>
