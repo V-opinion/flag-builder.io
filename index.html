@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flag Builder – ccTLD Flag Editor</title>
+  <title>Flag Builder – ccTLD .se Color Demo</title>
   <style>
     body {
       background: #f9f9f9;
@@ -33,25 +33,26 @@
 <body>
   <header>
     <h1>Flag Builder</h1>
-    <p>Create and customize ccTLD flags for .se, .no, .dk, and .fi. Add letters, drag, and export!</p>
+    <p>Create a ccTLD .se flag by composing draggable colored letters. Export as SVG or PNG!</p>
   </header>
   <main>
     <div class="sidebar">
       <h2>Templates</h2>
-      <button onclick="loadFlag('se')">Sweden (.se)</button><br>
-      <button onclick="loadFlag('no')">Norway (.no)</button><br>
-      <button onclick="loadFlag('dk')">Denmark (.dk)</button><br>
-      <button onclick="loadFlag('fi')">Finland (.fi)</button><br>
+      <button onclick="loadFlag('se')">Sweden (reset)</button>
+      <button onclick="loadFlag('no')">Norway</button>
+      <button onclick="loadFlag('dk')">Denmark</button>
+      <button onclick="loadFlag('fi')">Finland</button>
 
-      <h3>Add .se Letters</h3>
-<button onclick="addColoredSE()">Add .se with Colors</button>
+      <h3>.se with Colors</h3>
+      <button onclick="addColoredSE()">Add .se with Colors</button>
 
-      
-         <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" style="width:80px;" />
+      <h3>Add Letter/Text</h3>
+      <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" style="width:80px;" />
       <button onclick="addLetter()">Add</button>
       <div id="textControls" style="margin-top:1.5em;">
         <div id="selectedTextPanel" style="margin-top:10px;"></div>
       </div>
+
       <br>
       <button onclick="exportSVG()">Export SVG</button>
       <button onclick="exportPNG()">Export PNG</button>
@@ -61,17 +62,14 @@
         <!-- Shapes will be drawn here via JS -->
       </svg>
       <div style="margin-top:1em;font-size:0.95em;color:#888;">
-        <em>Tip: Tap/click and drag text to move it. Tap to edit, change color, or delete.</em>
+        <em>Tip: Tap/click and drag letters to move them. Tap to edit, change color, or delete.</em>
       </div>
     </div>
   </main>
   <script>
-    // Flag templates
     const flagTemplates = {
       se: [
-        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#006aa7" },
-        { type: "rect", x: 90, y: 0, width: 40, height: 200, fill: "#fecc00" },
-        { type: "rect", x: 0, y: 80, width: 320, height: 40, fill: "#fecc00" }
+        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" }
       ],
       no: [
         { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#ba0c2f" },
@@ -96,6 +94,31 @@
     let selectedTextId = null;
     let dragOffset = null;
 
+    // The new function for your special .se with colored letters
+    function addColoredSE() {
+      userFlag = [
+        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" }
+      ];
+      const chars = [
+        { ch: ".", color: "#27ae60" },    // green dot
+        { ch: "s", color: "#2980ff" },    // blue s
+        { ch: "e", color: "#f4d03f" }     // yellow e
+      ];
+      let xStart = 130, yBase = 110;
+      chars.forEach((c, i) => {
+        userFlag.push({
+          type: "text", text: c.ch,
+          x: xStart + i * 28, y: yBase,
+          fontSize: 56,
+          fill: c.color,
+          fontWeight: "bold",
+          id: "l" + (Math.random() * 100000).toFixed(0)
+        });
+      });
+      selectedTextId = null;
+      drawFlag(userFlag);
+    }
+
     function addLetter() {
       const txt = document.getElementById('addLetterInput').value.trim();
       if (!txt) return;
@@ -103,7 +126,7 @@
         type: "text", text: txt,
         x: 120, y: 110,
         fontSize: 56,
-        fill: "#fff",
+        fill: "#222",
         fontWeight: "bold",
         id: "l" + (Math.random() * 100000).toFixed(0)
       });
@@ -272,31 +295,7 @@
       };
       img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
     }
-    // Initifunction addColoredSE() {
-  // Removes previous texts, sets background to white
-  userFlag = [
-    { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" } // white background
-  ];
-  const chars = [
-    { ch: ".", color: "#27ae60" },    // green dot
-    { ch: "s", color: "#2980ff" },    // blue s
-    { ch: "e", color: "#f4d03f" }     // yellow e
-  ];
-  let xStart = 130;
-  chars.forEach((c, i) => {
-    userFlag.push({
-      type: "text", text: c.ch,
-      x: xStart + i * 28, y: 110,
-      fontSize: 56,
-      fill: c.color,
-      fontWeight: "bold",
-      id: "l" + (Math.random() * 100000).toFixed(0)
-    });
-  });
-  selectedTextId = null;
-  drawFlag(userFlag);
-}
-al flag
+    // Initial flag: set to white background
     window.onload = () => loadFlag('se');
   </script>
 </body>
