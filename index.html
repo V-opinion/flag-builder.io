@@ -3,95 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flag Builder – Editable ccTLD Flag Templates</title>
-  <meta name="description" content="Create, edit, and export flag designs for ccTLDs like .se, .no, .dk, .fi. Drag shapes, manage layers, and more with Flag Builder." />
-  <link rel="icon" href="favicon.ico">
+  <title>Flag Builder – ccTLD Flag Editor</title>
   <style>
     body {
       background: #f9f9f9;
-      font-family: 'Inter', sans-serif;
-      margin: 0; padding: 0;
-      color: #222;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0; padding: 0; color: #222;
     }
     header {
-      background: #0366d6;
-      color: #fff;
-      padding: 1em 2em;
-      text-align: left;
+      background: #0366d6; color: #fff;
+      padding: 1em 2em; text-align: left;
     }
-    main {
-      padding: 2em;
-      display: flex;
-      gap: 2em;
-    }
+    main { padding: 2em; display: flex; gap: 2em; }
     .sidebar {
-      min-width: 200px;
-      background: #f1f4f6;
-      padding: 1em;
-      border-radius: 0.7em;
-      box-shadow: 0 0 8px #eee;
+      min-width: 200px; background: #f1f4f6; padding: 1em;
+      border-radius: 0.7em; box-shadow: 0 0 8px #eee;
     }
     .canvas-area {
-      flex-grow: 1;
-      background: #fff;
-      padding: 2em;
-      border-radius: 1em;
-      box-shadow: 0 0 12px #ddd;
+      flex-grow: 1; background: #fff; padding: 2em;
+      border-radius: 1em; box-shadow: 0 0 12px #ddd;
     }
-    h1 {
-      margin: 0;
-      font-size: 2em;
-    }
-    <!-- Add in your sidebar or below the canvas area -->
-<div id="textControls" style="margin-top:1.5em;">
-  <h3>Text Controls</h3>
-  <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" style="width:80px;" />
-  <button onclick="addLetter()">Add</button>
-  <div id="selectedTextPanel" style="margin-top:10px;"></div>
-</div>
-
+    h1 { margin: 0 0 0.2em 0; font-size: 2em; }
+    h2, h3 { margin-top: 1em; }
+    button { margin: 2px 0.5em 2px 0; }
+    input[type="color"] { width: 36px; height: 1.5em; padding: 0; border: none; }
+    .selectedTextMsg { color: #00aaff; font-weight: bold; }
   </style>
 </head>
 <body>
   <header>
     <h1>Flag Builder</h1>
-    <p>Create and customize flags for .se, .no, .dk, .fi and more!</p>
+    <p>Create and customize ccTLD flags for .se, .no, .dk, and .fi. Add letters, drag, and export!</p>
   </header>
   <main>
     <div class="sidebar">
       <h2>Templates</h2>
-      <ul>
-        <li><button onclick="loadFlag('se')">Sweden (.se)</button></li>
-        <li><button onclick="loadFlag('no')">Norway (.no)</button></li>
-        <li><button onclick="loadFlag('dk')">Denmark (.dk)</button></li>
-        <li><button onclick="loadFlag('fi')">Finland (.fi)</button></li>
-      </ul>
-      <div class="sidebar">
-  <h2>Templates</h2>
-  <!-- ...existing template buttons... -->
+      <button onclick="loadFlag('se')">Sweden (.se)</button><br>
+      <button onclick="loadFlag('no')">Norway (.no)</button><br>
+      <button onclick="loadFlag('dk')">Denmark (.dk)</button><br>
+      <button onclick="loadFlag('fi')">Finland (.fi)</button><br>
 
-  <h2>Add Letter</h2>
-  <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="5" style="width:70px;" />
-  <button onclick="addLetter()">Add</button>
-  <br><br>
-  <!-- ...rest of your sidebar... -->
-</div>
-
+      <h3>Add Letter/Text</h3>
+      <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" style="width:80px;" />
+      <button onclick="addLetter()">Add</button>
+      <div id="textControls" style="margin-top:1.5em;">
+        <div id="selectedTextPanel" style="margin-top:10px;"></div>
+      </div>
       <br>
       <button onclick="exportSVG()">Export SVG</button>
       <button onclick="exportPNG()">Export PNG</button>
     </div>
     <div class="canvas-area">
-      <svg id="flagCanvas" width="320" height="200" style="border:1px solid #333; background:#fff;">
+      <svg id="flagCanvas" width="320" height="200" style="border:1px solid #333; background:#fff; touch-action:none;">
         <!-- Shapes will be drawn here via JS -->
       </svg>
-      <br>
-      <!-- Optional: shape property editing controls go here -->
-      <div id="shapeControls"></div>
+      <div style="margin-top:1em;font-size:0.95em;color:#888;">
+        <em>Tip: Tap/click and drag text to move it. Tap to edit, change color, or delete.</em>
+      </div>
     </div>
   </main>
   <script>
-    // Example: loading a flag template
+    // Flag templates
     const flagTemplates = {
       se: [
         { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#006aa7" },
@@ -117,6 +89,26 @@
       ]
     };
 
+    let userFlag = [];
+    let selectedTextId = null;
+    let dragOffset = null;
+
+    function addLetter() {
+      const txt = document.getElementById('addLetterInput').value.trim();
+      if (!txt) return;
+      userFlag.push({
+        type: "text", text: txt,
+        x: 120, y: 110,
+        fontSize: 56,
+        fill: "#fff",
+        fontWeight: "bold",
+        id: "l" + (Math.random() * 100000).toFixed(0)
+      });
+      drawFlag(userFlag);
+      document.getElementById('addLetterInput').value = "";
+      selectText(userFlag[userFlag.length - 1].id);
+    }
+
     function drawFlag(shapes) {
       const svg = document.getElementById('flagCanvas');
       svg.innerHTML = '';
@@ -130,19 +122,121 @@
           el.setAttribute('height', shape.height);
           el.setAttribute('fill', shape.fill);
         }
-        // Add cases for circles/polygons...
+        if (shape.type === 'text') {
+          el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          el.setAttribute('x', shape.x);
+          el.setAttribute('y', shape.y);
+          el.setAttribute('fill', shape.fill);
+          el.setAttribute('font-size', shape.fontSize);
+          el.setAttribute('font-weight', shape.fontWeight || "normal");
+          el.setAttribute('font-family', "Arial, sans-serif");
+          el.textContent = shape.text;
+          el.setAttribute('cursor', 'move');
+          if (selectedTextId === shape.id) {
+            el.setAttribute('stroke', '#00aaff');
+            el.setAttribute('stroke-width', "2");
+          }
+          // Mouse drag events
+          el.addEventListener('mousedown', function(evt) {
+            selectText(shape.id);
+            dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y };
+            svg.addEventListener('mousemove', dragMoveText);
+            svg.addEventListener('mouseup', dragEndText);
+          });
+          // Touch events
+          el.addEventListener('touchstart', function(evt) {
+            selectText(shape.id);
+            const touch = evt.touches[0];
+            const rect = svg.getBoundingClientRect();
+            dragOffset = { x: touch.clientX - rect.left - shape.x, y: touch.clientY - rect.top - shape.y };
+            svg.addEventListener('touchmove', dragMoveTextTouch);
+            svg.addEventListener('touchend', dragEndTextTouch);
+            evt.preventDefault();
+          });
+        }
         svg.appendChild(el);
       });
+      renderSelectedTextPanel();
     }
 
+    function selectText(id) {
+      selectedTextId = id;
+      renderSelectedTextPanel();
+      drawFlag(userFlag);
+    }
+
+    function dragMoveText(evt) {
+      if (!selectedTextId || dragOffset == null) return;
+      let txt = userFlag.find(shape => shape.id === selectedTextId);
+      txt.x = evt.offsetX - dragOffset.x;
+      txt.y = evt.offsetY - dragOffset.y;
+      drawFlag(userFlag);
+    }
+    function dragEndText(evt) {
+      dragOffset = null;
+      const svg = document.getElementById('flagCanvas');
+      svg.removeEventListener('mousemove', dragMoveText);
+      svg.removeEventListener('mouseup', dragEndText);
+    }
+    function dragMoveTextTouch(evt) {
+      if (!selectedTextId || dragOffset == null) return;
+      const touch = evt.touches[0];
+      const svg = document.getElementById('flagCanvas');
+      const rect = svg.getBoundingClientRect();
+      let txt = userFlag.find(shape => shape.id === selectedTextId);
+      txt.x = touch.clientX - rect.left - dragOffset.x;
+      txt.y = touch.clientY - rect.top - dragOffset.y;
+      drawFlag(userFlag);
+    }
+    function dragEndTextTouch(evt) {
+      dragOffset = null;
+      const svg = document.getElementById('flagCanvas');
+      svg.removeEventListener('touchmove', dragMoveTextTouch);
+      svg.removeEventListener('touchend', dragEndTextTouch);
+    }
+    function renderSelectedTextPanel() {
+      const panel = document.getElementById('selectedTextPanel');
+      if (!selectedTextId) {
+        panel.innerHTML = '<span class="selectedTextMsg">Tap a letter/text to select/edit.</span>';
+        return;
+      }
+      let txt = userFlag.find(shape => shape.id === selectedTextId);
+      if (!txt) {
+        panel.innerHTML = '';
+        return;
+      }
+      panel.innerHTML = `
+        <label>Text: <input type="text" id="txtText" value="${txt.text}" /></label><br/>
+        <label style="display:inline-block;width:55px;">Color:</label>
+        <input type="color" id="txtColor" value="${txt.fill}" style="vertical-align:middle;"/><br/>
+        <label style="display:inline-block;width:55px;">Size:</label>
+        <input type="number" id="txtSize" min="12" max="200" value="${txt.fontSize}" style="width:50px;"/><br/>
+        <button onclick="deleteSelectedText()">Delete</button>
+      `;
+      document.getElementById('txtText').oninput = function() {
+        txt.text = this.value;
+        drawFlag(userFlag);
+      };
+      document.getElementById('txtColor').oninput = function() {
+        txt.fill = this.value;
+        drawFlag(userFlag);
+      };
+      document.getElementById('txtSize').oninput = function() {
+        txt.fontSize = +this.value;
+        drawFlag(userFlag);
+      };
+    }
+    function deleteSelectedText() {
+      userFlag = userFlag.filter(shape => shape.id !== selectedTextId);
+      selectedTextId = null;
+      drawFlag(userFlag);
+    }
     function loadFlag(key) {
-      drawFlag(flagTemplates[key]);
+      userFlag = [...flagTemplates[key]];
+      selectedTextId = null;
+      drawFlag(userFlag);
     }
-
-    // Initial flag
-    window.onload = () => loadFlag('se');
-
-    // Export SVG
+    // Export SVG function
     function exportSVG() {
       const svg = document.getElementById('flagCanvas');
       const serializer = new XMLSerializer();
@@ -157,7 +251,6 @@
       document.body.removeChild(link);
       URL.revokeObjectURL(url);
     }
-
     // Export PNG with canvas workaround
     function exportPNG() {
       const svg = document.getElementById('flagCanvas');
@@ -176,117 +269,8 @@
       };
       img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
     }
+    // Initial flag
+    window.onload = () => loadFlag('se');
   </script>
-  <div class="properties-panel">
-  <h3>Shape Properties</h3>
-  <label>Type: <select>Rectangle, Circle, Polygon</select></label><br>
-  <label>Color: <input type="color"></label><br>
-  <label>X: <input type="number"></label>
-  <label>Y: <input type="number"></label><br>
-  <label>Width: <input type="number"></label>
-  <label>Height: <input type="number"></label><br>
-  <label>Opacity: <input type="range" min="0" max="1" step="0.05"></label>
-  <button>Delete Shape</button>
-</div>
-// The current flag state will include not just rectangles, but any letters (as SVG <text>)
-let userFlag = [];
-
-// Add a selectable letter (or short string) to flag
-function addLetter() {
-  const txt = document.getElementById('addLetterInput').value.trim();
-  if (!txt) return;
-  // Add to the current flag as a new object; you can set default position/size
-  userFlag.push({
-    type: "text",
-    text: txt,
-    x: 120,
-    y: 110,
-    fontSize: 56,
-    fill: "#fff",
-    fontWeight: "bold",
-    id: "l" + (Math.random() * 10000).toFixed(0)
-  });
-  drawFlag(userFlag.length > 0 ? userFlag : flagTemplates.se);
-  document.getElementById('addLetterInput').value = "";
-}
-
-// When loading a template, clear userFlag and load just the template
-function loadFlag(key) {
-  userFlag = [...flagTemplates[key]];
-  drawFlag(userFlag);
-}
-  el.addEventListener('mousedown', function(evt) {
-  selectText(shape.id);
-  dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y };
-  svg.addEventListener('mousemove', dragMoveText);
-  svg.addEventListener('mouseup', dragEndText);
-});
-
-// Touch events for mobile/tablet support
-el.addEventListener('touchstart', function(evt) {
-  selectText(shape.id);
-  const touch = evt.touches[0];
-  const rect = svg.getBoundingClientRect();
-  dragOffset = { 
-    x: touch.clientX - rect.left - shape.x, 
-    y: touch.clientY - rect.top - shape.y 
-  };
-  svg.addEventListener('touchmove', dragMoveTextTouch);
-  svg.addEventListener('touchend', dragEndTextTouch);
-  evt.preventDefault(); // Prevent scrolling
-});
-
-function dragMoveTextTouch(evt) {
-  if (!selectedTextId || dragOffset == null) return;
-  const touch = evt.touches[0];
-  const svg = document.getElementById('flagCanvas');
-  const rect = svg.getBoundingClientRect();
-  let txt = userFlag.find(shape => shape.id === selectedTextId);
-  txt.x = touch.clientX - rect.left - dragOffset.x;
-  txt.y = touch.clientY - rect.top - dragOffset.y;
-  drawFlag(userFlag);
-}
-
-function dragEndTextTouch(evt) {
-  dragOffset = null;
-  const svg = document.getElementById('flagCanvas');
-  svg.removeEventListener('touchmove', dragMoveTextTouch);
-  svg.removeEventListener('touchend', dragEndTextTouch);
-}
-if (shape.type === 'text') {
-  el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-  // ... set attributes, etc ...
-  el.textContent = shape.text;
-  el.setAttribute('cursor', 'move');
-  if (selectedTextId === shape.id) {
-    el.setAttribute('stroke', '#00aaff');
-    el.setAttribute('stroke-width', "2");
-  }
-
-  // Mouse events
-  el.addEventListener('mousedown', function(evt) {
-    selectText(shape.id);
-    dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y };
-    svg.addEventListener('mousemove', dragMoveText);
-    svg.addEventListener('mouseup', dragEndText);
-  });
-
-  // Touch events
-  el.addEventListener('touchstart', function(evt) {
-    selectText(shape.id);
-    const touch = evt.touches[0];
-    const rect = svg.getBoundingClientRect();
-    dragOffset = { 
-      x: touch.clientX - rect.left - shape.x, 
-      y: touch.clientY - rect.top - shape.y 
-    };
-    svg.addEventListener('touchmove', dragMoveTextTouch);
-    svg.addEventListener('touchend', dragEndTextTouch);
-    evt.preventDefault();
-  });
-}
-
 </body>
 </html>
-
-
