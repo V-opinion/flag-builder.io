@@ -42,6 +42,14 @@
       margin: 0;
       font-size: 2em;
     }
+    <!-- Add in your sidebar or below the canvas area -->
+<div id="textControls" style="margin-top:1.5em;">
+  <h3>Text Controls</h3>
+  <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" style="width:80px;" />
+  <button onclick="addLetter()">Add</button>
+  <div id="selectedTextPanel" style="margin-top:10px;"></div>
+</div>
+
   </style>
 </head>
 <body>
