@@ -19,15 +19,24 @@
       min-width: 200px; background: #f1f4f6; padding: 1em;
       border-radius: 0.7em; box-shadow: 0 0 8px #eee;
     }
-    .canvas-area {
-      flex-grow: 1; background: #fff; padding: 2em;
-      border-radius: 1em; box-shadow: 0 0 12px #ddd;
-    }
-    h1 { margin: 0 0 0.2em 0; font-size: 2em; }
-    h2, h3 { margin-top: 1em; }
-    button { margin: 2px 0.5em 2px 0; }
-    input[type="color"] { width: 36px; height: 1.5em; padding: 0; border: none; }
-    .selectedTextMsg { color: #00aaff; font-weight: bold; }
+    <div class="canvas-area" style="display:flex; gap:40px; align-items:flex-start;">
+  <div>
+    <div style="text-align:center; color:#444; font-weight:bold;">Original</div>
+    <svg id="originalFlagCanvas" width="320" height="200" style="border:1px solid #bbb; background:#fff; margin-bottom:0.5em;">
+      <!-- Original flag -->
+    </svg>
+  </div>
+  <div>
+    <div style="text-align:center; color:#0366d6; font-weight:bold;">Editable</div>
+    <svg id="flagCanvas" width="320" height="200" style="border:1px solid #333; background:#fff; touch-action:none;">
+      <!-- Editable shapes are drawn here via JS -->
+    </svg>
+    <div style="margin-top:1em;font-size:0.95em;color:#888;">
+      <em>Tip: Tap/click and drag letters to move them. Tap to edit, change color, or delete.</em>
+    </div>
+  </div>
+</div>
+
   </style>
 </head>
 <body>
