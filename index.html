@@ -3,15 +3,162 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flag Builder</title>
-  <link rel="stylesheet" href="style.css"><!-- Optional CSS -->
+  <title>Flag Builder – Editable ccTLD Flag Templates</title>
+  <meta name="description" content="Create, edit, and export flag designs for ccTLDs like .se, .no, .dk, .fi. Drag shapes, manage layers, and more with Flag Builder." />
+  <link rel="icon" href="favicon.ico">
+  <style>
+    body {
+      background: #f9f9f9;
+      font-family: 'Inter', sans-serif;
+      margin: 0; padding: 0;
+      color: #222;
+    }
+    header {
+      background: #0366d6;
+      color: #fff;
+      padding: 1em 2em;
+      text-align: left;
+    }
+    main {
+      padding: 2em;
+      display: flex;
+      gap: 2em;
+    }
+    .sidebar {
+      min-width: 200px;
+      background: #f1f4f6;
+      padding: 1em;
+      border-radius: 0.7em;
+      box-shadow: 0 0 8px #eee;
+    }
+    .canvas-area {
+      flex-grow: 1;
+      background: #fff;
+      padding: 2em;
+      border-radius: 1em;
+      box-shadow: 0 0 12px #ddd;
+    }
+    h1 {
+      margin: 0;
+      font-size: 2em;
+    }
+  </style>
 </head>
 <body>
-  <h1>Flag Builder</h1>
-  <p>Welcome! Edit flags and try ccTLD templates (.se, .no, .dk, .fi).</p>
-  <div id="app">
-    <!-- Add your app logic here -->
-  </div>
-  <script src="main.js"></script><!-- Your application logic -->
+  <header>
+    <h1>Flag Builder</h1>
+    <p>Create and customize flags for .se, .no, .dk, .fi and more!</p>
+  </header>
+  <main>
+    <div class="sidebar">
+      <h2>Templates</h2>
+      <ul>
+        <li><button onclick="loadFlag('se')">Sweden (.se)</button></li>
+        <li><button onclick="loadFlag('no')">Norway (.no)</button></li>
+        <li><button onclick="loadFlag('dk')">Denmark (.dk)</button></li>
+        <li><button onclick="loadFlag('fi')">Finland (.fi)</button></li>
+      </ul>
+      <br>
+      <button onclick="exportSVG()">Export SVG</button>
+      <button onclick="exportPNG()">Export PNG</button>
+    </div>
+    <div class="canvas-area">
+      <svg id="flagCanvas" width="320" height="200" style="border:1px solid #333; background:#fff;">
+        <!-- Shapes will be drawn here via JS -->
+      </svg>
+      <br>
+      <!-- Optional: shape property editing controls go here -->
+      <div id="shapeControls"></div>
+    </div>
+  </main>
+  <script>
+    // Example: loading a flag template
+    const flagTemplates = {
+      se: [
+        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#006aa7" },
+        { type: "rect", x: 90, y: 0, width: 40, height: 200, fill: "#fecc00" },
+        { type: "rect", x: 0, y: 80, width: 320, height: 40, fill: "#fecc00" }
+      ],
+      no: [
+        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#ba0c2f" },
+        { type: "rect", x: 85, y: 0, width: 40, height: 200, fill: "#fff" },
+        { type: "rect", x: 0, y: 80, width: 320, height: 40, fill: "#fff" },
+        { type: "rect", x: 95, y: 0, width: 20, height: 200, fill: "#00205b" },
+        { type: "rect", x: 0, y: 90, width: 320, height: 20, fill: "#00205b" }
+      ],
+      dk: [
+        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#c60c30" },
+        { type: "rect", x: 110, y: 0, width: 30, height: 200, fill: "#fff" },
+        { type: "rect", x: 0, y: 70, width: 320, height: 30, fill: "#fff" }
+      ],
+      fi: [
+        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" },
+        { type: "rect", x: 80, y: 0, width: 40, height: 200, fill: "#003580" },
+        { type: "rect", x: 0, y: 75, width: 320, height: 40, fill: "#003580" }
+      ]
+    };
+
+    function drawFlag(shapes) {
+      const svg = document.getElementById('flagCanvas');
+      svg.innerHTML = '';
+      shapes.forEach((shape, idx) => {
+        let el;
+        if (shape.type === 'rect') {
+          el = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          el.setAttribute('x', shape.x);
+          el.setAttribute('y', shape.y);
+          el.setAttribute('width', shape.width);
+          el.setAttribute('height', shape.height);
+          el.setAttribute('fill', shape.fill);
+        }
+        // Add cases for circles/polygons...
+        svg.appendChild(el);
+      });
+    }
+
+    function loadFlag(key) {
+      drawFlag(flagTemplates[key]);
+    }
+
+    // Initial flag
+    window.onload = () => loadFlag('se');
+
+    // Export SVG
+    function exportSVG() {
+      const svg = document.getElementById('flagCanvas');
+      const serializer = new XMLSerializer();
+      let svgContent = serializer.serializeToString(svg);
+      let blob = new Blob([svgContent], {type: "image/svg+xml"});
+      let url = URL.createObjectURL(blob);
+      let link = document.createElement("a");
+      link.href = url;
+      link.download = "flag.svg";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    // Export PNG with canvas workaround
+    function exportPNG() {
+      const svg = document.getElementById('flagCanvas');
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const canvas = document.createElement('canvas');
+      canvas.width = svg.width.baseVal.value;
+      canvas.height = svg.height.baseVal.value;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        const link = document.createElement('a');
+        link.download = 'flag.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      };
+      img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+    }
+  </script>
 </body>
 </html>
+
+
