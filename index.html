@@ -215,6 +215,76 @@ function loadFlag(key) {
   userFlag = [...flagTemplates[key]];
   drawFlag(userFlag);
 }
+  el.addEventListener('mousedown', function(evt) {
+  selectText(shape.id);
+  dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y };
+  svg.addEventListener('mousemove', dragMoveText);
+  svg.addEventListener('mouseup', dragEndText);
+});
+
+// Touch events for mobile/tablet support
+el.addEventListener('touchstart', function(evt) {
+  selectText(shape.id);
+  const touch = evt.touches[0];
+  const rect = svg.getBoundingClientRect();
+  dragOffset = { 
+    x: touch.clientX - rect.left - shape.x, 
+    y: touch.clientY - rect.top - shape.y 
+  };
+  svg.addEventListener('touchmove', dragMoveTextTouch);
+  svg.addEventListener('touchend', dragEndTextTouch);
+  evt.preventDefault(); // Prevent scrolling
+});
+
+function dragMoveTextTouch(evt) {
+  if (!selectedTextId || dragOffset == null) return;
+  const touch = evt.touches[0];
+  const svg = document.getElementById('flagCanvas');
+  const rect = svg.getBoundingClientRect();
+  let txt = userFlag.find(shape => shape.id === selectedTextId);
+  txt.x = touch.clientX - rect.left - dragOffset.x;
+  txt.y = touch.clientY - rect.top - dragOffset.y;
+  drawFlag(userFlag);
+}
+
+function dragEndTextTouch(evt) {
+  dragOffset = null;
+  const svg = document.getElementById('flagCanvas');
+  svg.removeEventListener('touchmove', dragMoveTextTouch);
+  svg.removeEventListener('touchend', dragEndTextTouch);
+}
+if (shape.type === 'text') {
+  el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+  // ... set attributes, etc ...
+  el.textContent = shape.text;
+  el.setAttribute('cursor', 'move');
+  if (selectedTextId === shape.id) {
+    el.setAttribute('stroke', '#00aaff');
+    el.setAttribute('stroke-width', "2");
+  }
+
+  // Mouse events
+  el.addEventListener('mousedown', function(evt) {
+    selectText(shape.id);
+    dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y };
+    svg.addEventListener('mousemove', dragMoveText);
+    svg.addEventListener('mouseup', dragEndText);
+  });
+
+  // Touch events
+  el.addEventListener('touchstart', function(evt) {
+    selectText(shape.id);
+    const touch = evt.touches[0];
+    const rect = svg.getBoundingClientRect();
+    dragOffset = { 
+      x: touch.clientX - rect.left - shape.x, 
+      y: touch.clientY - rect.top - shape.y 
+    };
+    svg.addEventListener('touchmove', dragMoveTextTouch);
+    svg.addEventListener('touchend', dragEndTextTouch);
+    evt.preventDefault();
+  });
+}
 
 </body>
 </html>
