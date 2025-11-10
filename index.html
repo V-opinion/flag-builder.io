@@ -1,85 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <title>Flag Builder: Editable Swedish ccTLD Flags – Drag & Export Online</title>
-<meta name="description" content="Build or remix national flags for Sweden, Norway, Denmark & Finland. Drag elements, add .se text, export as SVG/PNG & compare original vs. your design. Mobile friendly!" />
-<meta name="keywords" content="Flag Builder, editable flags, ccTLD, Sweden flag, .se flag, online flag editor, SVG export, drag and drop flag design, compare flags, mobile flag builder, Nordic flags, national flags, democracy inclusion, multilingual country flags, LLM SEO, generative AI" />
-<meta name="author" content="multireligionvalsystem.eu.org">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://flag-builder.multireligionvalsystem.eu.org/">
-<!-- Open Graph for social and LLM previews -->
-<meta property="og:title" content="Flag Builder: Editable Swedish ccTLD Flags">
-<meta property="og:description" content="Drag to edit or remix Swedish, Norwegian, Danish, Finnish flags. Add colored .se text, compare, export SVG/PNG. Mobile-friendly.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://flag-builder.multireligionvalsystem.eu.org/">
-<meta property="og:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png"><!-- ideally upload a thumbnail -->
-<!-- Twitter cards -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Flag Builder – Remix, Compare, and Export Nordic Flags">
-<meta name="twitter:description" content="Online tool to drag, edit, and export Swedish, Norwegian, Danish, Finnish flags. Add .se, export, compare.">
-<meta name="twitter:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org/",
-  "@type": "WebApplication",
-  "name": "Flag Builder",
-  "url": "https://flag-builder.multireligionvalsystem.eu.org/",
-  "description": "Build, remix, and export Swedish, Nordic and ccTLD national flags. Drag, edit, and compare with the original.",
-  "applicationCategory": "DesignApplication",
-  "operatingSystem": "All",
-  "offers": {
-    "@type": "Offer",
-    "price": "0",
-    "priceCurrency": "EUR"
-  },
-  "author": {
-    "@type": "Organization",
-    "name": "Religions for Peace – MultireligionValSystem.eu.org"
-  }
-}
-</script>
+  <meta charset="UTF-8" />
+  <title>Flag Builder: Editable Swedish ccTLD Flags – Drag & Export Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Build or remix national flags for Sweden, Norway, Denmark & Finland. Drag elements, add .se text, export as SVG/PNG & compare original vs. your design. Mobile friendly!" />
+  <meta name="keywords" content="Flag Builder, editable flags, ccTLD, Sweden flag, .se flag, online flag editor, SVG export, drag and drop flag design, compare flags, mobile flag builder, Nordic flags, national flags, democracy inclusion, multilingual country flags, LLM SEO, generative AI" />
+  <meta name="author" content="multireligionvalsystem.eu.org">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://flag-builder.multireligionvalsystem.eu.org/">
+  <!-- Open Graph for social previews -->
+  <meta property="og:title" content="Flag Builder: Editable Swedish ccTLD Flags">
+  <meta property="og:description" content="Drag to edit or remix Swedish, Norwegian, Danish, Finnish flags. Add colored .se text, compare, export SVG/PNG. Mobile-friendly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flag-builder.multireligionvalsystem.eu.org/">
+  <meta property="og:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
+  <!-- Twitter cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flag Builder – Remix, Compare, and Export Nordic Flags">
+  <meta name="twitter:description" content="Online tool to drag, edit, and export Swedish, Norwegian, Danish, Finnish flags. Add .se, export, compare.">
+  <meta name="twitter:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
 
+  <!-- Structured Data for rich results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "WebApplication",
+    "name": "Flag Builder",
+    "url": "https://flag-builder.multireligionvalsystem.eu.org/",
+    "description": "Build, remix, and export Swedish, Nordic and ccTLD national flags. Drag, edit, and compare with the original.",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "EUR"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Religions for Peace – MultireligionValSystem.eu.org"
+    }
+  }
+  </script>
   <style>
     html, body { height:100%; }
     body {
       background: #f9f9f9;
       font-family: 'Inter', Arial, sans-serif;
-      margin: 0; padding: 0; color: #222; min-height:100vh;
-    <header>
-  <h1>Flag Builder: Editable Swedish & Nordic ccTLD Flags</h1>
-  <h2>
-    Online flag editor for Sweden (.se), Norway (.no), Denmark (.dk), Finland (.fi).
-    Drag, remix, add colored text, and export your custom flag. Supports SVG, PNG. Mobile first.
-  </h2>
-  <p>
-    Perfect for inclusion, education, generative AI, or multilingual democracy campaigns.
-    Compare your remix with the official flag side-by-side. Try adding ".se" in blue!
-  </p>
-</header>
-...
-
-<div class="canvas-block">
-  <div class="canvas-label">Original</div>
-  <svg id="originalFlagCanvas" width="320" height="200" aria-label="Original Swedish Flag, drag-editable version shown beside" style="border:1.5px solid #bbb; background:#fff;">
-  </svg>
-</div>
-<div class="canvas-block">
-  <div class="canvas-label editable">Editable</div>
-  <svg id="flagCanvas" width="320" height="200" aria-label="Editable flag canvas for Sweden, Denmark, Norway, Finland, with draggable colored text and shapes. Use the flag builder controls." style="border:2px solid #333; background:#fff; touch-action:none;">
-  </svg>
-  ...
-</div>
-
-    main { 
+      margin: 0;
+      padding: 0;
+      color: #222;
+      min-height: 100vh;
+    }
+    header {
+      background: #0366d6; color: #fff;
+      padding: 1em 2em; text-align: left;
+    }
+    main {
       padding: 1em 0.5em;
       display: flex; gap: 1em; flex-wrap: wrap;
       justify-content: center;
     }
     .sidebar {
-      min-width: 220px; width:320px; background: #f1f4f6; padding: 1em;
+      min-width: 220px; width: 320px; background: #f1f4f6; padding: 1em;
       border-radius: 0.8em; box-shadow: 0 0 8px #eee;
-      margin-bottom:1em;
-      box-sizing:border-box;
+      margin-bottom: 1em;
+      box-sizing: border-box;
     }
     .canvas-area {
       flex-grow: 1;
@@ -87,51 +73,61 @@
       padding: 1em 0.5em 1em 0.5em;
       border-radius: 1em;
       box-shadow: 0 0 12px #ddd;
-      min-width:320px; max-width:670px;
+      min-width: 320px; max-width: 670px;
       display: flex;
       gap: 20px;
       align-items: flex-start;
-      flex-wrap:wrap;
+      flex-wrap: wrap;
       justify-content: center;
-      box-sizing:border-box;
+      box-sizing: border-box;
     }
     .canvas-block {
       text-align: center;
-      margin-bottom:1em;
+      margin-bottom: 1em;
     }
     h1 { margin: 0 0 0.2em 0; font-size: 2em; }
     h2, h3 { margin-top: 1em; }
-    button { margin: 4px 1px 4px 0; font-size:1em; padding:0.4em 1.1em; border-radius:0.4em; border:none; background:#0366d6; color:#fff;}
-    button:active { background:#01408D;}
+    button { margin: 4px 1px 4px 0; font-size: 1em; padding: 0.4em 1.1em; border-radius: 0.4em; border: none; background: #0366d6; color: #fff; }
+    button:active { background: #01408D; }
     input[type="color"] { width: 36px; height: 1.8em; padding: 0; border: none; vertical-align:middle;}
     input, label { font-size:1em;}
     .selectedTextMsg { color: #00aaff; font-weight: bold; }
     .canvas-label {
       color: #444;
       font-weight: bold;
-      margin-bottom:0.4em;
-      font-size:1.07em;
+      margin-bottom: 0.4em;
+      font-size: 1.07em;
     }
     .canvas-label.editable { color: #0366d6; }
+    section {max-width: 830px; margin:2em auto 0 auto; padding:0 1em;}
     @media (max-width: 900px) {
       main{flex-direction:column; align-items:center;}
       .canvas-area {flex-direction:column;}
       .sidebar {width:auto; min-width:0; max-width:96vw;}
       .canvas-block {width:100%;}
+      section{font-size:1em;}
     }
     @media (max-width:600px) {
       main{padding: 0.6em 0;}
-      .canvas-area {padding:0.5em 0;}
+      .canvas-area {padding: 0.5em 0;}
       header { font-size: 1.05em;}
       h1 {font-size:1.25em;}
       button,input,label{font-size:0.97em;}
+      section{font-size:0.98em;}
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Flag Builder</h1>
-    <p>Compare the original flag (left) with your editable flag (right). Add .se with colors, drag, edit, and export! Works great on mobile.</p>
+    <h1>Flag Builder: Editable Swedish & Nordic ccTLD Flags</h1>
+    <h2>
+      Online flag editor for Sweden (.se), Norway (.no), Denmark (.dk), Finland (.fi).<br>
+      Drag, remix, add colored text, and export your custom flag. Supports SVG, PNG. Mobile first.
+    </h2>
+    <p>
+      Perfect for inclusion, education, generative AI, or multilingual democracy campaigns.
+      Compare your remix with the official flag side-by-side. Try adding ".se" in blue!
+    </p>
   </header>
   <main>
     <div class="sidebar">
@@ -158,23 +154,78 @@
     <div class="canvas-area">
       <div class="canvas-block">
         <div class="canvas-label">Original</div>
-        <svg id="originalFlagCanvas" width="320" height="200" style="border:1.5px solid #bbb; background:#fff;">
-        </svg>
+        <svg id="originalFlagCanvas" width="320" height="200" aria-label="Original Swedish Flag, drag-editable version shown beside" style="border:1.5px solid #bbb; background:#fff;"></svg>
       </div>
       <div class="canvas-block">
         <div class="canvas-label editable">Editable</div>
-        <svg id="flagCanvas" width="320" height="200" style="border:2px solid #333; background:#fff; touch-action:none;">
-        </svg>
+        <svg id="flagCanvas" width="320" height="200" aria-label="Editable flag canvas for Sweden, Denmark, Norway, Finland, with draggable colored text and shapes. Use the flag builder controls." style="border:2px solid #333; background:#fff; touch-action:none;"></svg>
         <div style="margin-top:0.8em;font-size:0.95em;color:#555;">
           <em>Tap or click any element to move, edit, or delete.<br/> Works on all mobile and desktop browsers.</em>
         </div>
       </div>
     </div>
   </main>
+  <!-- --- Topical SEO Sections --- -->
+  <section id="about-flag-builder">
+    <h2>About the Flag Builder Project</h2>
+    <p>
+      The Flag Builder is an open, interactive web tool for creating, visualizing, and exploring Swedish, Norwegian, Danish, and Finnish national flags—including creative ccTLD variants (like .se, .no, .dk, .fi).
+      This project empowers everyone to experiment with flag design for education, political inclusion, cultural campaigns, and multilingual communities.
+    </p>
+    <p>
+      Our mission is to foster <strong>democracy, visual literacy, and digital inclusion</strong> through open-source design, accessible on all devices and languages.&nbsp;
+      Flags matter: they are symbols of identity, pride, and sometimes challenge and transformation.
+    </p>
+  </section>
+  <section id="how-to-use-flag-builder">
+    <h2>How to Use the Flag Builder Tool</h2>
+    <ol>
+      <li><strong>Select a Flag Template:</strong> Choose from Sweden, Norway, Denmark, or Finland. The original flag appears on the left; your editable version on the right.</li>
+      <li><strong>Add or Edit Elements:</strong> Drag existing shapes, add colored letters (like “.se”), or import other text and symbols. Tap/Click to move, change color, or resize.</li>
+      <li><strong>Compare & Export:</strong> See your creation next to the official flag; export as SVG, PNG, or share with others.</li>
+      <li><strong>Undo/Redo & Mobile Support:</strong> Make changes confidently. The interface is touch-friendly and performs smoothly across devices.</li>
+    </ol>
+  </section>
+  <section id="flag-theory-cctld">
+    <h2>Flag Theory, National Identity & ccTLD Symbols</h2>
+    <p>
+      Flags are powerful tools of identity and communication, distilled into simple shapes and colors.
+      National domains (ccTLDs, like .se for Sweden) are increasingly used on real-world flags for digital inclusion, branding, and grassroots movements.
+    </p>
+    <p>
+      <strong>Why remix flags?</strong> Adding ccTLD or multilingual symbols to a flag can represent open data, digital democracy, or highlight values shared across borders. Our Flag Builder enables anyone to visualize these changes transparently—no design skills needed.
+    </p>
+    <p>
+      Explore more about <a href="https://multireligionvalsystem.eu.org/">democracy by design</a> and participate in inclusive civic campaigns!
+    </p>
+  </section>
+  <section id="flag-builder-faq">
+    <h2>Frequently Asked Questions</h2>
+    <dl>
+      <dt><strong>Can I export my flag as an SVG or PNG?</strong></dt>
+      <dd>Yes! Use the Export buttons for high-quality vector and raster images.</dd>
+      <dt><strong>Is the app open-source and mobile-friendly?</strong></dt>
+      <dd>Yes—Flag Builder works on all modern devices and browsers, and all code is open for contribution or learning.</dd>
+      <dt><strong>What is a ccTLD?</strong></dt>
+      <dd>Country Code Top Level Domains (ccTLD) are country-specific Internet extensions, e.g., .se for Sweden.</dd>
+      <dt><strong>Where can I learn more about flags and democracy campaigns?</strong></dt>
+      <dd>Check our resources at <a href="https://multireligionvalsystem.eu.org/">multireligionvalsystem.eu.org</a> for in-depth guides.</dd>
+    </dl>
+  </section>
+  <section id="contribute-flag-builder">
+    <h2>Contribute & Attribution</h2>
+    <p>
+      Flag Builder is inspired by open data and community collaboration. To suggest new templates, report bugs, or request features, contact us or contribute via our open project.
+    </p>
+    <ul>
+      <li><strong>Website:</strong> <a href="https://multireligionvalsystem.eu.org/">Religions for Peace – Multireligion Voting System</a></li>
+      <li><strong>Author:</strong> MultireligionValSystem.eu.org Team</li>
+    </ul>
+  </section>
+  <!-- --- End Topical SEO Sections --- -->
   <script>
-    // flag template objects now use unique IDs for ALL elements!
+    // --- Flag logic: unchanged from previous complete file, supports drag, edit, undo/redo, touch/mobile ---
     function idGen() {return "id"+Math.floor(Math.random()*1e8)}
-
     const flagTemplates = {
       se: [
         { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#006aa7" },
@@ -199,23 +250,19 @@
         { id: idGen(), type: "rect", x: 0, y: 75, width: 320, height: 40, fill: "#003580" }
       ]
     };
-
     let userFlag = [];
     let currentTemplateKey = 'se';
     let selectedTextId = null, dragOffset = null;
     let undoStack = [], redoStack = [];
-
     function saveStateForUndo() {
       undoStack.push(JSON.parse(JSON.stringify(userFlag)));
       if (undoStack.length > 50) undoStack.shift();
       redoStack = [];
     }
-
     function idGenText() { return "t"+(Math.random()*100000|0); }
-
     function addColoredSE() {
       saveStateForUndo();
-      userFlag = flagTemplates.se.map(o => ({...o})); // Swedish flag background (with fresh IDs)
+      userFlag = flagTemplates.se.map(o => ({...o}));
       const chars = [
         { ch: ".", color: "#27ae60" },
         { ch: "s", color: "#2980ff" },
@@ -236,7 +283,6 @@
       drawOriginalFlag(flagTemplates.se);
       currentTemplateKey = 'se';
     }
-
     function addLetter() {
       const txt = document.getElementById('addLetterInput').value.trim();
       if (!txt) return;
@@ -252,7 +298,6 @@
       document.getElementById('addLetterInput').value = "";
       selectText(userFlag[userFlag.length - 1].id);
     }
-
     function undo() {
       if (undoStack.length === 0) return;
       redoStack.push(JSON.parse(JSON.stringify(userFlag)));
@@ -267,7 +312,6 @@
       selectedTextId = null;
       drawFlag(userFlag);
     }
-
     function drawOriginalFlag(shapes) {
       const svg = document.getElementById('originalFlagCanvas');
       svg.innerHTML = '';
@@ -294,7 +338,6 @@
         svg.appendChild(el);
       });
     }
-
     function drawFlag(shapes) {
       const svg = document.getElementById('flagCanvas');
       svg.innerHTML = '';
@@ -361,13 +404,11 @@
       });
       renderSelectedTextPanel();
     }
-
     function selectText(id) {
       selectedTextId = id;
       renderSelectedTextPanel();
       drawFlag(userFlag);
     }
-
     function dragMoveText(evt) {
       if (!selectedTextId || dragOffset == null) return;
       let txt = userFlag.find(shape => shape.id === selectedTextId);
@@ -399,7 +440,6 @@
       svg.removeEventListener('touchend', dragEndTextTouch);
       saveStateForUndo();
     }
-    // Rect drag functions
     function dragMoveRect(evt) {
       if (!selectedTextId || dragOffset == null) return;
       let rectObj = userFlag.find(shape => shape.id === selectedTextId);
@@ -431,9 +471,7 @@
       svg.removeEventListener('touchend', dragEndRectTouch);
       saveStateForUndo();
     }
-
     function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
-
     function renderSelectedTextPanel() {
       const panel = document.getElementById('selectedTextPanel');
       if (!selectedTextId) {
@@ -441,10 +479,7 @@
         return;
       }
       let txt = userFlag.find(shape => shape.id === selectedTextId);
-      if (!txt) {
-        panel.innerHTML = '';
-        return;
-      }
+      if (!txt) { panel.innerHTML = ''; return; }
       if (txt.type === 'text') {
         panel.innerHTML = `
           <label>Text: <input type="text" id="txtText" value="${txt.text}" /></label><br/>
@@ -530,4 +565,3 @@
   </script>
 </body>
 </html>
-
