@@ -4,72 +4,99 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Flag Builder – Compare and Edit</title>
+  <meta name="description" content="Editable ccTLD flags. Drag, edit, add .se, compare and export – mobile friendly!">
   <style>
+    html, body { height:100%; }
     body {
       background: #f9f9f9;
       font-family: 'Inter', Arial, sans-serif;
-      margin: 0; padding: 0; color: #222;
+      margin: 0; padding: 0; color: #222; min-height:100vh;
     }
     header {
       background: #0366d6; color: #fff;
       padding: 1em 2em; text-align: left;
     }
-    main { padding: 2em; display: flex; gap: 2em; }
+    main { 
+      padding: 1em 0.5em;
+      display: flex; gap: 1em; flex-wrap: wrap;
+      justify-content: center;
+    }
     .sidebar {
-      min-width: 220px; background: #f1f4f6; padding: 1em;
+      min-width: 220px; width:320px; background: #f1f4f6; padding: 1em;
       border-radius: 0.8em; box-shadow: 0 0 8px #eee;
+      margin-bottom:1em;
+      box-sizing:border-box;
     }
     .canvas-area {
       flex-grow: 1;
       background: #fff;
-      padding: 2em 2em 0.5em 2em;
+      padding: 1em 0.5em 1em 0.5em;
       border-radius: 1em;
       box-shadow: 0 0 12px #ddd;
-      min-width: 760px;
+      min-width:320px; max-width:670px;
       display: flex;
-      gap: 40px;
+      gap: 20px;
       align-items: flex-start;
+      flex-wrap:wrap;
+      justify-content: center;
+      box-sizing:border-box;
     }
     .canvas-block {
       text-align: center;
+      margin-bottom:1em;
     }
     h1 { margin: 0 0 0.2em 0; font-size: 2em; }
     h2, h3 { margin-top: 1em; }
-    button { margin: 2px 0.5em 2px 0; }
-    input[type="color"] { width: 36px; height: 1.5em; padding: 0; border: none; }
+    button { margin: 4px 1px 4px 0; font-size:1em; padding:0.4em 1.1em; border-radius:0.4em; border:none; background:#0366d6; color:#fff;}
+    button:active { background:#01408D;}
+    input[type="color"] { width: 36px; height: 1.8em; padding: 0; border: none; vertical-align:middle;}
+    input, label { font-size:1em;}
     .selectedTextMsg { color: #00aaff; font-weight: bold; }
     .canvas-label {
       color: #444;
       font-weight: bold;
       margin-bottom:0.4em;
-      font-size:1em;
+      font-size:1.07em;
     }
     .canvas-label.editable { color: #0366d6; }
+    @media (max-width: 900px) {
+      main{flex-direction:column; align-items:center;}
+      .canvas-area {flex-direction:column;}
+      .sidebar {width:auto; min-width:0; max-width:96vw;}
+      .canvas-block {width:100%;}
+    }
+    @media (max-width:600px) {
+      main{padding: 0.6em 0;}
+      .canvas-area {padding:0.5em 0;}
+      header { font-size: 1.05em;}
+      h1 {font-size:1.25em;}
+      button,input,label{font-size:0.97em;}
+    }
   </style>
 </head>
 <body>
   <header>
     <h1>Flag Builder</h1>
-    <p>Compare the original template (left) with your editable flag (right). Add .se with colors, drag, edit, and export!</p>
+    <p>Compare the original flag (left) with your editable flag (right). Add .se with colors, drag, edit, and export! Works great on mobile.</p>
   </header>
   <main>
     <div class="sidebar">
       <h2>Templates</h2>
-      <button onclick="loadFlag('se')">Sweden (reset)</button><br>
-      <button onclick="loadFlag('no')">Norway</button><br>
-      <button onclick="loadFlag('dk')">Denmark</button><br>
-      <button onclick="loadFlag('fi')">Finland</button><br>
-
-      <h3>.se with Colors</h3>
+      <button onclick="loadFlag('se')">Sweden (reset)</button>
+      <button onclick="loadFlag('no')">Norway</button>
+      <button onclick="loadFlag('dk')">Denmark</button>
+      <button onclick="loadFlag('fi')">Finland</button>
+      <h3>Add .se with Colors</h3>
       <button onclick="addColoredSE()">Add .se with Colors</button>
-
       <h3>Add Letter/Text</h3>
       <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" style="width:80px;" />
       <button onclick="addLetter()">Add</button>
-      <div id="textControls" style="margin-top:1.5em">
+      <h3>Edit/Delete/Undo/Redo</h3>
+      <button onclick="undo()">Undo</button>
+      <button onclick="redo()">Redo</button>
+      <div id="textControls" style="margin-top:1.1em">
         <div id="selectedTextPanel" style="margin-top:10px;"></div>
       </div>
-
       <br>
       <button onclick="exportSVG()">Export SVG</button>
       <button onclick="exportPNG()">Export PNG</button>
@@ -77,68 +104,77 @@
     <div class="canvas-area">
       <div class="canvas-block">
         <div class="canvas-label">Original</div>
-        <svg id="originalFlagCanvas" width="320" height="200" style="border:1px solid #bbb; background:#fff; margin-bottom:0.5em;">
-          <!-- Original flag template -->
+        <svg id="originalFlagCanvas" width="320" height="200" style="border:1.5px solid #bbb; background:#fff;">
         </svg>
       </div>
       <div class="canvas-block">
         <div class="canvas-label editable">Editable</div>
-        <svg id="flagCanvas" width="320" height="200" style="border:1px solid #333; background:#fff; touch-action:none;">
-          <!-- Editable flag -->
+        <svg id="flagCanvas" width="320" height="200" style="border:2px solid #333; background:#fff; touch-action:none;">
         </svg>
-        <div style="margin-top:1em;font-size:0.95em;color:#888;">
-          <em>Tip: Tap/click and drag letters to move them. Tap to edit, change color, or delete.</em>
+        <div style="margin-top:0.8em;font-size:0.95em;color:#555;">
+          <em>Tap or click any element to move, edit, or delete.<br/> Works on all mobile and desktop browsers.</em>
         </div>
       </div>
     </div>
   </main>
   <script>
+    // flag template objects now use unique IDs for ALL elements!
+    function idGen() {return "id"+Math.floor(Math.random()*1e8)}
+
     const flagTemplates = {
       se: [
-        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#006aa7" },
-        { type: "rect", x: 90, y: 0, width: 40, height: 200, fill: "#fecc00" },
-        { type: "rect", x: 0, y: 80, width: 320, height: 40, fill: "#fecc00" }
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#006aa7" },
+        { id: idGen(), type: "rect", x: 90, y: 0, width: 40, height: 200, fill: "#fecc00" },
+        { id: idGen(), type: "rect", x: 0, y: 80, width: 320, height: 40, fill: "#fecc00" }
       ],
       no: [
-        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#ba0c2f" },
-        { type: "rect", x: 85, y: 0, width: 40, height: 200, fill: "#fff" },
-        { type: "rect", x: 0, y: 80, width: 320, height: 40, fill: "#fff" },
-        { type: "rect", x: 95, y: 0, width: 20, height: 200, fill: "#00205b" },
-        { type: "rect", x: 0, y: 90, width: 320, height: 20, fill: "#00205b" }
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#ba0c2f" },
+        { id: idGen(), type: "rect", x: 85, y: 0, width: 40, height: 200, fill: "#fff" },
+        { id: idGen(), type: "rect", x: 0, y: 80, width: 320, height: 40, fill: "#fff" },
+        { id: idGen(), type: "rect", x: 95, y: 0, width: 20, height: 200, fill: "#00205b" },
+        { id: idGen(), type: "rect", x: 0, y: 90, width: 320, height: 20, fill: "#00205b" }
       ],
       dk: [
-        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#c60c30" },
-        { type: "rect", x: 110, y: 0, width: 30, height: 200, fill: "#fff" },
-        { type: "rect", x: 0, y: 70, width: 320, height: 30, fill: "#fff" }
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#c60c30" },
+        { id: idGen(), type: "rect", x: 110, y: 0, width: 30, height: 200, fill: "#fff" },
+        { id: idGen(), type: "rect", x: 0, y: 70, width: 320, height: 30, fill: "#fff" }
       ],
       fi: [
-        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" },
-        { type: "rect", x: 80, y: 0, width: 40, height: 200, fill: "#003580" },
-        { type: "rect", x: 0, y: 75, width: 320, height: 40, fill: "#003580" }
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" },
+        { id: idGen(), type: "rect", x: 80, y: 0, width: 40, height: 200, fill: "#003580" },
+        { id: idGen(), type: "rect", x: 0, y: 75, width: 320, height: 40, fill: "#003580" }
       ]
     };
 
     let userFlag = [];
     let currentTemplateKey = 'se';
-    let selectedTextId = null;
-    let dragOffset = null;
+    let selectedTextId = null, dragOffset = null;
+    let undoStack = [], redoStack = [];
+
+    function saveStateForUndo() {
+      undoStack.push(JSON.parse(JSON.stringify(userFlag)));
+      if (undoStack.length > 50) undoStack.shift();
+      redoStack = [];
+    }
+
+    function idGenText() { return "t"+(Math.random()*100000|0); }
 
     function addColoredSE() {
-      userFlag = flagTemplates.se.map(o => ({...o})); // Swedish flag background
+      saveStateForUndo();
+      userFlag = flagTemplates.se.map(o => ({...o})); // Swedish flag background (with fresh IDs)
       const chars = [
-        { ch: ".", color: "#27ae60" },    // green dot
-        { ch: "s", color: "#2980ff" },    // blue s
-        { ch: "e", color: "#f4d03f" }     // yellow e
+        { ch: ".", color: "#27ae60" },
+        { ch: "s", color: "#2980ff" },
+        { ch: "e", color: "#f4d03f" }
       ];
       let xStart = 130, yBase = 110;
       chars.forEach((c, i) => {
         userFlag.push({
-          type: "text", text: c.ch,
+          type: "text", text: c.ch, id: idGenText(),
           x: xStart + i * 28, y: yBase,
           fontSize: 56,
           fill: c.color,
-          fontWeight: "bold",
-          id: "l" + (Math.random() * 100000).toFixed(0)
+          fontWeight: "bold"
         });
       });
       selectedTextId = null;
@@ -150,17 +186,32 @@
     function addLetter() {
       const txt = document.getElementById('addLetterInput').value.trim();
       if (!txt) return;
+      saveStateForUndo();
       userFlag.push({
-        type: "text", text: txt,
+        type: "text", text: txt, id: idGenText(),
         x: 120, y: 110,
         fontSize: 56,
         fill: "#222",
-        fontWeight: "bold",
-        id: "l" + (Math.random() * 100000).toFixed(0)
+        fontWeight: "bold"
       });
       drawFlag(userFlag);
       document.getElementById('addLetterInput').value = "";
       selectText(userFlag[userFlag.length - 1].id);
+    }
+
+    function undo() {
+      if (undoStack.length === 0) return;
+      redoStack.push(JSON.parse(JSON.stringify(userFlag)));
+      userFlag = undoStack.pop();
+      selectedTextId = null;
+      drawFlag(userFlag);
+    }
+    function redo() {
+      if (redoStack.length === 0) return;
+      undoStack.push(JSON.parse(JSON.stringify(userFlag)));
+      userFlag = redoStack.pop();
+      selectedTextId = null;
+      drawFlag(userFlag);
     }
 
     function drawOriginalFlag(shapes) {
@@ -194,16 +245,35 @@
       const svg = document.getElementById('flagCanvas');
       svg.innerHTML = '';
       shapes.forEach((shape, idx) => {
-        let el;
-        if (shape.type === 'rect') {
+        let el, isRect = shape.type === 'rect';
+        if (isRect) {
           el = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
           el.setAttribute('x', shape.x);
           el.setAttribute('y', shape.y);
           el.setAttribute('width', shape.width);
           el.setAttribute('height', shape.height);
           el.setAttribute('fill', shape.fill);
-        }
-        if (shape.type === 'text') {
+          el.setAttribute('cursor', 'move');
+          if (selectedTextId === shape.id) {
+            el.setAttribute('stroke', '#00aaff');
+            el.setAttribute('stroke-width', "2");
+          }
+          el.addEventListener('mousedown', function(evt) {
+            selectText(shape.id);
+            dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y };
+            svg.addEventListener('mousemove', dragMoveRect);
+            svg.addEventListener('mouseup', dragEndRect);
+          });
+          el.addEventListener('touchstart', function(evt) {
+            selectText(shape.id);
+            const touch = evt.touches[0];
+            const rect = svg.getBoundingClientRect();
+            dragOffset = { x: touch.clientX - rect.left - shape.x, y: touch.clientY - rect.top - shape.y };
+            svg.addEventListener('touchmove', dragMoveRectTouch);
+            svg.addEventListener('touchend', dragEndRectTouch);
+            evt.preventDefault();
+          });
+        } else if (shape.type === 'text') {
           el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
           el.setAttribute('x', shape.x);
           el.setAttribute('y', shape.y);
@@ -217,14 +287,12 @@
             el.setAttribute('stroke', '#00aaff');
             el.setAttribute('stroke-width', "2");
           }
-          // Mouse drag
           el.addEventListener('mousedown', function(evt) {
             selectText(shape.id);
             dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y };
             svg.addEventListener('mousemove', dragMoveText);
             svg.addEventListener('mouseup', dragEndText);
           });
-          // Touch drag
           el.addEventListener('touchstart', function(evt) {
             selectText(shape.id);
             const touch = evt.touches[0];
@@ -249,8 +317,8 @@
     function dragMoveText(evt) {
       if (!selectedTextId || dragOffset == null) return;
       let txt = userFlag.find(shape => shape.id === selectedTextId);
-      txt.x = evt.offsetX - dragOffset.x;
-      txt.y = evt.offsetY - dragOffset.y;
+      txt.x = clamp(evt.offsetX - dragOffset.x, 0, 320 - (txt.fontSize || 0));
+      txt.y = clamp(evt.offsetY - dragOffset.y, (txt.fontSize||0), 200);
       drawFlag(userFlag);
     }
     function dragEndText(evt) {
@@ -258,6 +326,7 @@
       const svg = document.getElementById('flagCanvas');
       svg.removeEventListener('mousemove', dragMoveText);
       svg.removeEventListener('mouseup', dragEndText);
+      saveStateForUndo();
     }
     function dragMoveTextTouch(evt) {
       if (!selectedTextId || dragOffset == null) return;
@@ -265,8 +334,8 @@
       const svg = document.getElementById('flagCanvas');
       const rect = svg.getBoundingClientRect();
       let txt = userFlag.find(shape => shape.id === selectedTextId);
-      txt.x = touch.clientX - rect.left - dragOffset.x;
-      txt.y = touch.clientY - rect.top - dragOffset.y;
+      txt.x = clamp(touch.clientX - rect.left - dragOffset.x, 0, 320 - (txt.fontSize || 0));
+      txt.y = clamp(touch.clientY - rect.top - dragOffset.y, (txt.fontSize||0), 200);
       drawFlag(userFlag);
     }
     function dragEndTextTouch(evt) {
@@ -274,11 +343,47 @@
       const svg = document.getElementById('flagCanvas');
       svg.removeEventListener('touchmove', dragMoveTextTouch);
       svg.removeEventListener('touchend', dragEndTextTouch);
+      saveStateForUndo();
     }
+    // Rect drag functions
+    function dragMoveRect(evt) {
+      if (!selectedTextId || dragOffset == null) return;
+      let rectObj = userFlag.find(shape => shape.id === selectedTextId);
+      rectObj.x = clamp(evt.offsetX - dragOffset.x, 0, 320 - rectObj.width);
+      rectObj.y = clamp(evt.offsetY - dragOffset.y, 0, 200 - rectObj.height);
+      drawFlag(userFlag);
+    }
+    function dragEndRect(evt) {
+      dragOffset = null;
+      const svg = document.getElementById('flagCanvas');
+      svg.removeEventListener('mousemove', dragMoveRect);
+      svg.removeEventListener('mouseup', dragEndRect);
+      saveStateForUndo();
+    }
+    function dragMoveRectTouch(evt) {
+      if (!selectedTextId || dragOffset == null) return;
+      const touch = evt.touches[0];
+      const svg = document.getElementById('flagCanvas');
+      const rect = svg.getBoundingClientRect();
+      let rectObj = userFlag.find(shape => shape.id === selectedTextId);
+      rectObj.x = clamp(touch.clientX - rect.left - dragOffset.x, 0, 320 - rectObj.width);
+      rectObj.y = clamp(touch.clientY - rect.top - dragOffset.y, 0, 200 - rectObj.height);
+      drawFlag(userFlag);
+    }
+    function dragEndRectTouch(evt) {
+      dragOffset = null;
+      const svg = document.getElementById('flagCanvas');
+      svg.removeEventListener('touchmove', dragMoveRectTouch);
+      svg.removeEventListener('touchend', dragEndRectTouch);
+      saveStateForUndo();
+    }
+
+    function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
+
     function renderSelectedTextPanel() {
       const panel = document.getElementById('selectedTextPanel');
       if (!selectedTextId) {
-        panel.innerHTML = '<span class="selectedTextMsg">Tap a letter/text to select/edit.</span>';
+        panel.innerHTML = '<span class="selectedTextMsg">Tap any element to select, edit or delete.</span>';
         return;
       }
       let txt = userFlag.find(shape => shape.id === selectedTextId);
@@ -286,33 +391,89 @@
         panel.innerHTML = '';
         return;
       }
-      panel.innerHTML = `
-        <label>Text: <input type="text" id="txtText" value="${txt.text}" /></label><br/>
-        <label style="display:inline-block;width:55px;">Color:</label>
-        <input type="color" id="txtColor" value="${txt.fill}" style="vertical-align:middle;"/><br/>
-        <label style="display:inline-block;width:55px;">Size:</label>
-        <input type="number" id="txtSize" min="12" max="200" value="${txt.fontSize}" style="width:50px;"/><br/>
-        <button onclick="deleteSelectedText()">Delete</button>
-      `;
-      document.getElementById('txtText').oninput = function() {
-        txt.text = this.value;
-        drawFlag(userFlag);
-      };
-      document.getElementById('txtColor').oninput = function() {
-        txt.fill = this.value;
-        drawFlag(userFlag);
-      };
-      document.getElementById('txtSize').oninput = function() {
-        txt.fontSize = +this.value;
-        drawFlag(userFlag);
-      };
+      if (txt.type === 'text') {
+        panel.innerHTML = `
+          <label>Text: <input type="text" id="txtText" value="${txt.text}" /></label><br/>
+          <label style="display:inline-block;width:55px;">Color:</label>
+          <input type="color" id="txtColor" value="${txt.fill}" style="vertical-align:middle;"/><br/>
+          <label style="display:inline-block;width:55px;">Size:</label>
+          <input type="number" id="txtSize" min="12" max="200" value="${txt.fontSize}" style="width:56px;"/><br/>
+          <button onclick="deleteSelectedText()">Delete</button>
+        `;
+        document.getElementById('txtText').oninput = function() {
+          saveStateForUndo(); txt.text = this.value; drawFlag(userFlag);
+        };
+        document.getElementById('txtColor').oninput = function() {
+          saveStateForUndo(); txt.fill = this.value; drawFlag(userFlag);
+        };
+        document.getElementById('txtSize').oninput = function() {
+          saveStateForUndo(); txt.fontSize = +this.value; drawFlag(userFlag);
+        };
+      } else if (txt.type === 'rect') {
+        panel.innerHTML = `
+          <label>X: <input type="number" id="rectX" value="${txt.x}" style="width:56px;"></label><br/>
+          <label>Y: <input type="number" id="rectY" value="${txt.y}" style="width:56px;"></label><br/>
+          <label>Width: <input type="number" id="rectWidth" value="${txt.width}" style="width:56px;"></label><br/>
+          <label>Height: <input type="number" id="rectHeight" value="${txt.height}" style="width:56px;"></label><br/>
+          <label>Color: <input type="color" id="rectFill" value="${txt.fill}"></label><br/>
+          <button onclick="deleteSelectedText()">Delete</button>
+        `;
+        document.getElementById('rectX').oninput = function() { saveStateForUndo(); txt.x = +this.value; drawFlag(userFlag);}
+        document.getElementById('rectY').oninput = function() { saveStateForUndo(); txt.y = +this.value; drawFlag(userFlag);}
+        document.getElementById('rectWidth').oninput = function() { saveStateForUndo();txt.width = +this.value; drawFlag(userFlag);}
+        document.getElementById('rectHeight').oninput = function() {saveStateForUndo(); txt.height = +this.value; drawFlag(userFlag);}
+        document.getElementById('rectFill').oninput = function() {saveStateForUndo(); txt.fill = this.value; drawFlag(userFlag);}
+      }
     }
     function deleteSelectedText() {
+      saveStateForUndo();
       userFlag = userFlag.filter(shape => shape.id !== selectedTextId);
       selectedTextId = null;
       drawFlag(userFlag);
     }
     function loadFlag(key) {
+      saveStateForUndo();
       currentTemplateKey = key;
-      userFlag = [...flagTemplates[key]];
-      selected
+      userFlag = flagTemplates[key].map(o=>({...o}));
+      selectedTextId = null;
+      drawFlag(userFlag);
+      drawOriginalFlag(flagTemplates[key]);
+    }
+    function exportSVG() {
+      const svg = document.getElementById('flagCanvas');
+      const serializer = new XMLSerializer();
+      let svgContent = serializer.serializeToString(svg);
+      let blob = new Blob([svgContent], {type: "image/svg+xml"});
+      let url = URL.createObjectURL(blob);
+      let link = document.createElement("a");
+      link.href = url;
+      link.download = "flag.svg";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+    function exportPNG() {
+      const svg = document.getElementById('flagCanvas');
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const canvas = document.createElement('canvas');
+      canvas.width = svg.width.baseVal.value;
+      canvas.height = svg.height.baseVal.value;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        const link = document.createElement('a');
+        link.download = 'flag.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+      };
+      img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+    }
+    window.onload = () => {
+      loadFlag('se');
+    };
+  </script>
+</body>
+</html>
+
