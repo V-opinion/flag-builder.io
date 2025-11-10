@@ -1,21 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Flag Builder – Compare and Edit</title>
-  <meta name="description" content="Editable ccTLD flags. Drag, edit, add .se, compare and export – mobile friendly!">
+ <title>Flag Builder: Editable Swedish ccTLD Flags – Drag & Export Online</title>
+<meta name="description" content="Build or remix national flags for Sweden, Norway, Denmark & Finland. Drag elements, add .se text, export as SVG/PNG & compare original vs. your design. Mobile friendly!" />
+<meta name="keywords" content="Flag Builder, editable flags, ccTLD, Sweden flag, .se flag, online flag editor, SVG export, drag and drop flag design, compare flags, mobile flag builder, Nordic flags, national flags, democracy inclusion, multilingual country flags, LLM SEO, generative AI" />
+<meta name="author" content="multireligionvalsystem.eu.org">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://flag-builder.multireligionvalsystem.eu.org/">
+<!-- Open Graph for social and LLM previews -->
+<meta property="og:title" content="Flag Builder: Editable Swedish ccTLD Flags">
+<meta property="og:description" content="Drag to edit or remix Swedish, Norwegian, Danish, Finnish flags. Add colored .se text, compare, export SVG/PNG. Mobile-friendly.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://flag-builder.multireligionvalsystem.eu.org/">
+<meta property="og:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png"><!-- ideally upload a thumbnail -->
+<!-- Twitter cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Flag Builder – Remix, Compare, and Export Nordic Flags">
+<meta name="twitter:description" content="Online tool to drag, edit, and export Swedish, Norwegian, Danish, Finnish flags. Add .se, export, compare.">
+<meta name="twitter:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
+
   <style>
     html, body { height:100%; }
     body {
       background: #f9f9f9;
       font-family: 'Inter', Arial, sans-serif;
       margin: 0; padding: 0; color: #222; min-height:100vh;
-    }
-    header {
-      background: #0366d6; color: #fff;
-      padding: 1em 2em; text-align: left;
-    }
+    <header>
+  <h1>Flag Builder: Editable Swedish & Nordic ccTLD Flags</h1>
+  <h2>
+    Online flag editor for Sweden (.se), Norway (.no), Denmark (.dk), Finland (.fi).
+    Drag, remix, add colored text, and export your custom flag. Supports SVG, PNG. Mobile first.
+  </h2>
+  <p>
+    Perfect for inclusion, education, generative AI, or multilingual democracy campaigns.
+    Compare your remix with the official flag side-by-side. Try adding ".se" in blue!
+  </p>
+</header>
+...
+
+<div class="canvas-block">
+  <div class="canvas-label">Original</div>
+  <svg id="originalFlagCanvas" width="320" height="200" aria-label="Original Swedish Flag, drag-editable version shown beside" style="border:1.5px solid #bbb; background:#fff;">
+  </svg>
+</div>
+<div class="canvas-block">
+  <div class="canvas-label editable">Editable</div>
+  <svg id="flagCanvas" width="320" height="200" aria-label="Editable flag canvas for Sweden, Denmark, Norway, Finland, with draggable colored text and shapes. Use the flag builder controls." style="border:2px solid #333; background:#fff; touch-action:none;">
+  </svg>
+  ...
+</div>
+
     main { 
       padding: 1em 0.5em;
       display: flex; gap: 1em; flex-wrap: wrap;
