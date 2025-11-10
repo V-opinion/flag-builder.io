@@ -124,9 +124,7 @@
     let dragOffset = null;
 
     function addColoredSE() {
-      userFlag = [
-        { type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" }
-      ];
+      userFlag = flagTemplates.se.map(o => ({...o})); // Swedish flag background
       const chars = [
         { ch: ".", color: "#27ae60" },    // green dot
         { ch: "s", color: "#2980ff" },    // blue s
@@ -145,7 +143,7 @@
       });
       selectedTextId = null;
       drawFlag(userFlag);
-      drawOriginalFlag(flagTemplates.se); // Always show Sweden original
+      drawOriginalFlag(flagTemplates.se);
       currentTemplateKey = 'se';
     }
 
@@ -317,44 +315,4 @@
     function loadFlag(key) {
       currentTemplateKey = key;
       userFlag = [...flagTemplates[key]];
-      selectedTextId = null;
-      drawFlag(userFlag);
-      drawOriginalFlag(flagTemplates[key]);
-    }
-    function exportSVG() {
-      const svg = document.getElementById('flagCanvas');
-      const serializer = new XMLSerializer();
-      let svgContent = serializer.serializeToString(svg);
-      let blob = new Blob([svgContent], {type: "image/svg+xml"});
-      let url = URL.createObjectURL(blob);
-      let link = document.createElement("a");
-      link.href = url;
-      link.download = "flag.svg";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    }
-    function exportPNG() {
-      const svg = document.getElementById('flagCanvas');
-      const svgData = new XMLSerializer().serializeToString(svg);
-      const canvas = document.createElement('canvas');
-      canvas.width = svg.width.baseVal.value;
-      canvas.height = svg.height.baseVal.value;
-      const ctx = canvas.getContext('2d');
-      const img = new Image();
-      img.onload = function() {
-        ctx.drawImage(img, 0, 0);
-        const link = document.createElement('a');
-        link.download = 'flag.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-      };
-      img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
-    }
-    window.onload = () => {
-      loadFlag('se');
-    };
-  </script>
-</body>
-</html>
+      selected
