@@ -2,206 +2,271 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Flag Builder: Lego Alphabet, ccTLD & Editable Flags for Children</title>
+  <title>Flag Builder: Lego Alphabet, Speech, ccTLD, Animated Flag</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Lego alphabet and ccTLD education: drag, tap, and place letters or country domains onto editable flags. Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, and more. Exportable, mobile-friendly, for preschoolers and inclusion." />
-  <meta name="keywords" content="flags for education, lego alphabet, ccTLD list, preschool flags, editable flags, drag move export, mobile flag builder, Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, democracy, inclusion" />
-  <meta name="author" content="multireligionvalsystem.eu.org">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://flag-builder.multireligionvalsystem.eu.org/">
-  <meta property="og:title" content="Flag Builder: Lego Alphabet, ccTLD & Editable Flags">
-  <meta property="og:description" content="Children drag Lego letters or ccTLDs onto flags — Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City. Educational, mobile-friendly, exportable.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://flag-builder.multireligionvalsystem.eu.org/">
-  <meta property="og:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Flag Builder – Lego Alphabet & ccTLD Flags for Preschoolers">
-  <meta name="twitter:description" content="Drag Lego alphabet or ccTLDs onto editable flags. Learn, play, export. Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, mobile-ready.">
-  <meta name="twitter:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org/",
-    "@type": "WebApplication",
-    "name": "Flag Builder",
-    "url": "https://flag-builder.multireligionvalsystem.eu.org/",
-    "description": "Learn the alphabet and digital inclusion using editable flags. Drag Lego-style letters or ccTLDs, edit, and export SVG/PNG.",
-    "applicationCategory": "DesignApplication",
-    "operatingSystem": "All",
-    "offers": {"@type": "Offer","price": "0","priceCurrency": "EUR"},
-    "author": {"@type": "Organization", "name": "Religions for Peace – MultireligionValSystem.eu.org" }
-  }
-  </script>
+  <meta name="description" content="Lego alphabet with spoken letters, waving Sweden flag, ccTLDs, and editable flags for children, teachers, and democracy. Supports 5 languages." />
+  <meta name="keywords" content="flag builder, lego alphabet, speech, British voice, waving flag, animated flag, educational, ccTLD, multilingual, Tailwind" />
+  <link rel="canonical" href="#">
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    html, body { height:100%; }
-    body {
-      background: #f9f9f9;
-      font-family: 'Inter', Arial, sans-serif;
-      margin: 0; padding: 0; color: #222; min-height: 100vh;
-    }
-    header { background: #0366d6; color: #fff; padding: 1.2em 2em 1em 2em; text-align: left; }
-    main { padding: 1em 0.5em; display: flex; gap: 1em; flex-wrap: wrap; justify-content: center; }
-    .sidebar {
-      min-width: 220px; width:320px; background: #f1f4f6; padding: 1em; border-radius: 0.8em; box-shadow: 0 0 8px #eee; margin-bottom:1em; box-sizing: border-box;
-    }
-    .canvas-area {
-      flex-grow: 1; background: #fff; padding: 1em 0.5em 1em 0.5em; border-radius: 1em; box-shadow: 0 0 12px #ddd;
-      min-width:320px; max-width:670px; display: flex; gap: 20px; align-items: flex-start; flex-wrap:wrap; justify-content: center; box-sizing: border-box;
-    }
-    .canvas-block { text-align: center; margin-bottom:1em; }
-    h1 { margin: 0 0 0.2em 0; font-size: 2em; }
-    h2, h3 { margin-top: 1em; }
-    button { margin: 4px 1px 4px 0; font-size:1em; padding:0.4em 1.1em; border-radius:0.4em; border:none; background:#0366d6; color:#fff;}
-    button:active { background:#01408D;}
-    input[type="color"] { width: 36px; height: 1.8em; padding: 0; border: none; vertical-align:middle;}
-    input, label { font-size:1em;}
-    .selectedTextMsg { color: #00aaff; font-weight: bold; }
-    .canvas-label { color: #444; font-weight: bold; margin-bottom:0.4em; font-size:1.07em; }
-    .canvas-label.editable { color: #0366d6; }
-    #lego-alphabet-tray {
-      user-select: none;
-      margin-top:1.2em;
-      margin-bottom:1.2em;
-      gap:0.5em;
-      flex-wrap:wrap;
-      display:flex;
-      justify-content: center;
-    }
-    #lego-alphabet-tray > div {
-      transition: box-shadow 0.2s;
-    }
-    #lego-alphabet-tray > div:active, #lego-alphabet-tray > div:focus {
-      box-shadow: 0 0 5px #44d9e6;
-    }
-    #cctld-list {
-      max-height:210px;
-      overflow-y:auto;
-      font-size:0.98em;
-      line-height:1.5;
-      margin-right:-10px;
-      padding-bottom:4px;
-    }
-    section {max-width: 830px; margin:2em auto 0 auto; padding:0 1em;}
-    @media (max-width:900px) {
-      main{flex-direction:column; align-items:center;}
-      .canvas-area {flex-direction:column;}
-      .sidebar {width:auto; min-width:0; max-width:96vw;}
-      .canvas-block {width:100%;}
-      #lego-alphabet-tray {margin-bottom:0.5em;}
-      section{font-size:1em;}
-    }
-    @media (max-width:600px) {
-      main{padding: 0.6em 0;}
-      .canvas-area {padding: 0.5em 0;}
-      header { font-size: 1.05em;}
-      h1 {font-size:1.25em;}
-      button,input,label{font-size:0.97em;}
-      section{font-size:0.98em;}
-    }
+    .waving-flag { animation: wave 2s infinite linear; transform-origin: 50% 50%; will-change: transform; }
+    @keyframes wave { 0%,100%{transform:skewY(0deg) scaleY(1);} 20%{transform:skewY(-4deg) scaleY(1.04);} 50%{transform:skewY(5deg) scaleY(0.97);} 80%{transform:skewY(-2deg) scaleY(1.02);} }
+    .btn {background:#2563EB; color:#fff; margin:2px 2px; padding:3px 11px; border-radius:8px; font-size:1em;}
+    .btn:hover {background:#0d1e50;}
   </style>
 </head>
-<body>
-  <header>
-    <h1>Flag Builder: Lego Alphabet & ccTLDs for Children</h1>
-    <h2>
-      Drag Lego alphabet or country ccTLDs onto editable flags: Sweden, Norway, Denmark, Finland, Turkey, Israel, Morocco, Pakistan, Vatican City.<br>
-      Built for preschoolers, teachers, and digital inclusion. Export to SVG or PNG. Works everywhere.
-    </h2>
-    <p>
-      Play, learn, and build identity by remixing flags with Lego letters or ccTLDs.
-    </p>
-  </header>
-  <main>
-    <div class="sidebar">
-      <h2>Templates</h2>
-      <button onclick="loadFlag('se')">Sweden</button>
-      <button onclick="loadFlag('no')">Norway</button>
-      <button onclick="loadFlag('dk')">Denmark</button>
-      <button onclick="loadFlag('fi')">Finland</button>
-      <button onclick="loadFlag('tr')">Turkey</button>
-      <button onclick="loadFlag('il')">Israel</button>
-      <button onclick="loadFlag('ma')">Morocco</button>
-      <button onclick="loadFlag('pk')">Pakistan</button>
-      <button onclick="loadFlag('va')">Vatican City</button>
-      <h3>Add .se with Colors</h3>
-      <button onclick="addColoredSE()">Add .se with Colors</button>
-      <h3>Add Letter/Text</h3>
-      <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" style="width:80px;" />
-      <button onclick="addLetter()">Add</button>
-      <h3>All Country ccTLDs</h3>
-      <div id="cctld-list"></div>
-      <h3>Edit/Delete/Undo/Redo</h3>
-      <button onclick="undo()">Undo</button>
-      <button onclick="redo()">Redo</button>
-      <div id="textControls" style="margin-top:1.1em">
-        <div id="selectedTextPanel" style="margin-top:10px;"></div>
+<body class="bg-gray-50">
+  <header class="bg-blue-700 text-white py-6 px-3">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+      <h1 id="title" class="text-3xl font-bold">Flag Builder: Lego Alphabet & Speech</h1>
+      <div class="mt-4 md:mt-0 flex items-center gap-2">
+        <label for="language" class="font-semibold">Language:</label>
+        <select id="language" class="rounded p-2 text-gray-700">
+          <option value="en-GB">English</option>
+          <option value="fr-FR">Français</option>
+          <option value="es-ES">Español</option>
+          <option value="ar-SA">العربية</option>
+          <option value="ru-RU">Русский</option>
+        </select>
       </div>
-      <br>
-      <button onclick="exportSVG()">Export SVG</button>
-      <button onclick="exportPNG()">Export PNG</button>
     </div>
-    <div class="canvas-area">
-      <div class="canvas-block">
-        <div class="canvas-label">Original</div>
-        <img id="originalFlagCanvas" width="320" height="200" alt="Original Flag"
-  src="data:image/jpeg;base64,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"
->  <br><p>
-        <span style="color: #CC1029">The top-level domain of poor countries , Discover the power of cctTLDs<br>
-      Why do the flags of nations wave with religious symbols over the EU, UN, and NATO? It's important to replace these symbols with the countries' own ccTLDs. This change would make the flags more meaningful and respectful. <br>
-  </span> Education, inclusion, and democracy.
-    <a href="https://discover-the-power-of-cctlds.multireligionvalsystem.eu.org/Redesigning-Religious-Symbols-on-Flags-at-the-UN-EU-NATO" rel="dofollow">Fattiga ländernas toppdomän -Discover the power of cctTLDs</a>   <br>
-    <a href="https://flag-builder.multireligionvalsystem.eu.org/" rel="dofollow">Besök flag builder</a>
+    <p id="subtitle" class="mt-2 text-lg">Click or drag Lego letters or ccTLD buttons onto flags. Hear the letter spoken in your language!</p>
+  </header>
+  <main class="max-w-7xl mx-auto px-2 py-8 flex flex-col md:flex-row gap-8">
 
-<br><a href="https://multireligionvalsystem.eu.org/comparison/hinduism-vs-buddhism.html" rel="dofollow">Ls vidare om  hinduism vs buddhism</a>
-<br><a href="https://a-multi-religion-election-system.multireligionvalsystem.eu.org/den-judisk-kristna-politiska-alliansen/" rel="dofollow">Ls vidare om den judisk kristna politiska alliansen/</a>
-
-<br><a href=" https://rfp.multireligionvalsystem.eu.org/podcasts/" rel="dofollow">Besök MultiReligion-Election podcasting</a>
-
-
-<br><a href="https://a-multi-religion-election.multireligionvalsystem.eu.org/ofullbordade-separationen-stat-kyrka-religion-politik.html" rel="dofollow">Besök ofullbordade separationen </a>
-
-<br><a href=" https://community.multireligionvalsystem.eu.org/2025/11/multireligionvalsystemet-har-tre.html/" rel="dofollow">Besök Gaza</a>
-
-<br><a href=" https://frc-.multireligionvalsystem.eu.org/MultiReligion-Election-Education.html" rel="dofollow">Besök MultiReligion-Election</a>
-<br><a href="https://political-practices-in-exile.multireligionvalsystem.eu.org/Empowering-Exiled-Political-Practices.html " rel="dofollow">Besök Empowering Exiled Political Practices</a>
-<a href="https://a-multi-religion-election-system.multireligionvalsystem.eu.org/Implementera-ett-Multi-Religi%C3%B6st-Valssystem.html" rel="dofollow">Besök MultiReligionValSystem</a>
-</p>
-
-
+    <!-- Sidebar -->
+    <aside class="md:w-80 flex-shrink-0">
+      <div class="bg-white rounded-lg shadow p-5 mb-5">
+        <h2 id="tmplHdr" class="text-xl font-semibold mb-4">Templates</h2>
+        <button class="btn" onclick="loadFlag('se')">Sweden</button>
+        <button class="btn" onclick="loadFlag('no')">Norway</button>
+        <button class="btn" onclick="loadFlag('dk')">Denmark</button>
+        <button class="btn" onclick="loadFlag('fi')">Finland</button>
+        <button class="btn" onclick="loadFlag('tr')">Turkey</button>
+        <button class="btn" onclick="loadFlag('il')">Israel</button>
+        <button class="btn" onclick="loadFlag('ma')">Morocco</button>
+        <button class="btn" onclick="loadFlag('pk')">Pakistan</button>
+        <button class="btn" onclick="loadFlag('va')">Vatican City</button>
+        <h2 id="seHdr" class="text-xl font-semibold mt-6 mb-2">Add .se with Colors</h2>
+        <button class="bg-green-500 hover:bg-green-700 text-white px-3 py-1 m-1 rounded" onclick="addColoredSE()">Add .se with Colors</button>
+        <h2 id="addLetterHdr" class="text-xl font-semibold mt-6 mb-2">Add Letter/Text</h2>
+        <div>
+          <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" class="border rounded px-2 py-1 mr-2"/>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-1 rounded" onclick="addLetter()">Add</button>
+        </div>
+        <h3 id="cctldHdr" class="mt-6 mb-1 font-semibold text-lg">All Country ccTLDs</h3>
+        <div id="cctld-list"
+          class="max-h-52 overflow-y-auto text-sm py-1 mb-4"
+          style="margin-right:-10px;"></div>
+        <h3 id="editHdr" class="font-semibold text-lg mb-2">Edit/Delete/Undo/Redo</h3>
+        <button class="bg-yellow-400 hover:bg-yellow-600 text-black px-3 py-1 m-1 rounded" onclick="undo()">Undo</button>
+        <button class="bg-yellow-400 hover:bg-yellow-600 text-black px-3 py-1 m-1 rounded" onclick="redo()">Redo</button>
+        <div id="textControls" class="mt-3 text-sm"></div>
+        <button class="bg-gray-800 hover:bg-gray-600 text-white px-4 py-1 mt-4 rounded" onclick="exportSVG()">Export SVG</button>
+        <button class="bg-gray-800 hover:bg-gray-600 text-white px-4 py-1 mt-2 rounded" onclick="exportPNG()">Export PNG</button>
       </div>
-      <div class="canvas-block">
-        <div class="canvas-label editable">Editable</div>
-        <svg id="flagCanvas" width="320" height="200" aria-label="Editable flag canvas with draggable text and symbols" style="border:2px solid #333; background:#fff; touch-action:none;"></svg>
-        <div style="margin-top:0.8em;font-size:0.95em;color:#555;">
-          <em>Drag or tap Lego letters and ccTLDs onto flags. Move, edit, or delete. Mobile, tablet, desktop.</em>
+    </aside>
+
+    <!-- Flag Canvas & Lego Alphabet -->
+    <section class="flex-1">
+      <div class="flex gap-10 flex-wrap justify-around mb-9 items-center">
+        <!-- Animated JPEG original flag -->
+        <div>
+          <span id="origFlagLbl" class="block text-gray-600 font-semibold mb-2">Original flag</span>
+          <img 
+            id="originalFlag" 
+            width="320" height="200"
+            class="waving-flag rounded shadow-lg"
+            alt="Original Sweden flag"
+            src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/..."/>
+        </div>
+        <div>
+          <span id="editFlagLbl" class="block text-indigo-700 font-semibold mb-2">Editable flag</span>
+          <svg id="flagCanvas" width="320" height="200" class="rounded shadow-lg bg-white" style="touch-action:none;"></svg>
         </div>
       </div>
-    </div>
+
+      <!-- Lego Alphabet Tray -->
+      <div id="lego-alphabet-tray" class="flex flex-wrap justify-center mb-6 gap-2"></div>
+
+      <!-- Educational: Alphabet Learning -->
+      <section class="my-8 bg-white rounded-xl shadow p-6 max-w-xl mx-auto">
+        <h2 class="text-xl font-semibold mb-3 text-blue-700">Learning the Alphabet With Lego Letters and Flags</h2>
+        <ul class="mb-2 list-disc pl-5 text-gray-700">
+          <li><strong>Letter Placement:</strong> Drag or tap Lego alphabet blocks onto flags. Spell ccTLDs, country names, or fun words.</li>
+          <li><strong>Color + Phonics:</strong> Each Lego block uses a unique color to support visual learning and letter identification.</li>
+          <li><strong>National & Civic Literacy:</strong> Connect letter shapes to flag symbols; teach diversity, digital domains, and spelling together.</li>
+          <li><strong>Audio Feedback:</strong> When you select a letter, hear its name spoken aloud in your chosen language.</li>
+          <li><strong>Active Learning:</strong> Move and arrange letters for hands-on alphabet practice in class or at home.</li>
+        </ul>
+        <p class="italic text-gray-500">
+          Teachers, parents, and learners: Place the alphabet or ccTLDs on flag templates, discuss what each flag and letter means, and help children build creative, memorable combos!
+        </p>
+      </section>
+
+      <!-- Authority: ccTLDs, inclusion, democracy -->
+      <section class="my-8 bg-blue-50 rounded-xl shadow p-6 max-w-xl mx-auto border border-blue-200">
+        <h2 class="text-xl font-bold text-blue-900 mb-3">Fattiga länders toppdomän – Discover the Power of ccTLDs</h2>
+        <p class="mb-2 text-gray-800">
+          <strong>Why ccTLDs?</strong> The top-level domain of poor countries is a key to education, inclusion, and democracy.
+          Flags of nations should wave with their own ccTLD (.pk, .se, .ng, etc.) instead of borrowed religious symbols from EU, UN, or NATO.
+          Replacing outside symbols with a country’s digital top domain honors local identity and makes flags more meaningful and respectful.
+        </p>
+        <ul class="mb-2 list-disc pl-5 text-gray-700">
+          <li>Education, inclusion, and democracy are strengthened by giving every country their own digital address.</li>
+          <li>Poor countries especially need visibility and empowerment in the digital world.</li>
+          <li>
+            <a class="text-blue-700 underline" href="https://discover-the-power-of-cctlds.multireligionvalsystem.eu.org/Redesigning-Religious-Symbols-on-Flags-at-the-UN-EU-NATO" target="_blank">
+              Fattiga ländernas toppdomän – Discover the power of cctTLDs
+            </a>
+          </li>
+        </ul>
+        <h3 class="font-semibold mt-4 mb-2 text-indigo-700">Explore and Learn More</h3>
+        <ul class="list-disc pl-6 text-gray-700 text-sm">
+          <li><a class="text-blue-700 underline" href="https://flag-builder.multireligionvalsystem.eu.org/" target="_blank">Besök Flag Builder</a></li>
+          <li><a class="text-blue-700 underline" href="https://multireligionvalsystem.eu.org/comparison/hinduism-vs-buddhism.html" target="_blank">Läs vidare om hinduism vs buddhism</a></li>
+          <li><a class="text-blue-700 underline" href="https://a-multi-religion-election-system.multireligionvalsystem.eu.org/den-judisk-kristna-politiska-alliansen/" target="_blank">Läs vidare om den judisk kristna politiska alliansen</a></li>
+          <li><a class="text-blue-700 underline" href="https://rfp.multireligionvalsystem.eu.org/podcasts/" target="_blank">Besök MultiReligion-Election podcasting</a></li>
+          <li><a class="text-blue-700 underline" href="https://a-multi-religion-election.multireligionvalsystem.eu.org/ofullbordade-separationen-stat-kyrka-religion-politik.html" target="_blank">Besök ofullbordade separationen</a></li>
+          <li><a class="text-blue-700 underline" href="https://community.multireligionvalsystem.eu.org/2025/11/multireligionvalsystemet-har-tre.html/" target="_blank">Besök Gaza</a></li>
+          <li><a class="text-blue-700 underline" href="https://frc-.multireligionvalsystem.eu.org/MultiReligion-Election-Education.html" target="_blank">Besök MultiReligion-Election</a></li>
+          <li><a class="text-blue-700 underline" href="https://political-practices-in-exile.multireligionvalsystem.eu.org/Empowering-Exiled-Political-Practices.html" target="_blank">Besök Empowering Exiled Political Practices</a></li>
+          <li><a class="text-blue-700 underline" href="https://a-multi-religion-election-system.multireligionvalsystem.eu.org/Implementera-ett-Multi-Religi%C3%B6st-Valssystem.html" target="_blank">Besök MultiReligionValSystem</a></li>
+        </ul>
+      </section>
+    </section>
   </main>
-  <div id="lego-alphabet-tray"></div>
-
-  <!-- Educational/Authority Sections -->
-  <section id="alphabet-learning-flags">
-    <h2>Learning the Alphabet With Lego Letters and Flags</h2>
-    <ul>
-      <li><strong>Letter Placement:</strong> Drag or tap Lego alphabet blocks onto flags. Spell ccTLDs, words, combos!</li>
-      <li><strong>Color + Phonics:</strong> Each Lego block has a unique color for visual learning and fun.</li>
-      <li><strong>National & Civic Literacy:</strong> Teach digital domains, country symbols, and alphabet shapes together.</li>
-    </ul>
-    <p><em>Teachers:</em> Place the alphabet or ccTLDs on flag templates, discuss colors and flags, and help children build their own mix.</p>
-  </section>
-  <section id="cctld-inclusion-flags">
-    <h2>Why Place ccTLDs on Flags?</h2>
-    <ol>
-      <li><strong>Digital Identity:</strong> Recognize your nation’s address online (.se, .pk, .br, .us, ...).</li>
-      <li><strong>Inclusion & Equity:</strong> Help world countries find pride and equality through their digital domain.</li>
-      <li><strong>Empowerment:</strong> Seeing the ccTLD encourages pride and participation online.</li>
-      <li><strong>Future Skills:</strong> Kids learn spelling and digital citizenship with each nation’s ccTLD.</li>
-    </ol>
-    <p><em>Advocates:</em> Use Flag Builder for digital inclusion and citizenship!</p>
-  </section>
-
   <script>
-    function idGen() { return "id" + Math.floor(Math.random() * 1e8); }
+    // Multi-language UI setup
+    const uiText = {
+      "en-GB": {
+        title: "Flag Builder: Lego Alphabet & Speech",
+        subtitle: "Click or drag Lego letters or ccTLD buttons onto flags. Hear the letter spoken in your language!",
+        tmplHdr: "Templates", seHdr: "Add .se with Colors", addLetterHdr: "Add Letter/Text",
+        cctldHdr: "All Country ccTLDs", editHdr: "Edit/Delete/Undo/Redo",
+        origFlagLbl: "Original flag", editFlagLbl: "Editable flag"
+      },
+      "fr-FR": {
+        title: "Créateur de Drapeaux: Alphabet Lego & Prononciation",
+        subtitle: "Cliquez ou glissez des lettres Lego ou ccTLD sur les drapeaux. Écoutez la lettre prononcée dans votre langue !",
+        tmplHdr: "Modèles", seHdr: "Ajouter .se en couleurs", addLetterHdr: "Ajouter Lettre/Texte",
+        cctldHdr: "Tous les ccTLD de Pays", editHdr: "Modifier/Supprimer/Annuler/Rétablir",
+        origFlagLbl: "Drapeau original", editFlagLbl: "Drapeau modifiable"
+      },
+      "es-ES": {
+        title: "Creador de Banderas: Alfabeto Lego y Voz",
+        subtitle: "Haz clic o arrastra letras Lego o ccTLD sobre las banderas. ¡Escucha la letra en tu idioma!",
+        tmplHdr: "Plantillas", seHdr: "Añadir .se con colores", addLetterHdr: "Añadir Letra/Text",
+        cctldHdr: "Todos los ccTLD País", editHdr: "Editar/Borrar/Deshacer/Rehacer",
+        origFlagLbl: "Bandera original", editFlagLbl: "Bandera editable"
+      },
+      "ar-SA": {
+        title: "[translate:منشئ الأعلام: أحرف ليغو والنطق]",
+        subtitle: "[translate:انقر أو اسحب أحرف ليغو أو ccTLD إلى الأعلام. استمع للنطق بلغتك!]",
+        tmplHdr: "[translate:قوالب]", seHdr: "[translate:أضف .se بالألوان]", addLetterHdr: "[translate:أضف حرف/نص]",
+        cctldHdr: "[translate:جميع ccTLDs البلدان]", editHdr: "[translate:تعديل/حذف/تراجع/إعادة]",
+        origFlagLbl: "[translate:العلم الأصلي]", editFlagLbl: "[translate:العلم القابل للتعديل]"
+      },
+      "ru-RU": {
+        title: "[translate:Конструктор Флагов: Лего-Алфавит и Озвучивание]",
+        subtitle: "[translate:Кликните или перетащите буквы Лего или ccTLD на флаги. Слушайте произношение на вашем языке!]",
+        tmplHdr: "[translate:Шаблоны]", seHdr: "[translate:Добавить .se с цветами]", addLetterHdr: "[translate:Добавить букву/текст]",
+        cctldHdr: "[translate:Все страновые ccTLDs]", editHdr: "[translate:Редактировать/Удалить/Отменить/Повторить]",
+        origFlagLbl: "[translate:Оригинальный флаг]", editFlagLbl: "[translate:Редактируемый флаг]"
+      }
+    };
+    function setUILanguage(lang) {
+      document.getElementById("title").innerHTML = uiText[lang].title;
+      document.getElementById("subtitle").innerHTML = uiText[lang].subtitle;
+      document.getElementById("tmplHdr").innerHTML = uiText[lang].tmplHdr;
+      document.getElementById("seHdr").innerHTML = uiText[lang].seHdr;
+      document.getElementById("addLetterHdr").innerHTML = uiText[lang].addLetterHdr;
+      document.getElementById("cctldHdr").innerHTML = uiText[lang].cctldHdr;
+      document.getElementById("editHdr").innerHTML = uiText[lang].editHdr;
+      document.getElementById("origFlagLbl").innerHTML = uiText[lang].origFlagLbl;
+      document.getElementById("editFlagLbl").innerHTML = uiText[lang].editFlagLbl;
+    }
+    let currentLang = "en-GB";
+    document.getElementById("language").addEventListener("change", function(e){
+      setUILanguage(e.target.value);
+      currentLang = e.target.value;
+    });
+    setUILanguage("en-GB");
+
+    // Lego tray with speech
+    const legoColors = [
+      "#fdc029", "#3a9ad9", "#b6d54a", "#f35a3f", "#f8a4c0", "#6e2ea2",
+      "#44d9e6", "#ed5565", "#2ecc71", "#e74c3c", "#3498db", "#9b59b6",
+      "#f39c12", "#ecf0f1", "#1abc9c", "#34495e", "#fff900", "#00d8ff"
+    ];
+    const legoLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.".split("");
+    let lastSelectedLegoLetter = null, userFlag = [], undoStack = [], redoStack = [], selectedTextId = null;
+    let voicesByLang = {};
+    function renderLegoAlphabetTray() {
+      const tray = document.getElementById("lego-alphabet-tray");
+      tray.innerHTML = "";
+      legoLetters.forEach((ch, i) => {
+        const color = legoColors[i % legoColors.length];
+        const div = document.createElement("div");
+        div.innerHTML = `<svg width="38" height="46">
+          <rect x="2" y="5" rx="7" ry="11" width="34" height="36" fill="${color}" stroke="#999" stroke-width="2"/>
+          <text x="19" y="32" text-anchor="middle" font-size="22" font-weight="bold" fill="#222">${ch}</text>
+        </svg>`;
+        div.className = "w-9 h-12 rounded cursor-pointer border border-gray-300 hover:border-blue-400 focus:ring-2 focus:ring-blue-400";
+        div.tabIndex = 0;
+        div.setAttribute("role", "button");
+        div.setAttribute("aria-label", ch);
+        div.addEventListener("click", function(){
+          lastSelectedLegoLetter = ch;
+          tray.querySelectorAll("div").forEach(d => d.style.boxShadow="");
+          div.style.boxShadow="0 0 8px #44d9e6";
+          speakLetter(ch, currentLang);
+        });
+        div.addEventListener("dragstart", function(evt){
+          evt.dataTransfer.setData("text/plain", ch);
+          speakLetter(ch, currentLang);
+        });
+        tray.appendChild(div);
+      });
+    }
+    // Speech Synthesis
+    function loadVoices() {
+      voicesByLang = {};
+      speechSynthesis.getVoices().forEach(v=>{
+        if (!voicesByLang[v.lang]) voicesByLang[v.lang] = v;
+        if (v.lang === "en-GB" && v.name.toLowerCase().includes("female"))
+          voicesByLang["en-GB"] = v;
+      });
+    }
+    function speakLetter(ch, lang) {
+      window.speechSynthesis.cancel();
+      let voice = voicesByLang[lang] || voicesByLang["en-GB"];
+      let utter = new SpeechSynthesisUtterance(ch);
+      utter.voice = voice;
+      utter.lang = lang;
+      window.speechSynthesis.speak(utter);
+    }
+    window.speechSynthesis.onvoiceschanged = loadVoices; setTimeout(loadVoices, 1000);
+
+    // ccTLD List
+    const ccTLDs = [".ac",".ad",".ae",".af",".ag",".ai",".al",".am",".ao",".aq",".ar",".as",".at",".au",".aw",".ax",".az",".ba",".bb",".bd",".be",".bf",".bg",".bh",".bi",".bj",".bl",".bm",".bn",".bo",".bq",".br",".bs",".bt",".bv",".bw",".by",".bz",".ca",".cc",".cd",".cf",".cg",".ch",".ci",".ck",".cl",".cm",".cn",".co",".cr",".cu",".cv",".cw",".cx",".cy",".cz",".de",".dj",".dk",".dm",".do",".dz",".ec",".ee",".eg",".eh",".er",".es",".et",".eu",".fi",".fj",".fk",".fm",".fo",".fr",".ga",".gb",".gd",".ge",".gf",".gg",".gh",".gi",".gl",".gm",".gn",".gp",".gq",".gr",".gs",".gt",".gu",".gw",".gy",".hk",".hm",".hn",".hr",".ht",".hu",".id",".ie",".il",".im",".in",".io",".iq",".ir",".is",".it",".je",".jm",".jo",".jp",".ke",".kg",".kh",".ki",".km",".kn",".kp",".kr",".kw",".ky",".kz",".la",".lb",".lc",".li",".lk",".lr",".ls",".lt",".lu",".lv",".ly",".ma",".mc",".md",".me",".mf",".mg",".mh",".mk",".ml",".mm",".mn",".mo",".mp",".mq",".mr",".ms",".mt",".mu",".mv",".mw",".mx",".my",".mz",".na",".nc",".ne",".nf",".ng",".ni",".nl",".no",".np",".nr",".nu",".nz",".om",".pa",".pe",".pf",".pg",".ph",".pk",".pl",".pm",".pn",".pr",".ps",".pt",".pw",".py",".qa",".re",".ro",".rs",".ru",".rw",".sa",".sb",".sc",".sd",".se",".sg",".sh",".si",".sj",".sk",".sl",".sm",".sn",".so",".sr",".ss",".st",".sv",".sx",".sy",".sz",".tc",".td",".tf",".tg",".th",".tj",".tk",".tl",".tm",".tn",".to",".tr",".tt",".tv",".tw",".tz",".ua",".ug",".uk",".um",".us",".uy",".uz",".va",".vc",".ve",".vg",".vi",".vn",".vu",".wf",".ws",".ye",".yt",".za",".zm",".zw"];
+    function renderCCTLDList() {
+      const list = document.getElementById('cctld-list');
+      list.innerHTML = ccTLDs.map(tld =>
+        `<button style="background:#eee;color:#0366d6;border:1px solid #ccc;margin:1px 3px 1px 0;padding:2px 7px;border-radius:6px;cursor:pointer;"
+          onclick="addCCTLDToFlag('${tld}')">${tld}</button>`
+      ).join('');
+    }
+    function addCCTLDToFlag(tld) {
+      saveStateForUndo();
+      userFlag.push({type:"text", text:tld, id: idGenText(), x:120, y:110, fontSize:36, fill:"#0366d6", fontWeight:"bold"});
+      drawFlag(userFlag); speakLetter(tld, currentLang); selectText(userFlag[userFlag.length-1].id);
+    }
+    document.addEventListener("DOMContentLoaded", renderCCTLDList);
+
+    // Flag logic
+    function idGen() {return "id"+Math.floor(Math.random()*1e8);}
+    function idGenText() {return "t"+Math.random();}
     const flagTemplates = {
       se: [
         { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#006aa7" },
@@ -256,33 +321,10 @@
         { id: idGen(), type: "rect", x: 128, y: 102, width: 27, height: 7, fill: "#000" }
       ]
     };
-    let userFlag = [];
-    let currentTemplateKey = 'se';
-    let selectedTextId = null, dragOffset = null;
-    let undoStack = [], redoStack = [];
     function saveStateForUndo() {
       undoStack.push(JSON.parse(JSON.stringify(userFlag)));
       if (undoStack.length > 50) undoStack.shift();
       redoStack = [];
-    }
-    function idGenText() { return "t"+(Math.random()*100000|0); }
-    function addColoredSE() {
-      saveStateForUndo();
-      userFlag = flagTemplates.se.map(o => ({...o}));
-      const chars = [ { ch: ".", color: "#27ae60" }, { ch: "s", color: "#2980ff" }, { ch: "e", color: "#f4d03f" } ];
-      let xStart = 130, yBase = 110;
-      chars.forEach((c, i) => {
-        userFlag.push({ type: "text", text: c.ch, id: idGenText(), x: xStart + i * 28, y: yBase, fontSize: 56, fill: c.color, fontWeight: "bold" });
-      });
-      selectedTextId = null;
-      drawFlag(userFlag); drawOriginalFlag(flagTemplates.se); currentTemplateKey = 'se';
-    }
-    function addLetter() {
-      const txt = document.getElementById('addLetterInput').value.trim();
-      if (!txt) return;
-      saveStateForUndo();
-      userFlag.push({ type: "text", text: txt, id: idGenText(), x: 120, y: 110, fontSize: 56, fill: "#222", fontWeight: "bold" });
-      drawFlag(userFlag); document.getElementById('addLetterInput').value = ""; selectText(userFlag[userFlag.length - 1].id);
     }
     function undo() {
       if (undoStack.length === 0) return;
@@ -298,202 +340,166 @@
       selectedTextId = null;
       drawFlag(userFlag);
     }
-    function drawOriginalFlag(shapes) {
-      const svg = document.getElementById('originalFlagCanvas'); svg.innerHTML = '';
-      shapes.forEach((shape, idx) => {
-        let el = drawShapeElement(shape);
-        svg.appendChild(el);
-      });
-    }
     function drawFlag(shapes) {
-      const svg = document.getElementById('flagCanvas'); svg.innerHTML = '';
+      const svg = document.getElementById('flagCanvas');
+      svg.innerHTML = '';
       shapes.forEach((shape, idx) => {
-        let el = drawShapeElement(shape, true, shape.id === selectedTextId);
+        let el = null;
+        if (shape.type === "rect") {
+          el = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+          el.setAttribute('x', shape.x); el.setAttribute('y', shape.y);
+          el.setAttribute('width', shape.width); el.setAttribute('height', shape.height);
+          el.setAttribute('fill', shape.fill);
+        }
+        if (shape.type === "circle") {
+          el = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          el.setAttribute('cx', shape.cx); el.setAttribute('cy', shape.cy); el.setAttribute('r', shape.r);
+          el.setAttribute('fill', shape.fill);
+        }
+        if (shape.type === "polygon") {
+          el = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+          el.setAttribute('points', shape.points); el.setAttribute('fill', shape.fill);
+        }
+        if (shape.type === "text") {
+          el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+          el.setAttribute('x', shape.x); el.setAttribute('y', shape.y);
+          el.setAttribute('fill', shape.fill);
+          el.setAttribute('font-size', shape.fontSize);
+          el.setAttribute('font-weight', shape.fontWeight || "normal");
+          el.setAttribute('font-family', "Arial,sans-serif");
+          el.textContent = shape.text;
+        }
+        el && el.setAttribute('cursor', 'move');
+        if (selectedTextId === shape.id) { el.setAttribute('stroke', '#00aaff'); el.setAttribute('stroke-width', "2"); }
+        if (el && ["rect","circle","text"].includes(shape.type)) {
+          el.addEventListener('mousedown', function(evt){ selectText(shape.id); setDrag(evt, shape); });
+          el.addEventListener('touchstart', function(evt){ selectText(shape.id); setDragTouch(evt, shape); evt.preventDefault(); });
+        }
         svg.appendChild(el);
       });
       renderSelectedTextPanel();
     }
-    function drawShapeElement(shape, editable, selected) {
-      let el;
-      if (shape.type === "rect") {
-        el = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        el.setAttribute('x', shape.x);
-        el.setAttribute('y', shape.y);
-        el.setAttribute('width', shape.width);
-        el.setAttribute('height', shape.height);
-        el.setAttribute('fill', shape.fill);
-      }
-      if (shape.type === "circle") {
-        el = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        el.setAttribute('cx', shape.cx);
-        el.setAttribute('cy', shape.cy);
-        el.setAttribute('r', shape.r);
-        el.setAttribute('fill', shape.fill);
-      }
-      if (shape.type === "polygon") {
-        el = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-        el.setAttribute('points', shape.points);
-        el.setAttribute('fill', shape.fill);
-      }
-      if (shape.type === "text") {
-        el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        el.setAttribute('x', shape.x);
-        el.setAttribute('y', shape.y);
-        el.setAttribute('fill', shape.fill);
-        el.setAttribute('font-size', shape.fontSize);
-        el.setAttribute('font-weight', shape.fontWeight || "normal");
-        el.setAttribute('font-family', "Arial, sans-serif");
-        el.textContent = shape.text;
-      }
-      if (editable) {
-        el.setAttribute('cursor', 'move');
-        if (selected) { el.setAttribute('stroke', '#00aaff'); el.setAttribute('stroke-width', "2"); }
-        el.addEventListener('mousedown', function(evt) { selectText(shape.id); setDrag(evt, shape); });
-        el.addEventListener('touchstart', function(evt) { selectText(shape.id); setDragTouch(evt, shape); evt.preventDefault(); });
-      }
-      return el;
-    }
+    // Drag/Move logic
     function setDrag(evt, shape) {
       if (shape.type === "rect") dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y, type: "rect" };
       else if (shape.type === "circle") dragOffset = { x: evt.offsetX - shape.cx, y: evt.offsetY - shape.cy, type: "circle" };
       else if (shape.type === "text") dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y, type: "text" };
-      else if (shape.type === "polygon") dragOffset = null;
-      const svg=document.getElementById('flagCanvas');
-      if(shape.type==="rect") { svg.addEventListener('mousemove', dragMoveRect); svg.addEventListener('mouseup', dragEndRect); }
-      if(shape.type==="circle") { svg.addEventListener('mousemove', dragMoveCircle); svg.addEventListener('mouseup', dragEndCircle); }
-      if(shape.type==="text") {svg.addEventListener('mousemove', dragMoveText); svg.addEventListener('mouseup', dragEndText);}
+      const svg = document.getElementById('flagCanvas');
+      if(shape.type==="rect") {svg.addEventListener('mousemove', dragMoveRect);svg.addEventListener('mouseup', dragEndRect);}
+      if(shape.type==="circle") {svg.addEventListener('mousemove', dragMoveCircle);svg.addEventListener('mouseup', dragEndCircle);}
+      if(shape.type==="text") {svg.addEventListener('mousemove', dragMoveText);svg.addEventListener('mouseup', dragEndText);}
     }
     function setDragTouch(evt, shape) {
       const touch = evt.touches[0];
       const svg = document.getElementById('flagCanvas');
       const rect = svg.getBoundingClientRect();
-      if (shape.type==="rect") dragOffset={ x: touch.clientX-rect.left-shape.x, y: touch.clientY-rect.top-shape.y, type:"rect"};
-      if (shape.type==="circle") dragOffset={ x: touch.clientX-rect.left-shape.cx, y: touch.clientY-rect.top-shape.cy, type:"circle"};
-      if (shape.type==="text") dragOffset={ x: touch.clientX-rect.left-shape.x, y: touch.clientY-rect.top-shape.y, type:"text"};
-      if(shape.type==="rect") {svg.addEventListener('touchmove', dragMoveRectTouch);svg.addEventListener('touchend', dragEndRectTouch);}
-      if(shape.type==="circle") {svg.addEventListener('touchmove', dragMoveCircleTouch);svg.addEventListener('touchend', dragEndCircleTouch);}
-      if(shape.type==="text") {svg.addEventListener('touchmove', dragMoveTextTouch);svg.addEventListener('touchend', dragEndTextTouch);}
+      if(shape.type==="rect") dragOffset={ x: touch.clientX-rect.left-shape.x, y: touch.clientY-rect.top-shape.y, type:"rect"};
+      if(shape.type==="circle") dragOffset={ x: touch.clientX-rect.left-shape.cx, y: touch.clientY-rect.top-shape.cy, type:"circle"};
+      if(shape.type==="text") dragOffset={ x: touch.clientX-rect.left-shape.x, y: touch.clientY-rect.top-shape.y, type:"text"};
+      if(shape.type==="rect"){svg.addEventListener('touchmove', dragMoveRectTouch);svg.addEventListener('touchend', dragEndRectTouch);}
+      if(shape.type==="circle"){svg.addEventListener('touchmove', dragMoveCircleTouch);svg.addEventListener('touchend', dragEndCircleTouch);}
+      if(shape.type==="text"){svg.addEventListener('touchmove', dragMoveTextTouch);svg.addEventListener('touchend', dragEndTextTouch);}
     }
-    function dragMoveRect(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.x = clamp(evt.offsetX - dragOffset.x, 0, 320 - obj.width);
-      obj.y = clamp(evt.offsetY - dragOffset.y, 0, 200 - obj.height);
-      drawFlag(userFlag);
-    }
-    function dragEndRect(evt) { dragOffset = null;
-      const svg = document.getElementById('flagCanvas');
-      svg.removeEventListener('mousemove', dragMoveRect); svg.removeEventListener('mouseup', dragEndRect);
-      saveStateForUndo();
-    }
-    function dragMoveText(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.x = clamp(evt.offsetX - dragOffset.x, 0, 320 - (obj.fontSize || 0));
-      obj.y = clamp(evt.offsetY - dragOffset.y, (obj.fontSize||0), 200);
-      drawFlag(userFlag);
-    }
-    function dragEndText(evt) { dragOffset = null;
-      const svg = document.getElementById('flagCanvas');
-      svg.removeEventListener('mousemove', dragMoveText); svg.removeEventListener('mouseup', dragEndText);
-      saveStateForUndo();
-    }
-    function dragMoveCircle(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.cx = clamp(evt.offsetX - dragOffset.x, obj.r, 320 - obj.r);
-      obj.cy = clamp(evt.offsetY - dragOffset.y, obj.r, 200 - obj.r);
-      drawFlag(userFlag);
-    }
-    function dragEndCircle(evt) { dragOffset=null; const svg=document.getElementById('flagCanvas');
-      svg.removeEventListener('mousemove', dragMoveCircle); svg.removeEventListener('mouseup', dragEndCircle); saveStateForUndo();
-    }
-    function dragMoveRectTouch(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      const touch = evt.touches[0];
-      const svg = document.getElementById('flagCanvas');
-      const rect = svg.getBoundingClientRect();
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.x = clamp(touch.clientX - rect.left - dragOffset.x, 0, 320 - obj.width);
-      obj.y = clamp(touch.clientY - rect.top - dragOffset.y, 0, 200 - obj.height);
-      drawFlag(userFlag);
-    }
-    function dragEndRectTouch(evt) {dragOffset=null; const svg=document.getElementById('flagCanvas');
-      svg.removeEventListener('touchmove', dragMoveRectTouch);svg.removeEventListener('touchend', dragEndRectTouch);saveStateForUndo();
-    }
-    function dragMoveTextTouch(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      const touch = evt.touches[0];
-      const svg = document.getElementById('flagCanvas');
-      const rect = svg.getBoundingClientRect();
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.x = clamp(touch.clientX - rect.left - dragOffset.x, 0, 320 - (obj.fontSize || 0));
-      obj.y = clamp(touch.clientY - rect.top - dragOffset.y, (obj.fontSize||0), 200);
-      drawFlag(userFlag);
-    }
-    function dragEndTextTouch(evt) { dragOffset=null; const svg=document.getElementById('flagCanvas');
-      svg.removeEventListener('touchmove', dragMoveTextTouch);svg.removeEventListener('touchend', dragEndTextTouch);saveStateForUndo();
-    }
-    function dragMoveCircleTouch(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      const touch = evt.touches[0];
-      const svg = document.getElementById('flagCanvas');
-      const rect = svg.getBoundingClientRect();
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.cx = clamp(touch.clientX - rect.left - dragOffset.x, obj.r, 320 - obj.r);
-      obj.cy = clamp(touch.clientY - rect.top - dragOffset.y, obj.r, 200 - obj.r);
-      drawFlag(userFlag);
-    }
-    function dragEndCircleTouch(evt) { dragOffset=null; const svg=document.getElementById('flagCanvas');
-      svg.removeEventListener('touchmove', dragMoveCircleTouch);svg.removeEventListener('touchend', dragEndCircleTouch);saveStateForUndo();
-    }
-    function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
-    function selectText(id) { selectedTextId = id; renderSelectedTextPanel(); drawFlag(userFlag); }
+    function dragMoveRect(evt) { let obj=userFlag.find(s => s.id===selectedTextId); obj.x=clamp(evt.offsetX-dragOffset.x,0,320-obj.width); obj.y=clamp(evt.offsetY-dragOffset.y,0,200-obj.height); drawFlag(userFlag);}
+    function dragEndRect(evt){dragOffset=null;const svg=document.getElementById('flagCanvas');svg.removeEventListener('mousemove',dragMoveRect);svg.removeEventListener('mouseup',dragEndRect);saveStateForUndo();}
+    function dragMoveText(evt) { let obj=userFlag.find(s => s.id===selectedTextId); obj.x=clamp(evt.offsetX-dragOffset.x,0,320-(obj.fontSize||0));obj.y=clamp(evt.offsetY-dragOffset.y,(obj.fontSize||0),200);drawFlag(userFlag);}
+    function dragEndText(evt){dragOffset=null;const svg=document.getElementById('flagCanvas');svg.removeEventListener('mousemove',dragMoveText);svg.removeEventListener('mouseup',dragEndText);saveStateForUndo();}
+    function dragMoveCircle(evt) { let obj=userFlag.find(s=>s.id===selectedTextId); obj.cx=clamp(evt.offsetX-dragOffset.x,obj.r,320-obj.r);obj.cy=clamp(evt.offsetY-dragOffset.y,obj.r,200-obj.r);drawFlag(userFlag);}
+    function dragEndCircle(evt){dragOffset=null;const svg=document.getElementById('flagCanvas');svg.removeEventListener('mousemove',dragMoveCircle);svg.removeEventListener('mouseup',dragEndCircle);saveStateForUndo();}
+    // Touch variants
+    function dragMoveRectTouch(evt){const touch=evt.touches[0];const svg=document.getElementById('flagCanvas');const rect=svg.getBoundingClientRect();let obj=userFlag.find(s=>s.id===selectedTextId);obj.x=clamp(touch.clientX-rect.left-dragOffset.x,0,320-obj.width);obj.y=clamp(touch.clientY-rect.top-dragOffset.y,0,200-obj.height);drawFlag(userFlag);}
+    function dragEndRectTouch(evt){dragOffset=null;const svg=document.getElementById('flagCanvas');svg.removeEventListener('touchmove',dragMoveRectTouch);svg.removeEventListener('touchend',dragEndRectTouch);saveStateForUndo();}
+    function dragMoveTextTouch(evt){const touch=evt.touches[0];const svg=document.getElementById('flagCanvas');const rect=svg.getBoundingClientRect();let obj=userFlag.find(s=>s.id===selectedTextId);obj.x=clamp(touch.clientX-rect.left-dragOffset.x,0,320-(obj.fontSize||0));obj.y=clamp(touch.clientY-rect.top-dragOffset.y,(obj.fontSize||0),200);drawFlag(userFlag);}
+    function dragEndTextTouch(evt){dragOffset=null;const svg=document.getElementById('flagCanvas');svg.removeEventListener('touchmove',dragMoveTextTouch);svg.removeEventListener('touchend',dragEndTextTouch);saveStateForUndo();}
+    function dragMoveCircleTouch(evt){const touch=evt.touches[0];const svg=document.getElementById('flagCanvas');const rect=svg.getBoundingClientRect();let obj=userFlag.find(s=>s.id===selectedTextId);obj.cx=clamp(touch.clientX-rect.left-dragOffset.x,obj.r,320-obj.r);obj.cy=clamp(touch.clientY-rect.top-dragOffset.y,obj.r,200-obj.r);drawFlag(userFlag);}
+    function dragEndCircleTouch(evt){dragOffset=null;const svg=document.getElementById('flagCanvas');svg.removeEventListener('touchmove',dragMoveCircleTouch);svg.removeEventListener('touchend',dragEndCircleTouch);saveStateForUndo();}
+
+    function clamp(val,min,max){return Math.max(min,Math.min(max,val));}
+    function selectText(id) { selectedTextId=id; renderSelectedTextPanel(); drawFlag(userFlag);}
     function renderSelectedTextPanel() {
-      const panel = document.getElementById('selectedTextPanel');
-      if (!selectedTextId) { panel.innerHTML = '<span class="selectedTextMsg">Tap any element to select, edit or delete.</span>'; return; }
-      let obj = userFlag.find(shape => shape.id === selectedTextId); if (!obj) { panel.innerHTML = ''; return; }
-      if (obj.type === 'text') {
-        panel.innerHTML = `
-          <label>Text: <input type="text" id="txtText" value="${obj.text}" /></label><br/>
-          <label style="display:inline-block;width:55px;">Color:</label>
-          <input type="color" id="txtColor" value="${obj.fill}" style="vertical-align:middle;"/><br/>
-          <label style="display:inline-block;width:55px;">Size:</label>
-          <input type="number" id="txtSize" min="12" max="200" value="${obj.fontSize}" style="width:56px;"/><br/>
-          <button onclick="deleteSelectedText()">Delete</button>
-        `;
-        document.getElementById('txtText').oninput = function() { saveStateForUndo(); obj.text = this.value; drawFlag(userFlag); };
-        document.getElementById('txtColor').oninput = function() { saveStateForUndo(); obj.fill = this.value; drawFlag(userFlag); };
-        document.getElementById('txtSize').oninput = function() { saveStateForUndo(); obj.fontSize = +this.value; drawFlag(userFlag); };
+      const panel = document.getElementById('textControls');
+      if(!selectedTextId){panel.innerHTML='<span class="selectedTextMsg">Tap any element to select, edit or delete.</span>';return;}
+      let obj=userFlag.find(s=>s.id===selectedTextId);if(!obj){panel.innerHTML='';return;}
+      if(obj.type==="text") {
+        panel.innerHTML = `<label>Text:<input type="text" id="txtText" value="${obj.text}"/></label>
+        <label class="ml-2">Color:<input type="color" id="txtColor" value="${obj.fill}"/></label>
+        <label class="ml-2">Size:<input type="number" id="txtSize" min="12" max="200" value="${obj.fontSize}" style="width:56px;"/></label>
+        <button class="bg-pink-200 px-2 py-1 ml-2 rounded" onclick="deleteSelectedText()">Delete</button>`;
+        document.getElementById('txtText').oninput=function(){saveStateForUndo();obj.text=this.value;drawFlag(userFlag);}
+        document.getElementById('txtColor').oninput=function(){saveStateForUndo();obj.fill=this.value;drawFlag(userFlag);}
+        document.getElementById('txtSize').oninput=function(){saveStateForUndo();obj.fontSize=+this.value;drawFlag(userFlag);}
       }
-      // ... rest same as before ...
     }
     function deleteSelectedText() {
       saveStateForUndo();
-      userFlag = userFlag.filter(shape => shape.id !== selectedTextId);
+      userFlag = userFlag.filter(s => s.id!==selectedTextId);
       selectedTextId = null;
       drawFlag(userFlag);
     }
     function loadFlag(key) {
       saveStateForUndo();
-      currentTemplateKey = key;
-      userFlag = flagTemplates[key].map(o => ({...o}));
+      userFlag = flagTemplates[key].map(o=>({...o}));
       selectedTextId = null;
       drawFlag(userFlag);
-      drawOriginalFlag(flagTemplates[key]);
     }
+    function addColoredSE() {
+      saveStateForUndo();
+      userFlag = flagTemplates["se"].map(o=>({...o}));
+      const chars = [
+        {ch:".",color:"#27ae60"}, {ch:"s",color:"#2980ff"}, {ch:"e",color:"#f4d03f"}
+      ]; let xStart=130,yBase=110;
+      chars.forEach((c,i)=>userFlag.push({type:"text",text:c.ch,id:idGenText(),x:xStart+i*28,y:yBase,fontSize:56,fill:c.color,fontWeight:"bold"}));
+      selectedTextId=null; drawFlag(userFlag);
+    }
+    function addLetter() {
+      const txt = document.getElementById('addLetterInput').value.trim();
+      if (!txt) return;
+      saveStateForUndo();
+      userFlag.push({ type: "text", text: txt, id: idGenText(),
+        x: 140, y: 110, fontSize: 36, fill: "#222", fontWeight: "bold" });
+      drawFlag(userFlag); speakLetter(txt, currentLang); selectText(userFlag[userFlag.length - 1].id);
+      document.getElementById('addLetterInput').value = "";
+    }
+    setTimeout(()=>{
+      const flagCanvas=document.getElementById("flagCanvas");
+      flagCanvas.addEventListener("dragover",e=>e.preventDefault());
+      flagCanvas.addEventListener("drop",function(e){
+        e.preventDefault();
+        let ch=e.dataTransfer.getData("text/plain");
+        if(!ch)return;
+        let rect=flagCanvas.getBoundingClientRect();
+        let x=e.clientX-rect.left,y=e.clientY-rect.top;
+        saveStateForUndo();
+        userFlag.push({type:"text",text:ch,id:idGenText(),
+          x:x-18,y:y+22,fontSize:36,fill:legoColors[legoLetters.indexOf(ch)%legoColors.length]||"#222",fontWeight:"bold"
+        });drawFlag(userFlag);speakLetter(ch,currentLang);selectText(userFlag[userFlag.length-1].id);
+      });
+      // Tap to place: tap letter, tap flag
+      flagCanvas.addEventListener("click",function(e){
+        if(lastSelectedLegoLetter){
+          let rect=flagCanvas.getBoundingClientRect();
+          let x=e.clientX-rect.left,y=e.clientY-rect.top;
+          saveStateForUndo();
+          userFlag.push({type:"text",text:lastSelectedLegoLetter,id:idGenText(),
+            x:x-18,y:y+22,fontSize:36,fill:legoColors[legoLetters.indexOf(lastSelectedLegoLetter)%legoColors.length]||"#222",fontWeight:"bold"
+          });
+          drawFlag(userFlag);speakLetter(lastSelectedLegoLetter,currentLang);selectText(userFlag[userFlag.length-1].id);
+          lastSelectedLegoLetter=null;
+          document.querySelectorAll("#lego-alphabet-tray>div").forEach(d=>d.style.boxShadow="");
+        }
+      });
+    },420);
     function exportSVG() {
       const svg = document.getElementById('flagCanvas');
       const serializer = new XMLSerializer();
       let svgContent = serializer.serializeToString(svg);
-      let blob = new Blob([svgContent], {type: "image/svg+xml"});
-      let url = URL.createObjectURL(blob);
-      let link = document.createElement("a");
-      link.href = url; link.download = "flag.svg";
-      document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url);
+      let blob = new Blob([svgContent],{type:"image/svg+xml"});
+      let url=URL.createObjectURL(blob);
+      let link=document.createElement("a");link.href=url;link.download="flag.svg";
+      document.body.appendChild(link);link.click();document.body.removeChild(link);URL.revokeObjectURL(url);
     }
     function exportPNG() {
-      const svg = document.getElementById('flagCanvas');
+      const svg=document.getElementById('flagCanvas');
       const svgData = new XMLSerializer().serializeToString(svg);
       const canvas = document.createElement('canvas');
       canvas.width = svg.width.baseVal.value; canvas.height = svg.height.baseVal.value;
@@ -501,122 +507,16 @@
       const img = new Image();
       img.onload = function() {
         ctx.drawImage(img, 0, 0);
-        const link = document.createElement('a');
-        link.download = 'flag.png';
-        link.href = canvas.toDataURL('image/png'); link.click();
+        const link = document.createElement('a'); link.download='flag.png';
+        link.href=canvas.toDataURL('image/png'); link.click();
       };
       img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
     }
-    // --- Lego Alphabet Tray Code ---
-    const legoColors = [
-      "#fdc029", "#3a9ad9", "#b6d54a", "#f35a3f", "#f8a4c0", "#6e2ea2",
-      "#44d9e6", "#ed5565", "#2ecc71", "#e74c3c", "#3498db", "#9b59b6",
-      "#f39c12", "#ecf0f1", "#1abc9c", "#34495e", "#fff900", "#00d8ff"
-    ];
-    const legoLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.".split("");
-    function renderLegoAlphabetTray() {
-      const tray = document.getElementById("lego-alphabet-tray");
-      tray.innerHTML = "";
-      legoLetters.forEach((ch, i) => {
-        const color = legoColors[i % legoColors.length];
-        const div = document.createElement("div");
-        div.style.margin = "0 2px";
-        div.style.display = "inline-block";
-        div.style.cursor = "grab";
-        div.innerHTML = `<svg width="36" height="44" style="touch-action:none;">
-          <rect x="2" y="4" rx="5" ry="7" width="32" height="36" fill="${color}" stroke="#999" stroke-width="2"/>
-          <text x="18" y="30" text-anchor="middle" font-size="22" font-weight="bold" fill="#222" font-family="arial">${ch}</text>
-        </svg>`;
-        div.draggable = true;
-        div.addEventListener("dragstart", function(evt){ evt.dataTransfer.setData("text/plain", ch); });
-        div.addEventListener("click", function(){ lastSelectedLegoLetter = ch; tray.querySelectorAll("div").forEach(d => d.style.boxShadow=""); div.style.boxShadow="0 0 8px #44d9e6"; });
-        tray.appendChild(div);
-      });
-    }
-    let lastSelectedLegoLetter = null;
-    document.addEventListener("DOMContentLoaded", renderLegoAlphabetTray);
-
-    function getFlagCanvas() { return document.getElementById("flagCanvas"); }
-    setTimeout(() => {
-      const flagCanvas = getFlagCanvas();
-      flagCanvas.addEventListener("dragover", function(e){ e.preventDefault(); });
-      flagCanvas.addEventListener("drop", function(e){
-        e.preventDefault();
-        let ch = e.dataTransfer.getData("text/plain");
-        if (!ch) return;
-        let rect = flagCanvas.getBoundingClientRect();
-        let x = e.clientX - rect.left, y = e.clientY - rect.top;
-        userFlag.push({
-          type: "text", text: ch, id: idGenText(),
-          x: x-18, y: y+22, fontSize: 36,
-          fill: legoColors[legoLetters.indexOf(ch)%legoColors.length] || "#222",
-          fontWeight: "bold"
-        });
-        saveStateForUndo();
-        drawFlag(userFlag);
-        selectText(userFlag[userFlag.length-1].id);
-      });
-      // Mobile/touch: tap a letter, tap the flag to place
-      flagCanvas.addEventListener("click", function(e){
-        if (lastSelectedLegoLetter) {
-          let rect = flagCanvas.getBoundingClientRect();
-          let x = e.clientX - rect.left, y = e.clientY - rect.top;
-          userFlag.push({
-            type: "text", text: lastSelectedLegoLetter, id: idGenText(),
-            x: x-18, y: y+22, fontSize: 36, fill: legoColors[legoLetters.indexOf(lastSelectedLegoLetter)%legoColors.length] || "#222",
-            fontWeight: "bold"
-          });
-          saveStateForUndo();
-          drawFlag(userFlag);
-          selectText(userFlag[userFlag.length-1].id);
-          lastSelectedLegoLetter = null;
-          document.querySelectorAll("#lego-alphabet-tray > div").forEach(d => d.style.boxShadow="");
-        }
-      });
-    }, 400);
-
-    // --- ccTLD List Code ---
-    const ccTLDs = [
-      ".ac", ".ad", ".ae", ".af", ".ag", ".ai", ".al", ".am", ".ao", ".aq", ".ar", ".as", ".at", ".au", ".aw", ".ax",
-      ".az", ".ba", ".bb", ".bd", ".be", ".bf", ".bg", ".bh", ".bi", ".bj", ".bl", ".bm", ".bn", ".bo", ".bq", ".br",
-      ".bs", ".bt", ".bv", ".bw", ".by", ".bz", ".ca", ".cc", ".cd", ".cf", ".cg", ".ch", ".ci", ".ck", ".cl", ".cm",
-      ".cn", ".co", ".cr", ".cu", ".cv", ".cw", ".cx", ".cy", ".cz", ".de", ".dj", ".dk", ".dm", ".do", ".dz", ".ec",
-      ".ee", ".eg", ".eh", ".er", ".es", ".et", ".eu", ".fi", ".fj", ".fk", ".fm", ".fo", ".fr", ".ga", ".gb", ".gd",
-      ".ge", ".gf", ".gg", ".gh", ".gi", ".gl", ".gm", ".gn", ".gp", ".gq", ".gr", ".gs", ".gt", ".gu", ".gw", ".gy",
-      ".hk", ".hm", ".hn", ".hr", ".ht", ".hu", ".id", ".ie", ".il", ".im", ".in", ".io", ".iq", ".ir", ".is", ".it",
-      ".je", ".jm", ".jo", ".jp", ".ke", ".kg", ".kh", ".ki", ".km", ".kn", ".kp", ".kr", ".kw", ".ky", ".kz", ".la",
-      ".lb", ".lc", ".li", ".lk", ".lr", ".ls", ".lt", ".lu", ".lv", ".ly", ".ma", ".mc", ".md", ".me", ".mf", ".mg",
-      ".mh", ".mk", ".ml", ".mm", ".mn", ".mo", ".mp", ".mq", ".mr", ".ms", ".mt", ".mu", ".mv", ".mw", ".mx", ".my",
-      ".mz", ".na", ".nc", ".ne", ".nf", ".ng", ".ni", ".nl", ".no", ".np", ".nr", ".nu", ".nz", ".om", ".pa", ".pe",
-      ".pf", ".pg", ".ph", ".pk", ".pl", ".pm", ".pn", ".pr", ".ps", ".pt", ".pw", ".py", ".qa", ".re", ".ro", ".rs",
-      ".ru", ".rw", ".sa", ".sb", ".sc", ".sd", ".se", ".sg", ".sh", ".si", ".sj", ".sk", ".sl", ".sm", ".sn", ".so",
-      ".sr", ".ss", ".st", ".sv", ".sx", ".sy", ".sz", ".tc", ".td", ".tf", ".tg", ".th", ".tj", ".tk", ".tl", ".tm",
-      ".tn", ".to", ".tr", ".tt", ".tv", ".tw", ".tz", ".ua", ".ug", ".uk", ".um", ".us", ".uy", ".uz", ".va", ".vc",
-      ".ve", ".vg", ".vi", ".vn", ".vu", ".wf", ".ws", ".ye", ".yt", ".za", ".zm", ".zw"
-    ];
-    function renderCCTLDList() {
-      const list = document.getElementById('cctld-list');
-      list.innerHTML = ccTLDs.map(tld =>
-        `<button style="background:#eee;color:#0366d6;border:1px solid #ccc;margin:1px 3px 1px 0;padding:2px 7px;border-radius:6px;cursor:pointer;"
-          onclick="addCCTLDToFlag('${tld}')">${tld}</button>`
-      ).join('');
-    }
-    window.addCCTLDToFlag = function(tld) {
-      userFlag.push({
-        type: "text", text: tld, id: idGenText(),
-        x: 120, y: 110,
-        fontSize: 36,
-        fill: "#0366d6",
-        fontWeight: "bold"
-      });
-      saveStateForUndo();
-      drawFlag(userFlag);
-      selectText(userFlag[userFlag.length - 1].id);
-    }
-    document.addEventListener("DOMContentLoaded", renderCCTLDList);
-
-    window.onload = () => { loadFlag('se'); };
+    window.onload = function() {
+      renderLegoAlphabetTray();
+      loadFlag('se');
+    };
   </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99c9f46fa8bb6dac',t:'MTc2MjgyMzg5Nw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"90fdef7da9c745b9921b35c565174988","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
+
