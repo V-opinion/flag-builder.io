@@ -518,6 +518,21 @@
       loadFlag('se');
     };
   </script>
+  <script>
+  window.Voiceflow = window.Voiceflow || function() {
+    (window.Voiceflow.q = window.Voiceflow.q || []).push(arguments)
+  }; 
+</script>
+<script src="https://cdn.voiceflow.com/widget/bundle.mjs"></script>
+<script>
+  Voiceflow("init", {
+    verify: { projectID: "18080d79-31d4-470d-a46c-3bbca221dfff" },
+    url: 'https://general-runtime.voiceflow.com',
+    versionID: 'production', // or a specific version number
+    theme: { button: { background: '#2563EB' }, chat: { background: '#ffffff' } }
+  });
+</script>
+
 </body>
 </html>
 
