@@ -2,22 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Flag Builder: Lego Alphabet, Editable National, Religious, ccTLD Flags</title>
+  <title>Flag Builder: Lego Alphabet, ccTLD & Editable Flags for Children</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Lego alphabet for education: drag, tap, and place letters onto national/religious flags. Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City. Exportable, mobile-friendly, for preschoolers and inclusion." />
-  <meta name="keywords" content="flags for education, lego alphabet, preschool flags, ccTLD inclusion, editable flags, religious flags, drag move export, mobile flag builder, Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, Nordic flags, democracy, inclusion" />
+  <meta name="description" content="Lego alphabet and ccTLD education: drag, tap, and place letters or country domains onto editable flags. Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, and more. Exportable, mobile-friendly, for preschoolers and inclusion." />
+  <meta name="keywords" content="flags for education, lego alphabet, ccTLD list, preschool flags, editable flags, drag move export, mobile flag builder, Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, democracy, inclusion" />
   <meta name="author" content="multireligionvalsystem.eu.org">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://flag-builder.multireligionvalsystem.eu.org/">
-  <!-- Open Graph / Twitter meta -->
-  <meta property="og:title" content="Flag Builder: Lego Alphabet, Editable ccTLD & Religious Flags">
-  <meta property="og:description" content="Children drag Lego letters onto flags — Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City. Educational, mobile-friendly, exportable.">
+  <meta property="og:title" content="Flag Builder: Lego Alphabet, ccTLD & Editable Flags">
+  <meta property="og:description" content="Children drag Lego letters or ccTLDs onto flags — Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City. Educational, mobile-friendly, exportable.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flag-builder.multireligionvalsystem.eu.org/">
   <meta property="og:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Flag Builder – Lego Alphabet Flags for Preschoolers">
-  <meta name="twitter:description" content="Drag Lego alphabet onto editable flags. Learn, play, export. Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, Nordic flags, mobile-ready.">
+  <meta name="twitter:title" content="Flag Builder – Lego Alphabet & ccTLD Flags for Preschoolers">
+  <meta name="twitter:description" content="Drag Lego alphabet or ccTLDs onto editable flags. Learn, play, export. Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, mobile-ready.">
   <meta name="twitter:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
   <script type="application/ld+json">
   {
@@ -25,7 +24,7 @@
     "@type": "WebApplication",
     "name": "Flag Builder",
     "url": "https://flag-builder.multireligionvalsystem.eu.org/",
-    "description": "Learn the alphabet and digital inclusion using editable flags. Drag Lego-style letters, edit, and export SVG/PNG.",
+    "description": "Learn the alphabet and digital inclusion using editable flags. Drag Lego-style letters or ccTLDs, edit, and export SVG/PNG.",
     "applicationCategory": "DesignApplication",
     "operatingSystem": "All",
     "offers": {"@type": "Offer","price": "0","priceCurrency": "EUR"},
@@ -73,6 +72,14 @@
     #lego-alphabet-tray > div:active, #lego-alphabet-tray > div:focus {
       box-shadow: 0 0 5px #44d9e6;
     }
+    #cctld-list {
+      max-height:210px;
+      overflow-y:auto;
+      font-size:0.98em;
+      line-height:1.5;
+      margin-right:-10px;
+      padding-bottom:4px;
+    }
     section {max-width: 830px; margin:2em auto 0 auto; padding:0 1em;}
     @media (max-width:900px) {
       main{flex-direction:column; align-items:center;}
@@ -94,13 +101,13 @@
 </head>
 <body>
   <header>
-    <h1>Flag Builder: Lego Alphabet & Educational Flags</h1>
+    <h1>Flag Builder: Lego Alphabet & ccTLDs for Children</h1>
     <h2>
-      Drag Lego alphabet onto editable flags of Sweden, Norway, Denmark, Finland, Turkey, Israel, Morocco, Pakistan, Vatican City.<br>
-      Designed for children, educators, and digital inclusion. Export SVG, PNG. Touch-ready.
+      Drag Lego alphabet or country ccTLDs onto editable flags: Sweden, Norway, Denmark, Finland, Turkey, Israel, Morocco, Pakistan, Vatican City.<br>
+      Built for preschoolers, teachers, and digital inclusion. Export to SVG or PNG. Works everywhere.
     </h2>
     <p>
-      Learn the alphabet and digital identity, remix flags for play and civic literacy.
+      Play, learn, and build identity by remixing flags with Lego letters or ccTLDs.
     </p>
   </header>
   <main>
@@ -120,6 +127,8 @@
       <h3>Add Letter/Text</h3>
       <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" style="width:80px;" />
       <button onclick="addLetter()">Add</button>
+      <h3>All Country ccTLDs</h3>
+      <div id="cctld-list"></div>
       <h3>Edit/Delete/Undo/Redo</h3>
       <button onclick="undo()">Undo</button>
       <button onclick="redo()">Redo</button>
@@ -139,35 +148,32 @@
         <div class="canvas-label editable">Editable</div>
         <svg id="flagCanvas" width="320" height="200" aria-label="Editable flag canvas with draggable text and symbols" style="border:2px solid #333; background:#fff; touch-action:none;"></svg>
         <div style="margin-top:0.8em;font-size:0.95em;color:#555;">
-          <em>Tap or drag Lego letters onto flags. Then move, edit, or delete.<br/> Works mobile, tablet, desktop.</em>
+          <em>Drag or tap Lego letters and ccTLDs onto flags. Move, edit, or delete. Mobile, tablet, desktop.</em>
         </div>
       </div>
     </div>
   </main>
-  <!-- Alphabet Tray -->
   <div id="lego-alphabet-tray"></div>
 
-  <!-- Alphabet Learning Section -->
+  <!-- Educational/Authority Sections -->
   <section id="alphabet-learning-flags">
-    <h2>Learning the Alphabet Through Flags and Lego Pieces</h2>
+    <h2>Learning the Alphabet With Lego Letters and Flags</h2>
     <ul>
-      <li><strong>Letter Placement:</strong> Drag or tap Lego alphabet blocks onto flags. Spell ccTLDs, words, or playful combos!</li>
+      <li><strong>Letter Placement:</strong> Drag or tap Lego alphabet blocks onto flags. Spell ccTLDs, words, combos!</li>
       <li><strong>Color + Phonics:</strong> Each Lego block has a unique color for visual learning and fun.</li>
-      <li><strong>National & Civic Literacy:</strong> Teach letter shapes, flag symbolism, and country codes together.</li>
+      <li><strong>National & Civic Literacy:</strong> Teach digital domains, country symbols, and alphabet shapes together.</li>
     </ul>
-    <p>
-      <em>Teachers:</em> Place the alphabet on flag templates, discuss colors and symbols, and help children build their own combination flags.
-    </p>
+    <p><em>Teachers:</em> Place the alphabet or ccTLDs on flag templates, discuss colors and flags, and help children build their own mix.</p>
   </section>
   <section id="cctld-inclusion-flags">
     <h2>Why Place ccTLDs on Flags?</h2>
     <ol>
-      <li><strong>Digital Identity:</strong> Recognize your nation’s presence online.</li>
-      <li><strong>Inclusion & Equity:</strong> Help developing countries claim their space in the digital era.</li>
-      <li><strong>Empowerment:</strong> Seeing your ccTLD encourages pride and participation online.</li>
+      <li><strong>Digital Identity:</strong> Recognize your nation’s address online (.se, .pk, .br, .us, ...).</li>
+      <li><strong>Inclusion & Equity:</strong> Help world countries find pride and equality through their digital domain.</li>
+      <li><strong>Empowerment:</strong> Seeing the ccTLD encourages pride and participation online.</li>
       <li><strong>Future Skills:</strong> Kids learn spelling and digital citizenship with each nation’s ccTLD.</li>
     </ol>
-    <p><em>Advocates:</em> Use Flag Builder for digital inclusion and pride.</p>
+    <p><em>Advocates:</em> Use Flag Builder for digital inclusion and citizenship!</p>
   </section>
 
   <script>
@@ -436,8 +442,7 @@
         document.getElementById('txtColor').oninput = function() { saveStateForUndo(); obj.fill = this.value; drawFlag(userFlag); };
         document.getElementById('txtSize').oninput = function() { saveStateForUndo(); obj.fontSize = +this.value; drawFlag(userFlag); };
       }
-      // ... same for rect, circle, polygon as in prior files ...
-      // Shortened for brevity.
+      // ... rest same as before ...
     }
     function deleteSelectedText() {
       saveStateForUndo();
@@ -478,7 +483,6 @@
       };
       img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
     }
-
     // --- Lego Alphabet Tray Code ---
     const legoColors = [
       "#fdc029", "#3a9ad9", "#b6d54a", "#f35a3f", "#f8a4c0", "#6e2ea2",
@@ -547,8 +551,47 @@
       });
     }, 400);
 
+    // --- ccTLD List Code ---
+    const ccTLDs = [
+      ".ac", ".ad", ".ae", ".af", ".ag", ".ai", ".al", ".am", ".ao", ".aq", ".ar", ".as", ".at", ".au", ".aw", ".ax",
+      ".az", ".ba", ".bb", ".bd", ".be", ".bf", ".bg", ".bh", ".bi", ".bj", ".bl", ".bm", ".bn", ".bo", ".bq", ".br",
+      ".bs", ".bt", ".bv", ".bw", ".by", ".bz", ".ca", ".cc", ".cd", ".cf", ".cg", ".ch", ".ci", ".ck", ".cl", ".cm",
+      ".cn", ".co", ".cr", ".cu", ".cv", ".cw", ".cx", ".cy", ".cz", ".de", ".dj", ".dk", ".dm", ".do", ".dz", ".ec",
+      ".ee", ".eg", ".eh", ".er", ".es", ".et", ".eu", ".fi", ".fj", ".fk", ".fm", ".fo", ".fr", ".ga", ".gb", ".gd",
+      ".ge", ".gf", ".gg", ".gh", ".gi", ".gl", ".gm", ".gn", ".gp", ".gq", ".gr", ".gs", ".gt", ".gu", ".gw", ".gy",
+      ".hk", ".hm", ".hn", ".hr", ".ht", ".hu", ".id", ".ie", ".il", ".im", ".in", ".io", ".iq", ".ir", ".is", ".it",
+      ".je", ".jm", ".jo", ".jp", ".ke", ".kg", ".kh", ".ki", ".km", ".kn", ".kp", ".kr", ".kw", ".ky", ".kz", ".la",
+      ".lb", ".lc", ".li", ".lk", ".lr", ".ls", ".lt", ".lu", ".lv", ".ly", ".ma", ".mc", ".md", ".me", ".mf", ".mg",
+      ".mh", ".mk", ".ml", ".mm", ".mn", ".mo", ".mp", ".mq", ".mr", ".ms", ".mt", ".mu", ".mv", ".mw", ".mx", ".my",
+      ".mz", ".na", ".nc", ".ne", ".nf", ".ng", ".ni", ".nl", ".no", ".np", ".nr", ".nu", ".nz", ".om", ".pa", ".pe",
+      ".pf", ".pg", ".ph", ".pk", ".pl", ".pm", ".pn", ".pr", ".ps", ".pt", ".pw", ".py", ".qa", ".re", ".ro", ".rs",
+      ".ru", ".rw", ".sa", ".sb", ".sc", ".sd", ".se", ".sg", ".sh", ".si", ".sj", ".sk", ".sl", ".sm", ".sn", ".so",
+      ".sr", ".ss", ".st", ".sv", ".sx", ".sy", ".sz", ".tc", ".td", ".tf", ".tg", ".th", ".tj", ".tk", ".tl", ".tm",
+      ".tn", ".to", ".tr", ".tt", ".tv", ".tw", ".tz", ".ua", ".ug", ".uk", ".um", ".us", ".uy", ".uz", ".va", ".vc",
+      ".ve", ".vg", ".vi", ".vn", ".vu", ".wf", ".ws", ".ye", ".yt", ".za", ".zm", ".zw"
+    ];
+    function renderCCTLDList() {
+      const list = document.getElementById('cctld-list');
+      list.innerHTML = ccTLDs.map(tld =>
+        `<button style="background:#eee;color:#0366d6;border:1px solid #ccc;margin:1px 3px 1px 0;padding:2px 7px;border-radius:6px;cursor:pointer;"
+          onclick="addCCTLDToFlag('${tld}')">${tld}</button>`
+      ).join('');
+    }
+    window.addCCTLDToFlag = function(tld) {
+      userFlag.push({
+        type: "text", text: tld, id: idGenText(),
+        x: 120, y: 110,
+        fontSize: 36,
+        fill: "#0366d6",
+        fontWeight: "bold"
+      });
+      saveStateForUndo();
+      drawFlag(userFlag);
+      selectText(userFlag[userFlag.length - 1].id);
+    }
+    document.addEventListener("DOMContentLoaded", renderCCTLDList);
+
     window.onload = () => { loadFlag('se'); };
   </script>
 </body>
 </html>
-
