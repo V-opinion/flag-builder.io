@@ -1,23 +1,23 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Flag Builder: Editable, Alphabet, Religious, ccTLD Flags – Drag & Export Online</title>
+  <title>Flag Builder: Lego Alphabet, Editable National, Religious, ccTLD Flags</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Flag Builder for preschoolers, educators, and digital inclusion advocates. Learn the alphabet from flags, add ccTLDs to nations, remix Swedish, Nordic, Turkish, Israeli, Moroccan, Pakistani, Vatican flags. Drag and export SVG/PNG – mobile friendly!" />
-  <meta name="keywords" content="flags for education, alphabet flags, preschool flags, ccTLD inclusion, editable flags, religious flags, drag move export, mobile flag builder, Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, Nordic flags, democracy, inclusion" />
+  <meta name="description" content="Lego alphabet for education: drag, tap, and place letters onto national/religious flags. Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City. Exportable, mobile-friendly, for preschoolers and inclusion." />
+  <meta name="keywords" content="flags for education, lego alphabet, preschool flags, ccTLD inclusion, editable flags, religious flags, drag move export, mobile flag builder, Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, Nordic flags, democracy, inclusion" />
   <meta name="author" content="multireligionvalsystem.eu.org">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://flag-builder.multireligionvalsystem.eu.org/">
   <!-- Open Graph / Twitter meta -->
-  <meta property="og:title" content="Flag Builder: Alphabet, Religious, ccTLD Flags for Education">
-  <meta property="og:description" content="Learn the alphabet from flags, add ccTLDs, remix and export editable flags online. Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City. Mobile friendly.">
+  <meta property="og:title" content="Flag Builder: Lego Alphabet, Editable ccTLD & Religious Flags">
+  <meta property="og:description" content="Children drag Lego letters onto flags — Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City. Educational, mobile-friendly, exportable.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flag-builder.multireligionvalsystem.eu.org/">
   <meta property="og:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Flag Builder – Alphabet, Religious, ccTLD Flags">
-  <meta name="twitter:description" content="Preschoolers and educators: Learn the alphabet from flags, add ccTLDs for inclusion, export and compare.">
+  <meta name="twitter:title" content="Flag Builder – Lego Alphabet Flags for Preschoolers">
+  <meta name="twitter:description" content="Drag Lego alphabet onto editable flags. Learn, play, export. Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, Nordic flags, mobile-ready.">
   <meta name="twitter:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
   <script type="application/ld+json">
   {
@@ -25,7 +25,7 @@
     "@type": "WebApplication",
     "name": "Flag Builder",
     "url": "https://flag-builder.multireligionvalsystem.eu.org/",
-    "description": "Learn the alphabet and digital inclusion using editable flags. Drag, edit, and export SVG/PNG, compare originals.",
+    "description": "Learn the alphabet and digital inclusion using editable flags. Drag Lego-style letters, edit, and export SVG/PNG.",
     "applicationCategory": "DesignApplication",
     "operatingSystem": "All",
     "offers": {"@type": "Offer","price": "0","priceCurrency": "EUR"},
@@ -58,12 +58,28 @@
     .selectedTextMsg { color: #00aaff; font-weight: bold; }
     .canvas-label { color: #444; font-weight: bold; margin-bottom:0.4em; font-size:1.07em; }
     .canvas-label.editable { color: #0366d6; }
+    #lego-alphabet-tray {
+      user-select: none;
+      margin-top:1.2em;
+      margin-bottom:1.2em;
+      gap:0.5em;
+      flex-wrap:wrap;
+      display:flex;
+      justify-content: center;
+    }
+    #lego-alphabet-tray > div {
+      transition: box-shadow 0.2s;
+    }
+    #lego-alphabet-tray > div:active, #lego-alphabet-tray > div:focus {
+      box-shadow: 0 0 5px #44d9e6;
+    }
     section {max-width: 830px; margin:2em auto 0 auto; padding:0 1em;}
     @media (max-width:900px) {
       main{flex-direction:column; align-items:center;}
       .canvas-area {flex-direction:column;}
       .sidebar {width:auto; min-width:0; max-width:96vw;}
       .canvas-block {width:100%;}
+      #lego-alphabet-tray {margin-bottom:0.5em;}
       section{font-size:1em;}
     }
     @media (max-width:600px) {
@@ -78,13 +94,13 @@
 </head>
 <body>
   <header>
-    <h1>Flag Builder: Alphabet, Religious & ccTLD National Flags</h1>
+    <h1>Flag Builder: Lego Alphabet & Educational Flags</h1>
     <h2>
-      Online flag editor for Sweden, Norway, Denmark, Finland, Turkey, Israel, Morocco, Pakistan, Vatican City.<br>
-      For preschoolers, teachers, and inclusion campaigns—drag letters, ccTLDs, symbols, export/comparison, mobile-friendly.
+      Drag Lego alphabet onto editable flags of Sweden, Norway, Denmark, Finland, Turkey, Israel, Morocco, Pakistan, Vatican City.<br>
+      Designed for children, educators, and digital inclusion. Export SVG, PNG. Touch-ready.
     </h2>
     <p>
-      Learn the alphabet, teach digital identity, or remix flags for multilingual, civic, or religious education.
+      Learn the alphabet and digital identity, remix flags for play and civic literacy.
     </p>
   </header>
   <main>
@@ -123,40 +139,36 @@
         <div class="canvas-label editable">Editable</div>
         <svg id="flagCanvas" width="320" height="200" aria-label="Editable flag canvas with draggable text and symbols" style="border:2px solid #333; background:#fff; touch-action:none;"></svg>
         <div style="margin-top:0.8em;font-size:0.95em;color:#555;">
-          <em>Tap/click any element to move, edit, or delete. Works on all mobile and desktop browsers.</em>
+          <em>Tap or drag Lego letters onto flags. Then move, edit, or delete.<br/> Works mobile, tablet, desktop.</em>
         </div>
       </div>
     </div>
   </main>
+  <!-- Alphabet Tray -->
+  <div id="lego-alphabet-tray"></div>
 
   <!-- Alphabet Learning Section -->
   <section id="alphabet-learning-flags">
-    <h2>Learning the Alphabet Through World Flags</h2>
-    <p>
-      <strong>Flag Builder</strong> makes learning the alphabet fun for preschool children. Explore flags and overlay letters for playful spelling, color recognition, and global awareness!
-    </p>
+    <h2>Learning the Alphabet Through Flags and Lego Pieces</h2>
     <ul>
-      <li><strong>Add Letters:</strong> Drag and drop alphabet letters onto flags. Spell country names, ccTLDs (like <b>.se</b>, <b>.pk</b>), or any word.</li>
-      <li><strong>Visual Phonics:</strong> Match flag colors and symbols with sounds for memorable learning.</li>
-      <li><strong>Multicultural Literacy:</strong> Teach diversity, inclusion, and the meaning of symbols and letters worldwide.</li>
+      <li><strong>Letter Placement:</strong> Drag or tap Lego alphabet blocks onto flags. Spell ccTLDs, words, or playful combos!</li>
+      <li><strong>Color + Phonics:</strong> Each Lego block has a unique color for visual learning and fun.</li>
+      <li><strong>National & Civic Literacy:</strong> Teach letter shapes, flag symbolism, and country codes together.</li>
     </ul>
     <p>
-      <em>Teachers:</em> Use Flag Builder in your classroom as a playful way to recognize letters, colors, and the stories flags tell.
+      <em>Teachers:</em> Place the alphabet on flag templates, discuss colors and symbols, and help children build their own combination flags.
     </p>
   </section>
-  <!-- ccTLD Inclusion Section -->
   <section id="cctld-inclusion-flags">
     <h2>Why Place ccTLDs on Flags?</h2>
-    <p><strong>ccTLDs</strong> (Country Code Top Level Domains like <b>.se</b> and <b>.pk</b>) are powerful digital assets for nations. By placing ccTLDs visibly on national flags, every country is reminded of its digital identity and potential for online inclusion.</p>
     <ol>
       <li><strong>Digital Identity:</strong> Recognize your nation’s presence online.</li>
       <li><strong>Inclusion & Equity:</strong> Help developing countries claim their space in the digital era.</li>
       <li><strong>Empowerment:</strong> Seeing your ccTLD encourages pride and participation online.</li>
       <li><strong>Future Skills:</strong> Kids learn spelling and digital citizenship with each nation’s ccTLD.</li>
     </ol>
-    <p><em>Advocates:</em> Use Flag Builder to spark digital inclusion conversations and pride in your nation’s ccTLD!</p>
+    <p><em>Advocates:</em> Use Flag Builder for digital inclusion and pride.</p>
   </section>
-  <!-- Other topical sections (about, how-to, theory, FAQ, contributions) from previous answers go here -->
 
   <script>
     function idGen() { return "id" + Math.floor(Math.random() * 1e8); }
@@ -316,192 +328,3 @@
       else if (shape.type === "circle") dragOffset = { x: evt.offsetX - shape.cx, y: evt.offsetY - shape.cy, type: "circle" };
       else if (shape.type === "text") dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y, type: "text" };
       else if (shape.type === "polygon") dragOffset = null;
-      const svg=document.getElementById('flagCanvas');
-      if(shape.type==="rect") { svg.addEventListener('mousemove', dragMoveRect); svg.addEventListener('mouseup', dragEndRect); }
-      if(shape.type==="circle") { svg.addEventListener('mousemove', dragMoveCircle); svg.addEventListener('mouseup', dragEndCircle); }
-      if(shape.type==="text") {svg.addEventListener('mousemove', dragMoveText); svg.addEventListener('mouseup', dragEndText);}
-    }
-    function setDragTouch(evt, shape) {
-      const touch = evt.touches[0];
-      const svg = document.getElementById('flagCanvas');
-      const rect = svg.getBoundingClientRect();
-      if (shape.type==="rect") dragOffset={ x: touch.clientX-rect.left-shape.x, y: touch.clientY-rect.top-shape.y, type:"rect"};
-      if (shape.type==="circle") dragOffset={ x: touch.clientX-rect.left-shape.cx, y: touch.clientY-rect.top-shape.cy, type:"circle"};
-      if (shape.type==="text") dragOffset={ x: touch.clientX-rect.left-shape.x, y: touch.clientY-rect.top-shape.y, type:"text"};
-      if(shape.type==="rect") {svg.addEventListener('touchmove', dragMoveRectTouch);svg.addEventListener('touchend', dragEndRectTouch);}
-      if(shape.type==="circle") {svg.addEventListener('touchmove', dragMoveCircleTouch);svg.addEventListener('touchend', dragEndCircleTouch);}
-      if(shape.type==="text") {svg.addEventListener('touchmove', dragMoveTextTouch);svg.addEventListener('touchend', dragEndTextTouch);}
-    }
-    function dragMoveRect(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.x = clamp(evt.offsetX - dragOffset.x, 0, 320 - obj.width);
-      obj.y = clamp(evt.offsetY - dragOffset.y, 0, 200 - obj.height);
-      drawFlag(userFlag);
-    }
-    function dragEndRect(evt) { dragOffset = null;
-      const svg = document.getElementById('flagCanvas');
-      svg.removeEventListener('mousemove', dragMoveRect); svg.removeEventListener('mouseup', dragEndRect);
-      saveStateForUndo();
-    }
-    function dragMoveText(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.x = clamp(evt.offsetX - dragOffset.x, 0, 320 - (obj.fontSize || 0));
-      obj.y = clamp(evt.offsetY - dragOffset.y, (obj.fontSize||0), 200);
-      drawFlag(userFlag);
-    }
-    function dragEndText(evt) { dragOffset = null;
-      const svg = document.getElementById('flagCanvas');
-      svg.removeEventListener('mousemove', dragMoveText); svg.removeEventListener('mouseup', dragEndText);
-      saveStateForUndo();
-    }
-    function dragMoveCircle(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.cx = clamp(evt.offsetX - dragOffset.x, obj.r, 320 - obj.r);
-      obj.cy = clamp(evt.offsetY - dragOffset.y, obj.r, 200 - obj.r);
-      drawFlag(userFlag);
-    }
-    function dragEndCircle(evt) { dragOffset=null; const svg=document.getElementById('flagCanvas');
-      svg.removeEventListener('mousemove', dragMoveCircle); svg.removeEventListener('mouseup', dragEndCircle); saveStateForUndo();
-    }
-    function dragMoveRectTouch(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      const touch = evt.touches[0];
-      const svg = document.getElementById('flagCanvas');
-      const rect = svg.getBoundingClientRect();
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.x = clamp(touch.clientX - rect.left - dragOffset.x, 0, 320 - obj.width);
-      obj.y = clamp(touch.clientY - rect.top - dragOffset.y, 0, 200 - obj.height);
-      drawFlag(userFlag);
-    }
-    function dragEndRectTouch(evt) {dragOffset=null; const svg=document.getElementById('flagCanvas');
-      svg.removeEventListener('touchmove', dragMoveRectTouch);svg.removeEventListener('touchend', dragEndRectTouch);saveStateForUndo();
-    }
-    function dragMoveTextTouch(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      const touch = evt.touches[0];
-      const svg = document.getElementById('flagCanvas');
-      const rect = svg.getBoundingClientRect();
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.x = clamp(touch.clientX - rect.left - dragOffset.x, 0, 320 - (obj.fontSize || 0));
-      obj.y = clamp(touch.clientY - rect.top - dragOffset.y, (obj.fontSize||0), 200);
-      drawFlag(userFlag);
-    }
-    function dragEndTextTouch(evt) { dragOffset=null; const svg=document.getElementById('flagCanvas');
-      svg.removeEventListener('touchmove', dragMoveTextTouch);svg.removeEventListener('touchend', dragEndTextTouch);saveStateForUndo();
-    }
-    function dragMoveCircleTouch(evt) {
-      if (!selectedTextId || dragOffset == null) return;
-      const touch = evt.touches[0];
-      const svg = document.getElementById('flagCanvas');
-      const rect = svg.getBoundingClientRect();
-      let obj = userFlag.find(s => s.id === selectedTextId);
-      obj.cx = clamp(touch.clientX - rect.left - dragOffset.x, obj.r, 320 - obj.r);
-      obj.cy = clamp(touch.clientY - rect.top - dragOffset.y, obj.r, 200 - obj.r);
-      drawFlag(userFlag);
-    }
-    function dragEndCircleTouch(evt) { dragOffset=null; const svg=document.getElementById('flagCanvas');
-      svg.removeEventListener('touchmove', dragMoveCircleTouch);svg.removeEventListener('touchend', dragEndCircleTouch);saveStateForUndo();
-    }
-    function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
-    function selectText(id) { selectedTextId = id; renderSelectedTextPanel(); drawFlag(userFlag); }
-    function renderSelectedTextPanel() {
-      const panel = document.getElementById('selectedTextPanel');
-      if (!selectedTextId) { panel.innerHTML = '<span class="selectedTextMsg">Tap any element to select, edit or delete.</span>'; return; }
-      let obj = userFlag.find(shape => shape.id === selectedTextId); if (!obj) { panel.innerHTML = ''; return; }
-      if (obj.type === 'text') {
-        panel.innerHTML = `
-          <label>Text: <input type="text" id="txtText" value="${obj.text}" /></label><br/>
-          <label style="display:inline-block;width:55px;">Color:</label>
-          <input type="color" id="txtColor" value="${obj.fill}" style="vertical-align:middle;"/><br/>
-          <label style="display:inline-block;width:55px;">Size:</label>
-          <input type="number" id="txtSize" min="12" max="200" value="${obj.fontSize}" style="width:56px;"/><br/>
-          <button onclick="deleteSelectedText()">Delete</button>
-        `;
-        document.getElementById('txtText').oninput = function() { saveStateForUndo(); obj.text = this.value; drawFlag(userFlag); };
-        document.getElementById('txtColor').oninput = function() { saveStateForUndo(); obj.fill = this.value; drawFlag(userFlag); };
-        document.getElementById('txtSize').oninput = function() { saveStateForUndo(); obj.fontSize = +this.value; drawFlag(userFlag); };
-      }
-      else if (obj.type === 'rect') {
-        panel.innerHTML = `
-          <label>X: <input type="number" id="rectX" value="${obj.x}" style="width:56px;"></label><br/>
-          <label>Y: <input type="number" id="rectY" value="${obj.y}" style="width:56px;"></label><br/>
-          <label>Width: <input type="number" id="rectWidth" value="${obj.width}" style="width:56px;"></label><br/>
-          <label>Height: <input type="number" id="rectHeight" value="${obj.height}" style="width:56px;"></label><br/>
-          <label>Color: <input type="color" id="rectFill" value="${obj.fill}"></label><br/>
-          <button onclick="deleteSelectedText()">Delete</button>
-        `;
-        document.getElementById('rectX').oninput = function() { saveStateForUndo(); obj.x = +this.value; drawFlag(userFlag);}
-        document.getElementById('rectY').oninput = function() { saveStateForUndo(); obj.y = +this.value; drawFlag(userFlag);}
-        document.getElementById('rectWidth').oninput = function() { saveStateForUndo(); obj.width = +this.value; drawFlag(userFlag);}
-        document.getElementById('rectHeight').oninput = function() { saveStateForUndo(); obj.height = +this.value; drawFlag(userFlag);}
-        document.getElementById('rectFill').oninput = function() { saveStateForUndo(); obj.fill = this.value; drawFlag(userFlag);}
-      }
-      else if (obj.type === 'circle') {
-        panel.innerHTML = `
-          <label>CX: <input type="number" id="circleCX" value="${obj.cx}" style="width:56px;"></label><br/>
-          <label>CY: <input type="number" id="circleCY" value="${obj.cy}" style="width:56px;"></label><br/>
-          <label>Radius: <input type="number" id="circleR" value="${obj.r}" style="width:56px;"></label><br/>
-          <label>Color: <input type="color" id="circleFill" value="${obj.fill}"></label><br/>
-          <button onclick="deleteSelectedText()">Delete</button>
-        `;
-        document.getElementById('circleCX').oninput = function() { saveStateForUndo(); obj.cx = +this.value; drawFlag(userFlag);}
-        document.getElementById('circleCY').oninput = function() { saveStateForUndo(); obj.cy = +this.value; drawFlag(userFlag);}
-        document.getElementById('circleR').oninput = function() { saveStateForUndo(); obj.r = +this.value; drawFlag(userFlag);}
-        document.getElementById('circleFill').oninput = function() { saveStateForUndo(); obj.fill = this.value; drawFlag(userFlag);}
-      }
-      else if (obj.type === 'polygon') {
-        panel.innerHTML = `
-          <label>Points:<br/><textarea id="polygonPoints" rows="2" style="width:98%">${obj.points}</textarea></label><br/>
-          <label>Color: <input type="color" id="polygonFill" value="${obj.fill}"></label><br/>
-          <button onclick="deleteSelectedText()">Delete</button>
-        `;
-        document.getElementById('polygonPoints').oninput = function() { saveStateForUndo(); obj.points = this.value; drawFlag(userFlag); }
-        document.getElementById('polygonFill').oninput = function() { saveStateForUndo(); obj.fill = this.value; drawFlag(userFlag);}
-      }
-    }
-    function deleteSelectedText() {
-      saveStateForUndo();
-      userFlag = userFlag.filter(shape => shape.id !== selectedTextId);
-      selectedTextId = null;
-      drawFlag(userFlag);
-    }
-    function loadFlag(key) {
-      saveStateForUndo();
-      currentTemplateKey = key;
-      userFlag = flagTemplates[key].map(o => ({...o}));
-      selectedTextId = null;
-      drawFlag(userFlag);
-      drawOriginalFlag(flagTemplates[key]);
-    }
-    function exportSVG() {
-      const svg = document.getElementById('flagCanvas');
-      const serializer = new XMLSerializer();
-      let svgContent = serializer.serializeToString(svg);
-      let blob = new Blob([svgContent], {type: "image/svg+xml"});
-      let url = URL.createObjectURL(blob);
-      let link = document.createElement("a");
-      link.href = url; link.download = "flag.svg";
-      document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url);
-    }
-    function exportPNG() {
-      const svg = document.getElementById('flagCanvas');
-      const svgData = new XMLSerializer().serializeToString(svg);
-      const canvas = document.createElement('canvas');
-      canvas.width = svg.width.baseVal.value; canvas.height = svg.height.baseVal.value;
-      const ctx = canvas.getContext('2d');
-      const img = new Image();
-      img.onload = function() {
-        ctx.drawImage(img, 0, 0);
-        const link = document.createElement('a');
-        link.download = 'flag.png';
-        link.href = canvas.toDataURL('image/png'); link.click();
-      };
-      img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
-    }
-    window.onload = () => { loadFlag('se'); };
-  </script>
-</body>
-</html>
