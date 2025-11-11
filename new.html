@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Flag Builder: Editable, Alphabet, Religious, ccTLD Flags – Drag & Export Online</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Flag Builder for preschoolers, educators, and digital inclusion advocates. Learn the alphabet from flags, add ccTLDs to nations, remix Swedish, Nordic, Turkish, Israeli, Moroccan, Pakistani, Vatican flags. Drag and export SVG/PNG – mobile friendly!" />
+  <meta name="keywords" content="flags for education, alphabet flags, preschool flags, ccTLD inclusion, editable flags, religious flags, drag move export, mobile flag builder, Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City, Nordic flags, democracy, inclusion" />
+  <meta name="author" content="multireligionvalsystem.eu.org">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://flag-builder.multireligionvalsystem.eu.org/">
+  <!-- Open Graph / Twitter meta -->
+  <meta property="og:title" content="Flag Builder: Alphabet, Religious, ccTLD Flags for Education">
+  <meta property="og:description" content="Learn the alphabet from flags, add ccTLDs, remix and export editable flags online. Sweden, Turkey, Israel, Morocco, Pakistan, Vatican City. Mobile friendly.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flag-builder.multireligionvalsystem.eu.org/">
+  <meta property="og:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flag Builder – Alphabet, Religious, ccTLD Flags">
+  <meta name="twitter:description" content="Preschoolers and educators: Learn the alphabet from flags, add ccTLDs for inclusion, export and compare.">
+  <meta name="twitter:image" content="https://flag-builder.multireligionvalsystem.eu.org/og-image.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "WebApplication",
+    "name": "Flag Builder",
+    "url": "https://flag-builder.multireligionvalsystem.eu.org/",
+    "description": "Learn the alphabet and digital inclusion using editable flags. Drag, edit, and export SVG/PNG, compare originals.",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "All",
+    "offers": {"@type": "Offer","price": "0","priceCurrency": "EUR"},
+    "author": {"@type": "Organization", "name": "Religions for Peace – MultireligionValSystem.eu.org" }
+  }
+  </script>
+  <style>
+    html, body { height:100%; }
+    body {
+      background: #f9f9f9;
+      font-family: 'Inter', Arial, sans-serif;
+      margin: 0; padding: 0; color: #222; min-height: 100vh;
+    }
+    header { background: #0366d6; color: #fff; padding: 1.2em 2em 1em 2em; text-align: left; }
+    main { padding: 1em 0.5em; display: flex; gap: 1em; flex-wrap: wrap; justify-content: center; }
+    .sidebar {
+      min-width: 220px; width:320px; background: #f1f4f6; padding: 1em; border-radius: 0.8em; box-shadow: 0 0 8px #eee; margin-bottom:1em; box-sizing: border-box;
+    }
+    .canvas-area {
+      flex-grow: 1; background: #fff; padding: 1em 0.5em 1em 0.5em; border-radius: 1em; box-shadow: 0 0 12px #ddd;
+      min-width:320px; max-width:670px; display: flex; gap: 20px; align-items: flex-start; flex-wrap:wrap; justify-content: center; box-sizing: border-box;
+    }
+    .canvas-block { text-align: center; margin-bottom:1em; }
+    h1 { margin: 0 0 0.2em 0; font-size: 2em; }
+    h2, h3 { margin-top: 1em; }
+    button { margin: 4px 1px 4px 0; font-size:1em; padding:0.4em 1.1em; border-radius:0.4em; border:none; background:#0366d6; color:#fff;}
+    button:active { background:#01408D;}
+    input[type="color"] { width: 36px; height: 1.8em; padding: 0; border: none; vertical-align:middle;}
+    input, label { font-size:1em;}
+    .selectedTextMsg { color: #00aaff; font-weight: bold; }
+    .canvas-label { color: #444; font-weight: bold; margin-bottom:0.4em; font-size:1.07em; }
+    .canvas-label.editable { color: #0366d6; }
+    section {max-width: 830px; margin:2em auto 0 auto; padding:0 1em;}
+    @media (max-width:900px) {
+      main{flex-direction:column; align-items:center;}
+      .canvas-area {flex-direction:column;}
+      .sidebar {width:auto; min-width:0; max-width:96vw;}
+      .canvas-block {width:100%;}
+      section{font-size:1em;}
+    }
+    @media (max-width:600px) {
+      main{padding: 0.6em 0;}
+      .canvas-area {padding: 0.5em 0;}
+      header { font-size: 1.05em;}
+      h1 {font-size:1.25em;}
+      button,input,label{font-size:0.97em;}
+      section{font-size:0.98em;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Flag Builder: Alphabet, Religious & ccTLD National Flags</h1>
+    <h2>
+      Online flag editor for Sweden, Norway, Denmark, Finland, Turkey, Israel, Morocco, Pakistan, Vatican City.<br>
+      For preschoolers, teachers, and inclusion campaigns—drag letters, ccTLDs, symbols, export/comparison, mobile-friendly.
+    </h2>
+    <p>
+      Learn the alphabet, teach digital identity, or remix flags for multilingual, civic, or religious education.
+    </p>
+  </header>
+  <main>
+    <div class="sidebar">
+      <h2>Templates</h2>
+      <button onclick="loadFlag('se')">Sweden</button>
+      <button onclick="loadFlag('no')">Norway</button>
+      <button onclick="loadFlag('dk')">Denmark</button>
+      <button onclick="loadFlag('fi')">Finland</button>
+      <button onclick="loadFlag('tr')">Turkey</button>
+      <button onclick="loadFlag('il')">Israel</button>
+      <button onclick="loadFlag('ma')">Morocco</button>
+      <button onclick="loadFlag('pk')">Pakistan</button>
+      <button onclick="loadFlag('va')">Vatican City</button>
+      <h3>Add .se with Colors</h3>
+      <button onclick="addColoredSE()">Add .se with Colors</button>
+      <h3>Add Letter/Text</h3>
+      <input type="text" id="addLetterInput" placeholder="A-Z or .se" maxlength="8" style="width:80px;" />
+      <button onclick="addLetter()">Add</button>
+      <h3>Edit/Delete/Undo/Redo</h3>
+      <button onclick="undo()">Undo</button>
+      <button onclick="redo()">Redo</button>
+      <div id="textControls" style="margin-top:1.1em">
+        <div id="selectedTextPanel" style="margin-top:10px;"></div>
+      </div>
+      <br>
+      <button onclick="exportSVG()">Export SVG</button>
+      <button onclick="exportPNG()">Export PNG</button>
+    </div>
+    <div class="canvas-area">
+      <div class="canvas-block">
+        <div class="canvas-label">Original</div>
+        <svg id="originalFlagCanvas" width="320" height="200" aria-label="Original Flag" style="border:1.5px solid #bbb; background:#fff;"></svg>
+      </div>
+      <div class="canvas-block">
+        <div class="canvas-label editable">Editable</div>
+        <svg id="flagCanvas" width="320" height="200" aria-label="Editable flag canvas with draggable text and symbols" style="border:2px solid #333; background:#fff; touch-action:none;"></svg>
+        <div style="margin-top:0.8em;font-size:0.95em;color:#555;">
+          <em>Tap/click any element to move, edit, or delete. Works on all mobile and desktop browsers.</em>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Alphabet Learning Section -->
+  <section id="alphabet-learning-flags">
+    <h2>Learning the Alphabet Through World Flags</h2>
+    <p>
+      <strong>Flag Builder</strong> makes learning the alphabet fun for preschool children. Explore flags and overlay letters for playful spelling, color recognition, and global awareness!
+    </p>
+    <ul>
+      <li><strong>Add Letters:</strong> Drag and drop alphabet letters onto flags. Spell country names, ccTLDs (like <b>.se</b>, <b>.pk</b>), or any word.</li>
+      <li><strong>Visual Phonics:</strong> Match flag colors and symbols with sounds for memorable learning.</li>
+      <li><strong>Multicultural Literacy:</strong> Teach diversity, inclusion, and the meaning of symbols and letters worldwide.</li>
+    </ul>
+    <p>
+      <em>Teachers:</em> Use Flag Builder in your classroom as a playful way to recognize letters, colors, and the stories flags tell.
+    </p>
+  </section>
+  <!-- ccTLD Inclusion Section -->
+  <section id="cctld-inclusion-flags">
+    <h2>Why Place ccTLDs on Flags?</h2>
+    <p><strong>ccTLDs</strong> (Country Code Top Level Domains like <b>.se</b> and <b>.pk</b>) are powerful digital assets for nations. By placing ccTLDs visibly on national flags, every country is reminded of its digital identity and potential for online inclusion.</p>
+    <ol>
+      <li><strong>Digital Identity:</strong> Recognize your nation’s presence online.</li>
+      <li><strong>Inclusion & Equity:</strong> Help developing countries claim their space in the digital era.</li>
+      <li><strong>Empowerment:</strong> Seeing your ccTLD encourages pride and participation online.</li>
+      <li><strong>Future Skills:</strong> Kids learn spelling and digital citizenship with each nation’s ccTLD.</li>
+    </ol>
+    <p><em>Advocates:</em> Use Flag Builder to spark digital inclusion conversations and pride in your nation’s ccTLD!</p>
+  </section>
+  <!-- Other topical sections (about, how-to, theory, FAQ, contributions) from previous answers go here -->
+
+  <script>
+    function idGen() { return "id" + Math.floor(Math.random() * 1e8); }
+    const flagTemplates = {
+      se: [
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#006aa7" },
+        { id: idGen(), type: "rect", x: 90, y: 0, width: 40, height: 200, fill: "#fecc00" },
+        { id: idGen(), type: "rect", x: 0, y: 80, width: 320, height: 40, fill: "#fecc00" }
+      ],
+      no: [
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#ba0c2f" },
+        { id: idGen(), type: "rect", x: 85, y: 0, width: 40, height: 200, fill: "#fff" },
+        { id: idGen(), type: "rect", x: 0, y: 80, width: 320, height: 40, fill: "#fff" },
+        { id: idGen(), type: "rect", x: 95, y: 0, width: 20, height: 200, fill: "#00205b" },
+        { id: idGen(), type: "rect", x: 0, y: 90, width: 320, height: 20, fill: "#00205b" }
+      ],
+      dk: [
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#c60c30" },
+        { id: idGen(), type: "rect", x: 110, y: 0, width: 30, height: 200, fill: "#fff" },
+        { id: idGen(), type: "rect", x: 0, y: 70, width: 320, height: 30, fill: "#fff" }
+      ],
+      fi: [
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" },
+        { id: idGen(), type: "rect", x: 80, y: 0, width: 40, height: 200, fill: "#003580" },
+        { id: idGen(), type: "rect", x: 0, y: 75, width: 320, height: 40, fill: "#003580" }
+      ],
+      tr: [
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#e30a17" },
+        { id: idGen(), type: "circle", cx: 90, cy: 100, r: 40, fill: "#fff" },
+        { id: idGen(), type: "circle", cx: 100, cy: 100, r: 34, fill: "#e30a17" },
+        { id: idGen(), type: "polygon", points: "130,100 123,111 133,107 127,117 131,107 119,113 137,113 121,101 138,119 128,101", fill: "#fff" }
+      ],
+      il: [
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#fff" },
+        { id: idGen(), type: "rect", x: 0, y: 30, width: 320, height: 18, fill: "#0038b8" },
+        { id: idGen(), type: "rect", x: 0, y: 152, width: 320, height: 18, fill: "#0038b8" },
+        { id: idGen(), type: "polygon", points: "160,70 180,110 140,110", fill: "#0038b8" },
+        { id: idGen(), type: "polygon", points: "160,130 180,90 140,90", fill: "#0038b8" }
+      ],
+      ma: [
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#c1272d" },
+        { id: idGen(), type: "polygon", points: "160,55 181,85 171,122 149,122 139,85", fill: "#006233" }
+      ],
+      pk: [
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 320, height: 200, fill: "#01411c" },
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 64, height: 200, fill: "#fff" },
+        { id: idGen(), type: "circle", cx: 180, cy: 100, r: 37, fill: "#fff" },
+        { id: idGen(), type: "circle", cx: 190, cy: 100, r: 32, fill: "#01411c" },
+        { id: idGen(), type: "polygon", points: "209,85 213,95 224,95 215,102 219,113 209,107 200,113 204,102 195,95 206,95", fill: "#fff" }
+      ],
+      va: [
+        { id: idGen(), type: "rect", x: 0, y: 0, width: 160, height: 200, fill: "#fff" },
+        { id: idGen(), type: "rect", x: 160, y: 0, width: 160, height: 200, fill: "#ffd700" },
+        { id: idGen(), type: "rect", x: 138, y: 90, width: 7, height: 40, fill: "#000" },
+        { id: idGen(), type: "rect", x: 128, y: 102, width: 27, height: 7, fill: "#000" }
+      ]
+    };
+    let userFlag = [];
+    let currentTemplateKey = 'se';
+    let selectedTextId = null, dragOffset = null;
+    let undoStack = [], redoStack = [];
+    function saveStateForUndo() {
+      undoStack.push(JSON.parse(JSON.stringify(userFlag)));
+      if (undoStack.length > 50) undoStack.shift();
+      redoStack = [];
+    }
+    function idGenText() { return "t"+(Math.random()*100000|0); }
+    function addColoredSE() {
+      saveStateForUndo();
+      userFlag = flagTemplates.se.map(o => ({...o}));
+      const chars = [ { ch: ".", color: "#27ae60" }, { ch: "s", color: "#2980ff" }, { ch: "e", color: "#f4d03f" } ];
+      let xStart = 130, yBase = 110;
+      chars.forEach((c, i) => {
+        userFlag.push({ type: "text", text: c.ch, id: idGenText(), x: xStart + i * 28, y: yBase, fontSize: 56, fill: c.color, fontWeight: "bold" });
+      });
+      selectedTextId = null;
+      drawFlag(userFlag); drawOriginalFlag(flagTemplates.se); currentTemplateKey = 'se';
+    }
+    function addLetter() {
+      const txt = document.getElementById('addLetterInput').value.trim();
+      if (!txt) return;
+      saveStateForUndo();
+      userFlag.push({ type: "text", text: txt, id: idGenText(), x: 120, y: 110, fontSize: 56, fill: "#222", fontWeight: "bold" });
+      drawFlag(userFlag); document.getElementById('addLetterInput').value = ""; selectText(userFlag[userFlag.length - 1].id);
+    }
+    function undo() {
+      if (undoStack.length === 0) return;
+      redoStack.push(JSON.parse(JSON.stringify(userFlag)));
+      userFlag = undoStack.pop();
+      selectedTextId = null;
+      drawFlag(userFlag);
+    }
+    function redo() {
+      if (redoStack.length === 0) return;
+      undoStack.push(JSON.parse(JSON.stringify(userFlag)));
+      userFlag = redoStack.pop();
+      selectedTextId = null;
+      drawFlag(userFlag);
+    }
+    function drawOriginalFlag(shapes) {
+      const svg = document.getElementById('originalFlagCanvas'); svg.innerHTML = '';
+      shapes.forEach((shape, idx) => {
+        let el = drawShapeElement(shape);
+        svg.appendChild(el);
+      });
+    }
+    function drawFlag(shapes) {
+      const svg = document.getElementById('flagCanvas'); svg.innerHTML = '';
+      shapes.forEach((shape, idx) => {
+        let el = drawShapeElement(shape, true, shape.id === selectedTextId);
+        svg.appendChild(el);
+      });
+      renderSelectedTextPanel();
+    }
+    function drawShapeElement(shape, editable, selected) {
+      let el;
+      if (shape.type === "rect") {
+        el = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        el.setAttribute('x', shape.x);
+        el.setAttribute('y', shape.y);
+        el.setAttribute('width', shape.width);
+        el.setAttribute('height', shape.height);
+        el.setAttribute('fill', shape.fill);
+      }
+      if (shape.type === "circle") {
+        el = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        el.setAttribute('cx', shape.cx);
+        el.setAttribute('cy', shape.cy);
+        el.setAttribute('r', shape.r);
+        el.setAttribute('fill', shape.fill);
+      }
+      if (shape.type === "polygon") {
+        el = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        el.setAttribute('points', shape.points);
+        el.setAttribute('fill', shape.fill);
+      }
+      if (shape.type === "text") {
+        el = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        el.setAttribute('x', shape.x);
+        el.setAttribute('y', shape.y);
+        el.setAttribute('fill', shape.fill);
+        el.setAttribute('font-size', shape.fontSize);
+        el.setAttribute('font-weight', shape.fontWeight || "normal");
+        el.setAttribute('font-family', "Arial, sans-serif");
+        el.textContent = shape.text;
+      }
+      if (editable) {
+        el.setAttribute('cursor', 'move');
+        if (selected) { el.setAttribute('stroke', '#00aaff'); el.setAttribute('stroke-width', "2"); }
+        el.addEventListener('mousedown', function(evt) { selectText(shape.id); setDrag(evt, shape); });
+        el.addEventListener('touchstart', function(evt) { selectText(shape.id); setDragTouch(evt, shape); evt.preventDefault(); });
+      }
+      return el;
+    }
+    function setDrag(evt, shape) {
+      if (shape.type === "rect") dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y, type: "rect" };
+      else if (shape.type === "circle") dragOffset = { x: evt.offsetX - shape.cx, y: evt.offsetY - shape.cy, type: "circle" };
+      else if (shape.type === "text") dragOffset = { x: evt.offsetX - shape.x, y: evt.offsetY - shape.y, type: "text" };
+      else if (shape.type === "polygon") dragOffset = null;
+      const svg=document.getElementById('flagCanvas');
+      if(shape.type==="rect") { svg.addEventListener('mousemove', dragMoveRect); svg.addEventListener('mouseup', dragEndRect); }
+      if(shape.type==="circle") { svg.addEventListener('mousemove', dragMoveCircle); svg.addEventListener('mouseup', dragEndCircle); }
+      if(shape.type==="text") {svg.addEventListener('mousemove', dragMoveText); svg.addEventListener('mouseup', dragEndText);}
+    }
+    function setDragTouch(evt, shape) {
+      const touch = evt.touches[0];
+      const svg = document.getElementById('flagCanvas');
+      const rect = svg.getBoundingClientRect();
+      if (shape.type==="rect") dragOffset={ x: touch.clientX-rect.left-shape.x, y: touch.clientY-rect.top-shape.y, type:"rect"};
+      if (shape.type==="circle") dragOffset={ x: touch.clientX-rect.left-shape.cx, y: touch.clientY-rect.top-shape.cy, type:"circle"};
+      if (shape.type==="text") dragOffset={ x: touch.clientX-rect.left-shape.x, y: touch.clientY-rect.top-shape.y, type:"text"};
+      if(shape.type==="rect") {svg.addEventListener('touchmove', dragMoveRectTouch);svg.addEventListener('touchend', dragEndRectTouch);}
+      if(shape.type==="circle") {svg.addEventListener('touchmove', dragMoveCircleTouch);svg.addEventListener('touchend', dragEndCircleTouch);}
+      if(shape.type==="text") {svg.addEventListener('touchmove', dragMoveTextTouch);svg.addEventListener('touchend', dragEndTextTouch);}
+    }
+    function dragMoveRect(evt) {
+      if (!selectedTextId || dragOffset == null) return;
+      let obj = userFlag.find(s => s.id === selectedTextId);
+      obj.x = clamp(evt.offsetX - dragOffset.x, 0, 320 - obj.width);
+      obj.y = clamp(evt.offsetY - dragOffset.y, 0, 200 - obj.height);
+      drawFlag(userFlag);
+    }
+    function dragEndRect(evt) { dragOffset = null;
+      const svg = document.getElementById('flagCanvas');
+      svg.removeEventListener('mousemove', dragMoveRect); svg.removeEventListener('mouseup', dragEndRect);
+      saveStateForUndo();
+    }
+    function dragMoveText(evt) {
+      if (!selectedTextId || dragOffset == null) return;
+      let obj = userFlag.find(s => s.id === selectedTextId);
+      obj.x = clamp(evt.offsetX - dragOffset.x, 0, 320 - (obj.fontSize || 0));
+      obj.y = clamp(evt.offsetY - dragOffset.y, (obj.fontSize||0), 200);
+      drawFlag(userFlag);
+    }
+    function dragEndText(evt) { dragOffset = null;
+      const svg = document.getElementById('flagCanvas');
+      svg.removeEventListener('mousemove', dragMoveText); svg.removeEventListener('mouseup', dragEndText);
+      saveStateForUndo();
+    }
+    function dragMoveCircle(evt) {
+      if (!selectedTextId || dragOffset == null) return;
+      let obj = userFlag.find(s => s.id === selectedTextId);
+      obj.cx = clamp(evt.offsetX - dragOffset.x, obj.r, 320 - obj.r);
+      obj.cy = clamp(evt.offsetY - dragOffset.y, obj.r, 200 - obj.r);
+      drawFlag(userFlag);
+    }
+    function dragEndCircle(evt) { dragOffset=null; const svg=document.getElementById('flagCanvas');
+      svg.removeEventListener('mousemove', dragMoveCircle); svg.removeEventListener('mouseup', dragEndCircle); saveStateForUndo();
+    }
+    function dragMoveRectTouch(evt) {
+      if (!selectedTextId || dragOffset == null) return;
+      const touch = evt.touches[0];
+      const svg = document.getElementById('flagCanvas');
+      const rect = svg.getBoundingClientRect();
+      let obj = userFlag.find(s => s.id === selectedTextId);
+      obj.x = clamp(touch.clientX - rect.left - dragOffset.x, 0, 320 - obj.width);
+      obj.y = clamp(touch.clientY - rect.top - dragOffset.y, 0, 200 - obj.height);
+      drawFlag(userFlag);
+    }
+    function dragEndRectTouch(evt) {dragOffset=null; const svg=document.getElementById('flagCanvas');
+      svg.removeEventListener('touchmove', dragMoveRectTouch);svg.removeEventListener('touchend', dragEndRectTouch);saveStateForUndo();
+    }
+    function dragMoveTextTouch(evt) {
+      if (!selectedTextId || dragOffset == null) return;
+      const touch = evt.touches[0];
+      const svg = document.getElementById('flagCanvas');
+      const rect = svg.getBoundingClientRect();
+      let obj = userFlag.find(s => s.id === selectedTextId);
+      obj.x = clamp(touch.clientX - rect.left - dragOffset.x, 0, 320 - (obj.fontSize || 0));
+      obj.y = clamp(touch.clientY - rect.top - dragOffset.y, (obj.fontSize||0), 200);
+      drawFlag(userFlag);
+    }
+    function dragEndTextTouch(evt) { dragOffset=null; const svg=document.getElementById('flagCanvas');
+      svg.removeEventListener('touchmove', dragMoveTextTouch);svg.removeEventListener('touchend', dragEndTextTouch);saveStateForUndo();
+    }
+    function dragMoveCircleTouch(evt) {
+      if (!selectedTextId || dragOffset == null) return;
+      const touch = evt.touches[0];
+      const svg = document.getElementById('flagCanvas');
+      const rect = svg.getBoundingClientRect();
+      let obj = userFlag.find(s => s.id === selectedTextId);
+      obj.cx = clamp(touch.clientX - rect.left - dragOffset.x, obj.r, 320 - obj.r);
+      obj.cy = clamp(touch.clientY - rect.top - dragOffset.y, obj.r, 200 - obj.r);
+      drawFlag(userFlag);
+    }
+    function dragEndCircleTouch(evt) { dragOffset=null; const svg=document.getElementById('flagCanvas');
+      svg.removeEventListener('touchmove', dragMoveCircleTouch);svg.removeEventListener('touchend', dragEndCircleTouch);saveStateForUndo();
+    }
+    function clamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
+    function selectText(id) { selectedTextId = id; renderSelectedTextPanel(); drawFlag(userFlag); }
+    function renderSelectedTextPanel() {
+      const panel = document.getElementById('selectedTextPanel');
+      if (!selectedTextId) { panel.innerHTML = '<span class="selectedTextMsg">Tap any element to select, edit or delete.</span>'; return; }
+      let obj = userFlag.find(shape => shape.id === selectedTextId); if (!obj) { panel.innerHTML = ''; return; }
+      if (obj.type === 'text') {
+        panel.innerHTML = `
+          <label>Text: <input type="text" id="txtText" value="${obj.text}" /></label><br/>
+          <label style="display:inline-block;width:55px;">Color:</label>
+          <input type="color" id="txtColor" value="${obj.fill}" style="vertical-align:middle;"/><br/>
+          <label style="display:inline-block;width:55px;">Size:</label>
+          <input type="number" id="txtSize" min="12" max="200" value="${obj.fontSize}" style="width:56px;"/><br/>
+          <button onclick="deleteSelectedText()">Delete</button>
+        `;
+        document.getElementById('txtText').oninput = function() { saveStateForUndo(); obj.text = this.value; drawFlag(userFlag); };
+        document.getElementById('txtColor').oninput = function() { saveStateForUndo(); obj.fill = this.value; drawFlag(userFlag); };
+        document.getElementById('txtSize').oninput = function() { saveStateForUndo(); obj.fontSize = +this.value; drawFlag(userFlag); };
+      }
+      else if (obj.type === 'rect') {
+        panel.innerHTML = `
+          <label>X: <input type="number" id="rectX" value="${obj.x}" style="width:56px;"></label><br/>
+          <label>Y: <input type="number" id="rectY" value="${obj.y}" style="width:56px;"></label><br/>
+          <label>Width: <input type="number" id="rectWidth" value="${obj.width}" style="width:56px;"></label><br/>
+          <label>Height: <input type="number" id="rectHeight" value="${obj.height}" style="width:56px;"></label><br/>
+          <label>Color: <input type="color" id="rectFill" value="${obj.fill}"></label><br/>
+          <button onclick="deleteSelectedText()">Delete</button>
+        `;
+        document.getElementById('rectX').oninput = function() { saveStateForUndo(); obj.x = +this.value; drawFlag(userFlag);}
+        document.getElementById('rectY').oninput = function() { saveStateForUndo(); obj.y = +this.value; drawFlag(userFlag);}
+        document.getElementById('rectWidth').oninput = function() { saveStateForUndo(); obj.width = +this.value; drawFlag(userFlag);}
+        document.getElementById('rectHeight').oninput = function() { saveStateForUndo(); obj.height = +this.value; drawFlag(userFlag);}
+        document.getElementById('rectFill').oninput = function() { saveStateForUndo(); obj.fill = this.value; drawFlag(userFlag);}
+      }
+      else if (obj.type === 'circle') {
+        panel.innerHTML = `
+          <label>CX: <input type="number" id="circleCX" value="${obj.cx}" style="width:56px;"></label><br/>
+          <label>CY: <input type="number" id="circleCY" value="${obj.cy}" style="width:56px;"></label><br/>
+          <label>Radius: <input type="number" id="circleR" value="${obj.r}" style="width:56px;"></label><br/>
+          <label>Color: <input type="color" id="circleFill" value="${obj.fill}"></label><br/>
+          <button onclick="deleteSelectedText()">Delete</button>
+        `;
+        document.getElementById('circleCX').oninput = function() { saveStateForUndo(); obj.cx = +this.value; drawFlag(userFlag);}
+        document.getElementById('circleCY').oninput = function() { saveStateForUndo(); obj.cy = +this.value; drawFlag(userFlag);}
+        document.getElementById('circleR').oninput = function() { saveStateForUndo(); obj.r = +this.value; drawFlag(userFlag);}
+        document.getElementById('circleFill').oninput = function() { saveStateForUndo(); obj.fill = this.value; drawFlag(userFlag);}
+      }
+      else if (obj.type === 'polygon') {
+        panel.innerHTML = `
+          <label>Points:<br/><textarea id="polygonPoints" rows="2" style="width:98%">${obj.points}</textarea></label><br/>
+          <label>Color: <input type="color" id="polygonFill" value="${obj.fill}"></label><br/>
+          <button onclick="deleteSelectedText()">Delete</button>
+        `;
+        document.getElementById('polygonPoints').oninput = function() { saveStateForUndo(); obj.points = this.value; drawFlag(userFlag); }
+        document.getElementById('polygonFill').oninput = function() { saveStateForUndo(); obj.fill = this.value; drawFlag(userFlag);}
+      }
+    }
+    function deleteSelectedText() {
+      saveStateForUndo();
+      userFlag = userFlag.filter(shape => shape.id !== selectedTextId);
+      selectedTextId = null;
+      drawFlag(userFlag);
+    }
+    function loadFlag(key) {
+      saveStateForUndo();
+      currentTemplateKey = key;
+      userFlag = flagTemplates[key].map(o => ({...o}));
+      selectedTextId = null;
+      drawFlag(userFlag);
+      drawOriginalFlag(flagTemplates[key]);
+    }
+    function exportSVG() {
+      const svg = document.getElementById('flagCanvas');
+      const serializer = new XMLSerializer();
+      let svgContent = serializer.serializeToString(svg);
+      let blob = new Blob([svgContent], {type: "image/svg+xml"});
+      let url = URL.createObjectURL(blob);
+      let link = document.createElement("a");
+      link.href = url; link.download = "flag.svg";
+      document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url);
+    }
+    function exportPNG() {
+      const svg = document.getElementById('flagCanvas');
+      const svgData = new XMLSerializer().serializeToString(svg);
+      const canvas = document.createElement('canvas');
+      canvas.width = svg.width.baseVal.value; canvas.height = svg.height.baseVal.value;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        const link = document.createElement('a');
+        link.download = 'flag.png';
+        link.href = canvas.toDataURL('image/png'); link.click();
+      };
+      img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+    }
+    window.onload = () => { loadFlag('se'); };
+  </script>
+</body>
+</html>
