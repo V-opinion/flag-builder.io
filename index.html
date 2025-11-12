@@ -53,6 +53,7 @@
       margin-right:0.5em;
     }
     .pill-btn:hover { background: linear-gradient(90deg, #eab308 20%, #6366f1 90%);}
+    footer { font-size:1.1em; }
   </style>
 </head>
 <body class="bg-indigo-50">
@@ -90,10 +91,22 @@
           <polygon points="165,77 185,170 105,116 225,116 145,170" fill="#fff" />
         </svg>`
       };
+      function renderSEFlag() {
+        // Center the whole ".se", color dot green, S yellow, E blue
+        return `<svg id="flag-canvas" width="330" height="220" viewBox="0 0 330 220">
+          <rect x="10" y="10" width="310" height="200" fill="#f3f4f6" stroke="#6366f1" stroke-width="4"/>
+          <text x="155" y="120" font-size="54" fill="#22c55e" font-family="Nunito, Verdana" text-anchor="middle">.</text>
+          <text x="175" y="120" font-size="54" fill="#facc15" font-family="Nunito, Verdana" text-anchor="middle">S</text>
+          <text x="205" y="120" font-size="54" fill="#2563eb" font-family="Nunito, Verdana" text-anchor="middle">E</text>
+        </svg>`;
+      }
       function setFlagBuilderText(val, country='') {
         var container = document.getElementById('flag-container');
         var countryLabel = document.getElementById('flagCountryLabel');
-        if (nationalFlags[val]) {
+        if (val === ".se") {
+          container.innerHTML = renderSEFlag();
+          countryLabel.textContent = "Sweden .se";
+        } else if (nationalFlags[val]) {
           container.innerHTML = nationalFlags[val];
           countryLabel.textContent = country + " " + val;
         } else {
@@ -245,6 +258,16 @@
       </section>
     </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-800 text-white text-center py-6 mt-10 shadow-2xl border-t border-indigo-300">
+    <div class="mb-2">
+      <a href="mailto:info@multireligionvalsystemeu.org" class="underline hover:text-yellow-300">info@multireligionvalsystemeu.org</a>
+    </div>
+    <div class="mb-1">
+      <a href="https://www.multireligionvalsystemeu.org" target="_blank" class="underline hover:text-yellow-300">www.multireligionvalsystemeu.org</a>
+    </div>
+    <div class="text-sm opacity-60">© 2025 Multi-Religion Election System · Flag Builder Prototype · Powered by Civic EdTech</div>
+  </footer>
 </body>
 </html>
-
