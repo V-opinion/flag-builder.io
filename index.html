@@ -73,7 +73,25 @@
   </style>
 </head>
 <body class="bg-indigo-50">
-
+<!-- Voiceflow Chatbot Widget Integration -->
+<script src="https://cdn.voiceflow.com/widget/bundle.mjs"></script>
+<script>
+  window.Voiceflow = window.Voiceflow || function() {
+    (window.Voiceflow.q = window.Voiceflow.q || []).push(arguments)
+  };
+  Voiceflow("init", {
+    verify: { projectID: "18080d79-31d4-470d-a46c-3bbca221dfff" }, // <-- Replace with your Voiceflow project ID!
+    url: 'https://general-runtime.voiceflow.com',
+    versionID: 'production',
+    theme: { 
+      button: { background: '#6366f1' }, 
+      chat: { background: '#fafafd', 
+              header: { background: '#6366f1', color: '#fff', title: 'Flag Builder Bot' }, 
+              input: { background: '#f3f4f6' } 
+            } 
+    }
+  });
+</script>
   <header class="bg-indigo-700 text-white py-9 px-3 mb-8 shadow">
     <h1 class="text-4xl font-black tracking-tight text-center mb-4 drop-shadow">Flag Builder & World ccTLD Explorer</h1>
     <p class="mt-2 text-xl max-w-3xl mx-auto text-center font-semibold">Build country/domain flags, explore the Lego alphabet (with sound), and see every nation's unique ccTLD identity—with flag emoji and real civic inclusion!</p>
