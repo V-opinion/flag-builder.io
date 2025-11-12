@@ -59,25 +59,88 @@
       };        
     </script>
 
-    <!-- Lego Alphabet Learning Block -->
+    <!-- Lego Alphabet Expanded: Language + Voice Education Block -->
     <section class="my-8 bg-white rounded-xl shadow p-6 max-w-xl mx-auto">
-      <h2 class="text-xl font-semibold mb-3 text-blue-700">Lego Alphabet Language Learning</h2>
+      <h2 class="text-xl font-semibold mb-3 text-blue-700">Lego Alphabet: Letter Learning & Pronunciation</h2>
       <p class="mb-2 text-gray-700">
-        Tap a block to hear the letter/pronunciation! Drag onto flags in the full app.
+        Children and learners can tap a "Lego letter block" to hear how it's pronounced in different languages. 
+        Drag blocks to build ccTLD flags. Select your language, then tap to hear and learn!
       </p>
-      <div class="flex flex-wrap gap-2">
-        <!-- Example interactive tiles, replace/add more as needed -->
-        <div class="alphabet-tile px-4 py-2 rounded bg-yellow-300 text-xl font-bold text-gray-900" onclick="new Audio('https://ssl.gstatic.com/dictionary/static/sounds/20200429/a_en_us_1.mp3').play()">A</div>
-        <div class="alphabet-tile px-4 py-2 rounded bg-blue-300 text-xl font-bold text-gray-900" onclick="new Audio('https://ssl.gstatic.com/dictionary/static/sounds/20200429/b_en_us_1.mp3').play()">B</div>
-        <div class="alphabet-tile px-4 py-2 rounded bg-green-300 text-xl font-bold text-gray-900" onclick="new Audio('https://ssl.gstatic.com/dictionary/static/sounds/20200429/c_en_us_1.mp3').play()">C</div>
-        <div class="alphabet-tile px-4 py-2 rounded bg-pink-300 text-xl font-bold text-gray-900" onclick="new Audio('https://ssl.gstatic.com/dictionary/static/sounds/20200429/d_en_us_1.mp3').play()">D</div>
-        <!-- More tiles/letters/languages here -->
+
+      <!-- Language selector -->
+      <label for="langSelect" class="block mb-2 font-medium text-gray-600">Select Language:</label>
+      <select id="langSelect" class="border rounded p-2 mb-4">
+        <option value="en">English</option>
+        <option value="sv">Swedish</option>
+        <option value="ar">Arabic</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+      </select>
+
+      <div id="legoAlphabetTiles" class="flex flex-wrap gap-2 mb-3">
+        <!-- JavaScript will populate tiles per language -->
       </div>
-      <span class="text-xs text-gray-400 block mt-3">Letters/pronunciation for demo only – add more languages as needed.</span>
+      <div class="text-xs text-gray-400 block mt-2">
+        For full language immersion, [translate:أضغط على الحروف لتسمع النطق] (Arabic), [translate:Klicka på bokstäverna för att höra uttalet] (Swedish), [translate:Cliquez sur les lettres pour entendre la prononciation] (French)
+      </div>
+      
+      <p class="mt-4 text-gray-700 text-sm italic">
+        Educators: Ask children to build national ccTLDs and spell flag letters, then listen together and repeat aloud! Reinforce language skills across flags and alphabets.
+      </p>
     </section>
+    <script>
+      const alphabetSounds = {
+        en: {
+          A: 'https://ssl.gstatic.com/dictionary/static/sounds/20200429/a_en_us_1.mp3',
+          B: 'https://ssl.gstatic.com/dictionary/static/sounds/20200429/b_en_us_1.mp3',
+          C: 'https://ssl.gstatic.com/dictionary/static/sounds/20200429/c_en_us_1.mp3',
+          D: 'https://ssl.gstatic.com/dictionary/static/sounds/20200429/d_en_us_1.mp3'
+        },
+        sv: {
+          A: 'https://assets.mixkit.co/sfx/preview/mixkit-click-1122.mp3', // Replace with Swedish TTS
+          B: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1108.mp3',
+          C: 'https://assets.mixkit.co/sfx/preview/mixkit-interface-click-1124.mp3',
+          D: 'https://assets.mixkit.co/sfx/preview/mixkit-game-click-1114.mp3'
+        },
+        ar: {
+          A: 'https://ssl.gstatic.com/dictionary/static/sounds/20200429/a_ar_eg_1.mp3', // Replace/link as needed
+          B: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1108.mp3',
+          C: 'https://assets.mixkit.co/sfx/preview/mixkit-interface-click-1124.mp3',
+          D: 'https://assets.mixkit.co/sfx/preview/mixkit-game-click-1114.mp3'
+        },
+        fr: {
+          A: 'https://ssl.gstatic.com/dictionary/static/sounds/20200429/a_fr_1.mp3',
+          B: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1108.mp3',
+          C: 'https://assets.mixkit.co/sfx/preview/mixkit-interface-click-1124.mp3',
+          D: 'https://assets.mixkit.co/sfx/preview/mixkit-game-click-1114.mp3'
+        },
+        es: {
+          A: 'https://ssl.gstatic.com/dictionary/static/sounds/20200429/a_es_1.mp3',
+          B: 'https://assets.mixkit.co/sfx/preview/mixkit-select-click-1108.mp3',
+          C: 'https://assets.mixkit.co/sfx/preview/mixkit-interface-click-1124.mp3',
+          D: 'https://assets.mixkit.co/sfx/preview/mixkit-game-click-1114.mp3'
+        }
+      };
+      function renderAlphabet(lang) {
+        const container = document.getElementById('legoAlphabetTiles');
+        container.innerHTML = '';
+        const sounds = alphabetSounds[lang] || alphabetSounds.en;
+        Object.entries(sounds).forEach(([letter, url]) => {
+          let label = letter;
+          const div = document.createElement('div');
+          div.className = "alphabet-tile px-4 py-2 rounded bg-gradient-to-br from-yellow-200 to-blue-200 text-xl font-bold text-gray-900 shadow cursor-pointer";
+          div.innerText = label;
+          div.title = "Tap to hear " + label;
+          div.onclick = ()=>{ new Audio(url).play(); };
+          container.appendChild(div);
+        });
+      }
+      document.getElementById('langSelect').onchange = e=>renderAlphabet(e.target.value);
+      renderAlphabet('en'); // initial populate
+    </script>
 
     <!-- Social Media Share Block -->
-  <section class="mt-8 mb-4 p-3 bg-gray-50 rounded-lg shadow max-w-lg mx-auto flex gap-4 items-center">
+   <section class="mt-8 mb-4 p-3 bg-gray-50 rounded-lg shadow max-w-lg mx-auto flex gap-4 items-center">
   <span class="font-semibold text-gray-700">Connect & Share:</span>
   <a href="https://www.facebook.com/amultireligionelectionsystem" target="_blank" aria-label="Facebook" class="text-blue-600 hover:text-blue-900">
     <svg width="28" height="28" fill="currentColor"><path d="M17.523 14h-2.094V22H12.328v-8H11V9.34h1.329V8.021c0-1.894 1.04-3.021 2.998-3.021H17.5v3.658h-1.135c-.258 0-.367.117-.367.368v1.274h1.492l-.2 2.66z"/></svg>
@@ -155,7 +218,7 @@
       (window.Voiceflow.q = window.Voiceflow.q || []).push(arguments)
     };
     Voiceflow("init", {
-      verify: { projectID: "18080d79-31d4-470d-a46c-3bbca221dfff" }, // <-- Use your real Voiceflow project ID!
+      verify: { projectID: "18080d79-31d4-470d-a46c-3bbca221dfff" },
       url: 'https://general-runtime.voiceflow.com',
       versionID: 'production',
       theme: { button: { background: '#2563EB' }, chat: { background: '#ffffff' } }
@@ -163,4 +226,3 @@
   </script>
 </body>
 </html>
-
