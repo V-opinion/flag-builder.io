@@ -16,6 +16,10 @@
   <meta name="twitter:image" content="https://flag-builder.multireligionvalsystem.eu.org/banner.png"/>
   <link rel="canonical" href="https://flag-builder.multireligionvalsystem.eu.org/"/>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .alphabet-tile { cursor: pointer; margin:2px; }
+    .flag-svgeditor { background:#fafcfa; border-radius: 12px; box-shadow: 0 2px 6px #dde3fd; }
+  </style>
 </head>
 <body class="bg-gray-50">
 
@@ -26,35 +30,68 @@
   
   <main class="max-w-7xl mx-auto px-2 py-8">
 
-    <!-- Example Educational Section -->
+    <!-- Editable Flag Builder SVG Demo -->
+    <section class="flag-svgeditor my-6 p-6 rounded-xl shadow max-w-3xl mx-auto">
+      <h2 class="text-lg font-semibold mb-2 text-blue-700">Try the Editable Flag Builder</h2>
+      <svg id="flag-canvas" width="330" height="220" viewBox="0 0 330 220" class="border border-blue-300 mx-auto block mb-3" style="background:#fff;">
+        <rect x="10" y="10" width="310" height="200" fill="#f3f4f6" stroke="#2987f8" stroke-width="3"/>
+        <text id="flagtextSVG" x="50" y="120" font-size="48" fill="#1d253e" font-family="Verdana">.se</text>
+      </svg>
+      <label class="block mb-1 text-gray-700" for="flagTextInp">Flag Text (ccTLD):</label>
+      <input id="flagTextInp" type="text" value=".se" class="border rounded p-2 w-24" maxlength="10"/>
+      <button id="flagTextBtn" class="ml-3 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700">Update</button>
+      <button id="flagExportBtn" class="ml-3 px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">Export SVG</button>
+    </section>
+    <script>
+      document.getElementById('flagTextBtn').onclick = function() {
+        var txt = document.getElementById('flagTextInp').value;
+        document.getElementById('flagtextSVG').textContent = txt;
+      };
+      document.getElementById('flagExportBtn').onclick = function() {
+        var serializer = new XMLSerializer();
+        var svgStr = serializer.serializeToString(document.getElementById('flag-canvas'));
+        var a = document.createElement("a");
+        a.href = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgStr);
+        a.download = "flag.svg";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      };        
+    </script>
+
+    <!-- Lego Alphabet Learning Block -->
     <section class="my-8 bg-white rounded-xl shadow p-6 max-w-xl mx-auto">
-      <h2 class="text-xl font-semibold mb-3 text-blue-700">Learning with the Lego Alphabet and Flags</h2>
-      <ul class="mb-2 list-disc pl-5 text-gray-700">
-        <li>Place Lego blocks to learn the alphabet and spell ccTLDs of nations.</li>
-        <li>Connect national flags with phonics and digital identity.</li>
-        <li>Active learning for parents, teachers, and children.</li>
-      </ul>
-      <p class="italic text-gray-500">
-        Flags and alphabets for all—build knowledge, promote inclusion, and celebrate diversity!
+      <h2 class="text-xl font-semibold mb-3 text-blue-700">Lego Alphabet Language Learning</h2>
+      <p class="mb-2 text-gray-700">
+        Tap a block to hear the letter/pronunciation! Drag onto flags in the full app.
       </p>
+      <div class="flex flex-wrap gap-2">
+        <!-- Example interactive tiles, replace/add more as needed -->
+        <div class="alphabet-tile px-4 py-2 rounded bg-yellow-300 text-xl font-bold text-gray-900" onclick="new Audio('https://ssl.gstatic.com/dictionary/static/sounds/20200429/a_en_us_1.mp3').play()">A</div>
+        <div class="alphabet-tile px-4 py-2 rounded bg-blue-300 text-xl font-bold text-gray-900" onclick="new Audio('https://ssl.gstatic.com/dictionary/static/sounds/20200429/b_en_us_1.mp3').play()">B</div>
+        <div class="alphabet-tile px-4 py-2 rounded bg-green-300 text-xl font-bold text-gray-900" onclick="new Audio('https://ssl.gstatic.com/dictionary/static/sounds/20200429/c_en_us_1.mp3').play()">C</div>
+        <div class="alphabet-tile px-4 py-2 rounded bg-pink-300 text-xl font-bold text-gray-900" onclick="new Audio('https://ssl.gstatic.com/dictionary/static/sounds/20200429/d_en_us_1.mp3').play()">D</div>
+        <!-- More tiles/letters/languages here -->
+      </div>
+      <span class="text-xs text-gray-400 block mt-3">Letters/pronunciation for demo only – add more languages as needed.</span>
     </section>
 
     <!-- Social Media Share Block -->
-    <section class="mt-8 mb-4 p-3 bg-gray-50 rounded-lg shadow max-w-lg mx-auto flex gap-4 items-center">
-      <span class="font-semibold text-gray-700">Connect & Share:</span>
-      <a href="https://facebook.com/YOUR-PAGE" target="_blank" aria-label="Facebook" class="text-blue-600 hover:text-blue-900">
-        Facebook
-      </a>
-      <a href="https://twitter.com/YOUR-HANDLE" target="_blank" aria-label="Twitter/X" class="text-sky-500 hover:text-sky-900">
-        Twitter/X
-      </a>
-      <a href="https://instagram.com/YOUR-HANDLE" target="_blank" aria-label="Instagram" class="text-pink-600 hover:text-pink-900">
-        Instagram
-      </a>
-      <a href="https://www.linkedin.com/company/YOUR-COMPANY" target="_blank" aria-label="LinkedIn" class="text-blue-800 hover:text-blue-600">
-        LinkedIn
-      </a>
-    </section>
+  <section class="mt-8 mb-4 p-3 bg-gray-50 rounded-lg shadow max-w-lg mx-auto flex gap-4 items-center">
+  <span class="font-semibold text-gray-700">Connect & Share:</span>
+  <a href="https://www.facebook.com/amultireligionelectionsystem" target="_blank" aria-label="Facebook" class="text-blue-600 hover:text-blue-900">
+    <svg width="28" height="28" fill="currentColor"><path d="M17.523 14h-2.094V22H12.328v-8H11V9.34h1.329V8.021c0-1.894 1.04-3.021 2.998-3.021H17.5v3.658h-1.135c-.258 0-.367.117-.367.368v1.274h1.492l-.2 2.66z"/></svg>
+  </a>
+  <a href="https://twitter.com/DPNS" target="_blank" aria-label="Twitter/X" class="text-sky-500 hover:text-sky-900">
+    <svg width="28" height="28" fill="currentColor"><path d="M22.463 6.004c-.833.371-1.729.627-2.687.743.966-.579 1.708-1.498 2.058-2.592-.905.538-1.912.929-2.978 1.141a4.49 4.49 0 0 0-7.655 4.093A12.773 12.773 0 0 1 3.067 5.13c-.398.68-.627 1.472-.627 2.327 0 1.607.818 3.021 2.065 3.855-.761-.024-1.476-.233-2.101-.582v.059c0 2.244 1.625 4.118 3.772 4.547-.396.11-.814.17-1.246.17-.305 0-.604-.029-.899-.085.604 1.887 2.356 3.256 4.436 3.293-1.624 1.273-3.662 2.032-5.915 2.032-.385 0-.765-.022-1.143-.067C4.95 21.212 7.064 22 9.363 22c7.317 0 11.325-6.064 11.325-11.326 0-.172-.004-.344-.012-.514.779-.563 1.453-1.267 1.988-2.086z"/></svg>
+  </a>
+  <a href="https://www.instagram.com/multireligionval/" target="_blank" aria-label="Instagram" class="text-pink-600 hover:text-pink-900">
+    <svg width="28" height="28" fill="currentColor"><circle cx="14" cy="14" r="9"/><circle cx="14" cy="14" r="5"/><circle cx="17.5" cy="10.5" r="1"/><rect x="2" y="2" width="24" height="24" rx="6" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  </a>
+  <a href="http://se.linkedin.com/in/solidarity" target="_blank" aria-label="LinkedIn" class="text-blue-800 hover:text-blue-600">
+    <svg width="28" height="28" fill="currentColor"><rect width="20" height="20" x="4" y="4" rx="6"/><rect width="3" height="7" x="7" y="11" rx="1"/><circle cx="8.5" cy="9" r="1.5"/><rect width="3" height="7" x="15" y="11" rx="1"/><rect width="6" height="3" x="12" y="14" rx="1"/></svg>
+  </a>
+</section>
 
     <!-- Two-column: ccTLDs & Conflict Resolution -->
     <div class="flex flex-col md:flex-row gap-8 my-10 max-w-5xl mx-auto">
@@ -94,9 +131,7 @@
       <section class="flex-1 bg-yellow-50 rounded-xl shadow p-6 border border-yellow-300">
         <h2 class="text-xl font-bold text-yellow-900 mb-3">Modern Flag Design: The Real Conflict Resolution Model</h2>
         <p class="mb-2 text-gray-800"><strong>The incomplete separation of church and state and religion and politics</strong> has not been able to resolve the 77-year-long conflict between Israel and Palestine. This is due to the unsustainable policies pursued primarily by religious parties, for example within the EU and other countries such as the USA, Israel, Lebanon, India, etc.</p>
-        <p class="mb-2 text-gray-800">
-          Unsustainable development leads to lasting war, lasting poverty, lasting occupation, and lasting settlements that lead to genocide.
-        </p>
+        <p class="mb-2 text-gray-800">Unsustainable development leads to lasting war, lasting poverty, lasting occupation, and lasting settlements that lead to genocide.</p>
         <p class="mb-2 text-gray-800">
           Through a new modern flag design with educational purposes—where children in preschools can learn the alphabet from the flags together with the Multi-Religion Election System, which means introducing democracy in all religions without exception—a new modern conflict resolution model emerges. It solves the problem of the incomplete separation between state and church and between religion and politics. It is a guide to sustainable politics that leads to sustainable development.
         </p>
@@ -112,6 +147,20 @@
       </section>
     </div>
   </main>
+  
+  <!-- Voiceflow AI Chatbot Widget (update projectID as needed) -->
+  <script src="https://cdn.voiceflow.com/widget/bundle.mjs"></script>
+  <script>
+    window.Voiceflow = window.Voiceflow || function() {
+      (window.Voiceflow.q = window.Voiceflow.q || []).push(arguments)
+    };
+    Voiceflow("init", {
+      verify: { projectID: "18080d79-31d4-470d-a46c-3bbca221dfff" }, // <-- Use your real Voiceflow project ID!
+      url: 'https://general-runtime.voiceflow.com',
+      versionID: 'production',
+      theme: { button: { background: '#2563EB' }, chat: { background: '#ffffff' } }
+    });
+  </script>
 </body>
 </html>
 
