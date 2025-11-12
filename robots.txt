@@ -1,0 +1,25 @@
+# Allow all search engines, including AI-powered agents, to crawl your main site
+User-agent: *
+Allow: /
+
+# Explicitly allow known and future AI/LLM bots
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Gemini
+Allow: /
+
+User-agent: Bing-Chat
+Allow: /
+
+# Block sensitive and non-public sections (customize as needed)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /backup/
+
+# Sitemap for complete index coverage
+Sitemap: https://flag-builder.multireligionvalsystem.eu.org/sitemap.xml
