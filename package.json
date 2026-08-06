@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.1.2",
+    "posthog-react-native": "^3.12.0",
+    "react-native-device-info": "^14.0.4"
+  }
+}
