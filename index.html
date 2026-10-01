@@ -459,5 +459,254 @@ Other refugees, including politicians and other interested parties, are also wel
     </ul>
   </div>
 </footer>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MRES Footer</title>
+
+<style>
+  /* --- CSS Reset & Base Styles --- */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  body {
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Pushes footer to the bottom if page content is short */
+  main {
+    flex: 1; 
+  }
+
+  /* --- Footer Styles --- */
+  .site-footer {
+    background-color: #0f172a; /* Matches nav background */
+    color: #e2e8f0;
+    padding: 4rem 2rem 0;
+    margin-top: 4rem;
+  }
+
+  .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Column 1: Brand & Mission */
+  .footer-brand h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+  }
+
+  .footer-brand h3 span {
+    color: #38bdf8; /* Light blue accent */
+  }
+
+  .footer-brand p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Column Headings */
+  .footer-col h4 {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+
+  /* Small accent line under headings */
+  .footer-col h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    width: 30px;
+    height: 2px;
+    background-color: #38bdf8;
+  }
+
+  /* Links */
+  .footer-links {
+    list-style: none;
+  }
+
+  .footer-links li {
+    margin-bottom: 0.8rem;
+  }
+
+  .footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: inline-block;
+  }
+
+  .footer-links a:hover {
+    color: #38bdf8;
+    padding-left: 5px; /* Subtle slide effect on hover */
+  }
+
+  /* Contact Info */
+  .footer-contact p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .footer-contact a {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-contact a:hover {
+    color: #38bdf8;
+  }
+
+  /* Social Icons */
+  .social-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background-color: #1e293b;
+    border-radius: 50%;
+    color: #e2e8f0;
+    transition: all 0.3s ease;
+  }
+
+  .social-links a:hover {
+    background-color: #38bdf8;
+    color: #0f172a;
+    transform: translateY(-3px);
+  }
+
+  .social-links svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+
+  /* --- Bottom Copyright Bar --- */
+  .footer-bottom {
+    background-color: #020617; /* Slightly darker than main footer */
+    padding: 1.5rem 2rem;
+    text-align: center;
+    border-top: 1px solid #1e293b;
+  }
+
+  .footer-bottom p {
+    color: #64748b;
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom a {
+    color: #64748b;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-bottom a:hover {
+    color: #38bdf8;
+  }
+
+  .footer-bottom-links {
+    margin-top: 0.5rem;
+  }
+
+  .footer-bottom-links a {
+    margin: 0 10px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Placeholder for your main page content -->
+<main>
+  <!-- Your page content goes here -->
+</main>
+
+<!-- === FOOTER HTML === -->
+<footer class="site-footer">
+  <div class="footer-container">
+    
+    <!-- Column 1: Brand & Mission -->
+    <div class="footer-brand">
+      <h3>MRES<span>.eu</span></h3>
+      <p>Bridging secular democracy and religious diversity through structured, equitable representation and modern civic technology.</p>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/mres-framework/">Framework Guide</a></li>
+        <li><a href="https://online-voting-system.multireligionvalsystem.eu.org/">Online Voting System</a></li>
+        <li><a href="/about/">About MRES</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Resources -->
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <ul class="footer-links">
+        <li><a href="/multireligionvalsystem-anchor-article.html">The FRC Anchor Article</a></li>
+        <li><a href="/case-studies/">Case Studies</a></li>
+        <li><a href="/podcasts/">Podcasts & Media</a></li>
+        <li><a href="/contact/">Policy Consultations</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4: Contact & Social -->
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <div class="footer-contact">
+        <p>📧 <a href="mailto:contact@multireligionvalsystem.eu.org">contact@multireligionvalsystem.eu.org</a></p>
+      </div>
+      
+      <!-- Social Media Icons (Inline SVGs) -->
+      <div class="social-links">
+        <!-- LinkedIn -->
+        <a href="[Your LinkedIn URL]" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <!-- Twitter / X -->
+        <a href="[Your Twitter/X URL]" aria-label="Twitter" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <!-- Facebook -->
+        <a href="[Your Facebook URL]" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3
 </body>
 </html>
